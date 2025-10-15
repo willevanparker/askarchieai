@@ -15,24 +15,18 @@ declare global {
 
 const ChatBaseEmbed = ({ className = "" }: ChatBaseEmbedProps) => {
   useEffect(() => {
-    // Add chatbase config to window
-    window.embeddedChatbotConfig = {
-      chatbotId: "06a81a19-258d-4b0c-99b0-1c7781226da2",
-      domain: "www.chatbase.co"
-    };
-
-    // Create and append the script
-    const script = document.createElement('script');
-    script.src = "https://www.chatbase.co/embed.min.js";
-    script.setAttribute('chatbotId', '06a81a19-258d-4b0c-99b0-1c7781226da2');
-    script.setAttribute('domain', 'www.chatbase.co');
-    script.defer = true;
-    
-    document.body.appendChild(script);
+    // Inject Chatbase loader (verbatim snippet from Chatbase)
+    const inline = document.createElement('script');
+    inline.id = 'archie-chatbase-inline';
+    inline.innerHTML = `((function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="GM054S1a9A3U4EGfZEUfs";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}}))();`;
+    document.body.appendChild(inline);
 
     return () => {
-      // Cleanup: remove script on unmount
-      document.body.removeChild(script);
+      // Cleanup: remove injected scripts to avoid duplicates across route changes
+      const embed = document.getElementById('GM054S1a9A3U4EGfZEUfs');
+      if (embed && embed.parentNode) embed.parentNode.removeChild(embed);
+      const existingInline = document.getElementById('archie-chatbase-inline');
+      if (existingInline && existingInline.parentNode) existingInline.parentNode.removeChild(existingInline);
     };
   }, []);
 
