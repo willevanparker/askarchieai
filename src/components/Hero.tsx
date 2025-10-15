@@ -21,7 +21,7 @@ const Hero = () => {
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              From buying your first car to understanding complex repairs, get expert answers instantly. 
+              From buying your first car to understanding repairs, get expert answers instantly. 
               Archie knows the industry inside and out—and explains it clearly.
             </p>
             
