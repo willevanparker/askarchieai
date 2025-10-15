@@ -11,14 +11,8 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl sm:text-2xl">
-            <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
-            <span>
-              <span className="text-accent">A</span>
-              <span className="text-foreground">skArch</span>
-              <span className="text-accent">i</span>
-              <span className="text-foreground">e.ai</span>
-            </span>
+          <Link to="/" className="font-bold text-xl sm:text-2xl">
+            AskArchie
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
@@ -37,14 +31,6 @@ const Navbar = () => {
               }`}
             >
               About
-            </Link>
-            <Link 
-              to="/terms" 
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/terms') ? 'text-primary' : 'text-muted-foreground'
-              }`}
-            >
-              Terms
             </Link>
           </div>
           

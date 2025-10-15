@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MessageCircle, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -7,14 +7,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <Link to="/" className="flex items-center gap-2 font-bold text-lg mb-4">
-              <MessageCircle className="h-5 w-5 text-primary" />
-              <span>
-                <span className="text-accent">A</span>
-                <span className="text-foreground">skArch</span>
-                <span className="text-accent">i</span>
-                <span className="text-foreground">e.ai</span>
-              </span>
+            <Link to="/" className="font-bold text-lg mb-4 inline-block">
+              AskArchie
             </Link>
             <p className="text-sm text-muted-foreground">
               Your trusted car expert, making automotive knowledge accessible to everyone.
@@ -53,10 +47,10 @@ const Footer = () => {
               Have questions or feedback? We'd love to hear from you.
             </p>
             <a 
-              href="mailto:hello@askarchie.ai" 
+              href="mailto:just@askarchie.ai" 
               className="text-sm text-primary hover:text-primary-dark transition-colors"
             >
-              hello@askarchie.ai
+              just@askarchie.ai
             </a>
           </div>
         </div>
@@ -66,7 +60,7 @@ const Footer = () => {
             © {new Date().getFullYear()} AskArchie.ai. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Made with <Heart className="h-3 w-3 text-accent fill-accent" /> for car enthusiasts
+            Made with <Heart className="h-3 w-3 text-primary fill-primary" /> for car enthusiasts
           </p>
         </div>
       </div>
