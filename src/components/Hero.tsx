@@ -4,63 +4,56 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-secondary/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8 text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-              <Sparkles className="h-4 w-4" />
-              Car question?
+    <section className="relative overflow-hidden bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border">
+            <div className="text-center text-sm text-muted-foreground mb-8">
+              Today 2:14 PM
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              Car question?{" "}
-              <span className="block mt-2 text-primary">
-                Ask Archie.
-              </span>
-            </h1>
+            <div className="space-y-6">
+              <div className="flex justify-start">
+                <div className="bg-secondary px-6 py-4 rounded-3xl rounded-tl-sm max-w-xs">
+                  <p className="text-lg font-medium">Car question?</p>
+                </div>
+              </div>
+              
+              <div className="flex justify-end">
+                <div className="bg-primary text-primary-foreground px-6 py-4 rounded-3xl rounded-tr-sm max-w-xs">
+                  <p className="text-lg font-medium">Ask Archie.</p>
+                </div>
+              </div>
+            </div>
             
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              From buying your first car to understanding repairs, get expert answers instantly. 
-              Archie knows the industry inside and out—and explains it clearly.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/chat">
+            <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/chat" className="w-full sm:w-auto">
                 <Button 
                   size="lg"
-                  className="bg-primary hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto group"
+                  className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl group"
                 >
                   Start Chatting
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               
-              <Link to="/about">
+              <Link to="/about" className="w-full sm:w-auto">
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-2 hover:bg-secondary w-full sm:w-auto"
+                  className="w-full border-2 hover:bg-secondary"
                 >
                   Learn More
                 </Button>
               </Link>
             </div>
-            
-            <div className="flex flex-wrap gap-6 justify-center text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Expert Knowledge</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Instant Answers</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Free to use</span>
-              </div>
-            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              From buying your first car to understanding repairs, get expert answers instantly. 
+              Archie knows the industry inside and out—and explains it clearly.
+            </p>
           </div>
         </div>
       </div>
