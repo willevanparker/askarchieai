@@ -239,10 +239,34 @@ Remember: Prioritize the knowledge base content when available.`;
     });
 
   } catch (error) {
-    console.error('Error in archie-chat:', error);
+    // Log full details server-side
+    console.error('Error in archie-chat:', {
+      error: error instanceof Error ? error.message : 'Unknown',
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString()
+    });
+    
+    // Return generic error to client
+    const userMessage = getUserFriendlyError(error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: userMessage }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
+
+// Error message helper
+function getUserFriendlyError(error: unknown): string {
+  if (error instanceof Error) {
+    if (error.message.includes('rate limit') || error.message.includes('429')) {
+      return 'Too many requests. Please try again in a moment.';
+    }
+    if (error.message.includes('credit') || error.message.includes('402')) {
+      return 'Service temporarily unavailable. Please try again later.';
+    }
+    if (error.message.includes('Message too long')) {
+      return error.message;
+    }
+  }
+  return 'An error occurred. Please try again later.';
+}

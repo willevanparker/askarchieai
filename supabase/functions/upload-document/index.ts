@@ -22,6 +22,21 @@ serve(async (req) => {
     const token = authHeader.replace('Bearer ', '');
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
     if (authError || !user) throw new Error('Unauthorized');
+    
+    // Verify admin role explicitly for defense-in-depth
+    const { data: roles, error: roleError } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', user.id)
+      .eq('role', 'admin')
+      .single();
+    
+    if (roleError || !roles) {
+      return new Response(
+        JSON.stringify({ error: 'Admin privileges required' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     const { fileName, fileType, content, sourceType = 'file' } = await req.json();
     console.log(`Processing document: ${fileName} (${sourceType})`);
@@ -71,13 +86,34 @@ serve(async (req) => {
     );
 
   } catch (error) {
-    console.error('Error in upload-document:', error);
+    // Log full details server-side
+    console.error('Error in upload-document:', {
+      error: error instanceof Error ? error.message : 'Unknown',
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString()
+    });
+    
+    // Return generic error to client
+    const userMessage = getUserFriendlyError(error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: userMessage }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
+
+// Error message helper
+function getUserFriendlyError(error: unknown): string {
+  if (error instanceof Error) {
+    if (error.message.includes('Unauthorized') || error.message.includes('authorization')) {
+      return 'Authentication required';
+    }
+    if (error.message.includes('Admin privileges')) {
+      return 'Admin privileges required';
+    }
+  }
+  return 'An error occurred while processing the document. Please try again later.';
+}
 
 // Simple text chunking function
 function chunkText(text: string, maxChunkSize: number): string[] {
