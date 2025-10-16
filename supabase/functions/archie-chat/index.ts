@@ -21,7 +21,31 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { message, sessionId } = await req.json();
-    console.log(`Chat request from session ${sessionId}: ${message.substring(0, 50)}...`);
+    
+    // Validate inputs
+    if (!message || typeof message !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Invalid message format' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (message.length > 2000) {
+      return new Response(
+        JSON.stringify({ error: 'Message too long (max 2000 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (message.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'Message cannot be empty' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const sanitizedMessage = message.trim();
+    console.log(`Chat request from session ${sessionId}: ${sanitizedMessage.substring(0, 50)}...`);
 
     // Search for relevant document chunks
     const { data: chunks, error: chunksError } = await supabase
@@ -76,7 +100,7 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
     // Skip chat history for anonymous users (can add session-based history later if needed)
     const messages = [
       { role: 'system', content: systemPrompt },
-      { role: 'user', content: message }
+      { role: 'user', content: sanitizedMessage }
     ];
 
     // Call Lovable AI with GPT-5
