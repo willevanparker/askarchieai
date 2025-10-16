@@ -13,17 +13,13 @@ const About = () => {
               <h1 className="text-4xl sm:text-5xl font-bold mb-4">
                 About <span className="text-accent">A</span>rch<span className="text-accent">i</span>e
               </h1>
-              <p className="text-xl text-muted-foreground">
-                Your trusted guide through the automotive world
-              </p>
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
               <p className="text-muted-foreground leading-relaxed">
-                AskArchie.ai was created to demystify the car-buying and ownership experience. 
-                Whether you're a first-time buyer confused by dealership jargon, a seasoned owner 
-                navigating warranty claims, or someone just trying to understand why their check 
-                engine light came on—Archie is here to help.
+                AskArchie.ai was created to provide confidence and clarity to the automotive industry. 
+                Whether you're a first-time buyer, a seasoned owner, or someone just trying to understand 
+                why their check engine light came on—Archie is here to help.
               </p>
             </div>
 
@@ -45,8 +41,8 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
                 <p className="text-muted-foreground">
-                  We're upfront about our affiliate partnerships and always prioritize 
-                  giving you accurate, helpful information first.
+                  We prioritize giving you accurate, helpful information first. And unless you 
+                  ask, we don't share affiliate links.
                 </p>
               </div>
 
@@ -68,7 +64,7 @@ const About = () => {
                 <h3 className="text-xl font-semibold mb-2">Contextual Recommendations</h3>
                 <p className="text-muted-foreground">
                   When relevant, Archie can connect you with trusted services for financing, 
-                  warranties, parts, and more—only when it makes sense.
+                  warranties, insurance, and more—only when it makes sense.
                 </p>
               </div>
             </div>
@@ -77,9 +73,8 @@ const About = () => {
               <h2 className="text-2xl font-semibold mb-4">How Archie Works</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Archie is powered by advanced AI trained on thousands of automotive documents, 
-                  including manufacturer guidelines, state fee regulations, common repair procedures, 
-                  and dealership practices.
+                  Archie is powered by advanced AI trained on thousands of automotive data points 
+                  and resources.
                 </p>
                 <p>
                   Unlike a simple search engine, Archie understands context and can have natural 
@@ -90,12 +85,11 @@ const About = () => {
                   <li>Diagnosing common car problems</li>
                   <li>Comparing financing and warranty options</li>
                   <li>Navigating state-specific regulations</li>
-                  <li>Parts identification and pricing</li>
+                  <li>And more...</li>
                 </ul>
                 <p>
-                  When Archie detects that you might benefit from a specific service—like extended 
-                  warranty coverage for a repair concern—he'll offer relevant, helpful suggestions. 
-                  But you're always in control.
+                  And when Archie detects that you might benefit from a specific service—like extended 
+                  warranty coverage for a repair concern—he'll offer relevant, helpful suggestions.
                 </p>
               </div>
             </div>

@@ -51,7 +51,7 @@ const Index = () => {
                 How <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Can Help
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Expert guidance across all aspects of car ownership
+                Expert industry guidance powered by AI
               </p>
             </div>
 
@@ -72,9 +72,6 @@ const Index = () => {
         <section className="py-16 sm:py-20 bg-secondary/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to get answers?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Chat with Archie now and get the expert automotive guidance you need.
-            </p>
             <a href="/chat">
               <button className="bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
                 Start Chatting Now
