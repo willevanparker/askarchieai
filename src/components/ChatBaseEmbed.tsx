@@ -4,7 +4,7 @@ interface ChatBaseEmbedProps {
   className?: string;
 }
 
-const CHATBASE_BOT_ID = "06a81a19-258d-4b0c-99b0-1c7781226da2";
+const CHATBASE_BOT_ID = "GM054S1a9A3U4EGfZEUfs";
 
 const ChatBaseEmbed = ({ className = "" }: ChatBaseEmbedProps) => {
   return (
@@ -12,8 +12,8 @@ const ChatBaseEmbed = ({ className = "" }: ChatBaseEmbedProps) => {
       <iframe
         src={`https://www.chatbase.co/chatbot-iframe/${CHATBASE_BOT_ID}`}
         title="Archie Chat"
-        className="w-full h-full"
-        loading="lazy"
+        className="w-full h-full min-h-[700px]"
+        frameBorder="0"
         allow="clipboard-write; microphone; payment"
       />
     </section>
