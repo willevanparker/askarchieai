@@ -94,8 +94,8 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   Questions about these terms or our affiliate partnerships? Reach out at{" "}
-                  <a href="mailto:hello@askarchie.ai" className="text-primary hover:text-primary-dark">
-                    hello@askarchie.ai
+                  <a href="mailto:just@askarchie.ai" className="text-primary hover:text-primary-dark">
+                    just@askarchie.ai
                   </a>
                 </p>
               </section>
