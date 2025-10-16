@@ -34,28 +34,28 @@ const Hero = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/chat" className="w-full sm:w-auto">
+              <Button 
+                size="lg"
+                className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl group"
+              >
+                Start Chatting
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
             
-            <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/chat" className="w-full sm:w-auto">
-                <Button 
-                  size="lg"
-                  className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl group"
-                >
-                  Start Chatting
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              
-              <Link to="/about" className="w-full sm:w-auto">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="w-full border-2 hover:bg-secondary"
-                >
-                  Learn More
-                </Button>
-              </Link>
-            </div>
+            <Link to="/about" className="w-full sm:w-auto">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="w-full border-2 hover:bg-secondary"
+              >
+                Learn More
+              </Button>
+            </Link>
           </div>
           
           <div className="mt-12 text-center">
