@@ -14,7 +14,9 @@ serve(async (req) => {
 
   try {
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+    const PERPLEXITY_API_KEY = Deno.env.get('PERPLEXITY_API_KEY');
     if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY not configured');
+    if (!PERPLEXITY_API_KEY) throw new Error('PERPLEXITY_API_KEY not configured');
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -87,15 +89,66 @@ serve(async (req) => {
       console.log('No knowledge base content found');
     }
 
-    // System prompt with hybrid approach (Option A)
-    const systemPrompt = context 
-      ? `You are Archie, a helpful car expert assistant. Use the following information from the knowledge base to answer questions. If the knowledge base doesn't contain relevant information, provide helpful general automotive advice but note that it's not company-specific.
+    // If no knowledge base content, use Perplexity for web search
+    let finalMessage = sanitizedMessage;
+    let systemPrompt = '';
+    
+    if (!context || context.trim().length === 0) {
+      console.log('No knowledge base content, using Perplexity for web search');
+      
+      // Use Perplexity to search the web
+      const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${PERPLEXITY_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-sonar-large-128k-online',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a helpful automotive expert. Search for accurate, current information to answer car-related questions. Be precise and cite sources when possible.'
+            },
+            {
+              role: 'user',
+              content: sanitizedMessage
+            }
+          ],
+          temperature: 0.2,
+          top_p: 0.9,
+          max_tokens: 1000,
+        }),
+      });
+
+      if (!perplexityResponse.ok) {
+        console.error('Perplexity API error:', await perplexityResponse.text());
+        throw new Error('Failed to search web for information');
+      }
+
+      const perplexityData = await perplexityResponse.json();
+      const webSearchResult = perplexityData.choices?.[0]?.message?.content;
+      
+      if (webSearchResult) {
+        console.log('Got web search result from Perplexity');
+        systemPrompt = `You are Archie, a helpful car expert assistant. Use the following web search results to answer the user's question accurately.
+
+Web Search Results:
+${webSearchResult}
+
+Provide a clear, accurate answer based on this information.`;
+      } else {
+        systemPrompt = `You are Archie, a helpful car expert assistant. Provide general automotive advice and guidance.`;
+      }
+    } else {
+      console.log('Using knowledge base content');
+      systemPrompt = `You are Archie, a helpful car expert assistant. Use the following information from the knowledge base to answer questions. If the knowledge base doesn't contain relevant information, let the user know.
 
 Knowledge Base:
 ${context}
 
-Remember: Prioritize the knowledge base content, but if it doesn't address the question, provide general helpful automotive guidance.`
-      : `You are Archie, a helpful car expert assistant. Provide general automotive advice and guidance. Note: No specific company knowledge base is available yet, so responses are based on general automotive expertise.`;
+Remember: Prioritize the knowledge base content when available.`;
+    }
 
     // Skip chat history for anonymous users (can add session-based history later if needed)
     const messages = [
