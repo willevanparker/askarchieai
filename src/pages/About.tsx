@@ -18,7 +18,7 @@ const About = () => {
             <div className="prose prose-lg max-w-none mb-12">
               <p className="text-muted-foreground leading-relaxed">
                 AskArchie.ai was created to provide confidence and clarity to the automotive industry. 
-                Whether you're a first-time buyer, a seasoned owner, or someone just trying to understand 
+                Whether you're a first-time buyer, seasoned owner, or someone just trying to understand 
                 why their check engine light came on—Archie is here to help.
               </p>
             </div>
