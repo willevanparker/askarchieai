@@ -22,7 +22,7 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { message, sessionId } = await req.json();
+    const { message, sessionId, conversationHistory } = await req.json();
     
     // Validate inputs
     if (!message || typeof message !== 'string') {
@@ -150,9 +150,10 @@ ${context}
 Remember: Prioritize the knowledge base content when available.`;
     }
 
-    // Skip chat history for anonymous users (can add session-based history later if needed)
+    // Build messages array with conversation history
     const messages = [
       { role: 'system', content: systemPrompt },
+      ...(conversationHistory || []),
       { role: 'user', content: sanitizedMessage }
     ];
 
