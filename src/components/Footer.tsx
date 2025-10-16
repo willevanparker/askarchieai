@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <Link to="/" className="font-bold text-lg mb-4 inline-block">
-              <span className="text-primary">A</span>skArch<span className="text-primary">i</span>e
+              Ask<span className="text-primary">A</span>rch<span className="text-primary">i</span>e
             </Link>
             <p className="text-sm text-muted-foreground">
               Making automotive knowledge accessible to everyone.
