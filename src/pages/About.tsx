@@ -30,8 +30,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Expert Knowledge</h3>
                 <p className="text-muted-foreground">
-                  Trained on comprehensive automotive data including industry practices, 
-                  regulations, common repairs, and financing options.
+                  Trained extensively using real-world data, supercharged by AI. That means Archie can help with sales, service, and everything in between.
                 </p>
               </div>
 
