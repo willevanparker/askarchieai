@@ -9,33 +9,33 @@ const Index = () => {
     {
       icon: Car,
       title: "Buying a Car",
-      description: "Navigate the buying process, understand pricing, and negotiate with confidence"
+      description: "Navigate the buying process, understand pricing, and negotiate with confidence",
     },
     {
       icon: Wrench,
       title: "Repairs & Maintenance",
-      description: "Diagnose issues, understand repair costs, and know what's really necessary"
+      description: "Diagnose issues, understand repair costs, and know what's really necessary",
     },
     {
       icon: DollarSign,
       title: "Financing & Loans",
-      description: "Compare financing options, understand interest rates, and get pre-approved"
+      description: "Compare financing options, understand interest rates, and get pre-approved",
     },
     {
       icon: Shield,
       title: "Warranties & Insurance",
-      description: "Know what's covered, compare warranty options, and avoid unnecessary add-ons"
+      description: "Know what's covered, compare warranty options, and avoid unnecessary add-ons",
     },
     {
       icon: HelpCircle,
       title: "Dealership Questions",
-      description: "Understand fees, documentation, trade-ins, and dealership practices"
+      description: "Understand fees, documentation, trade-ins, and dealership practices",
     },
     {
       icon: FileText,
       title: "State Regulations",
-      description: "Learn about registration, taxes, emissions, and state-specific requirements"
-    }
+      description: "Learn about registration, taxes, emissions, and state-specific requirements",
+    },
   ];
 
   return (
@@ -43,7 +43,7 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        
+
         <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -51,7 +51,7 @@ const Index = () => {
                 How <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Can Help
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Expert guidance across all aspects of car ownership
+                Expert guidance across all aspects of car ownership.
               </p>
             </div>
 
@@ -71,9 +71,7 @@ const Index = () => {
 
         <section className="py-16 sm:py-20 bg-secondary/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Ready to get answers?
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to get answers?</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Chat with Archie now and get the expert automotive guidance you need.
             </p>
