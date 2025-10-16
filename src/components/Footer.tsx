@@ -47,6 +47,11 @@ const Footer = () => {
                   Cookie Policy
                 </Link>
               </li>
+              <li>
+                <a href="#" className="termly-display-preferences text-muted-foreground hover:text-primary transition-colors">
+                  Consent Preferences
+                </a>
+              </li>
             </ul>
           </div>
 
