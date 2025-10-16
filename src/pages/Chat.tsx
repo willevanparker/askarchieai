@@ -12,7 +12,7 @@ const Chat = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 container mx-auto py-8">
-        <div className="h-[calc(100vh-12rem)]">
+        <div className="min-h-[85vh]">
           <ChatBaseEmbed />
         </div>
       </main>

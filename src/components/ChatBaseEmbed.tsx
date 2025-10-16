@@ -12,7 +12,7 @@ const ChatBaseEmbed = ({ className = "" }: ChatBaseEmbedProps) => {
       <iframe
         src={`https://www.chatbase.co/chatbot-iframe/${CHATBASE_BOT_ID}`}
         title="Archie Chat"
-        className="w-full h-full min-h-[700px]"
+        className="w-full h-full min-h-[85vh]"
         frameBorder="0"
         allow="clipboard-write; microphone; payment"
       />
