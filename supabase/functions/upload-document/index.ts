@@ -16,17 +16,25 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { fileName, fileType, content, sessionId } = await req.json();
-    console.log(`Processing document: ${fileName} for session: ${sessionId}`);
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) throw new Error('No authorization header');
 
-    // Store the document without user_id (public knowledge base)
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) throw new Error('Unauthorized');
+
+    const { fileName, fileType, content, userId } = await req.json();
+    console.log(`Processing document: ${fileName} for user: ${userId}`);
+
+    // Store the document
     const { data: doc, error: docError } = await supabase
       .from('documents')
       .insert({
-        user_id: null,
+        user_id: userId,
         file_name: fileName,
         file_type: fileType,
-        content: content
+        content: content,
+        source_type: 'file'
       })
       .select()
       .single();

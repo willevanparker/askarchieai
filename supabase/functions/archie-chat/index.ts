@@ -23,23 +23,44 @@ serve(async (req) => {
     const { message, sessionId } = await req.json();
     console.log(`Chat request from session ${sessionId}: ${message.substring(0, 50)}...`);
 
-    // Search for relevant chunks from all public documents (no user filtering)
+    // Search for relevant document chunks
     const { data: chunks, error: chunksError } = await supabase
       .from('document_chunks')
       .select('chunk_text')
-      .limit(5);
+      .limit(3);
 
     if (chunksError) {
       console.error('Error fetching chunks:', chunksError);
     }
 
-    // Build context from chunks
+    // Search for relevant Q&A pairs
+    const { data: qaPairs, error: qaError } = await supabase
+      .from('qa_pairs')
+      .select('question, answer')
+      .limit(5);
+
+    if (qaError) {
+      console.error('Error fetching Q&A pairs:', qaError);
+    }
+
+    // Build context from chunks and Q&A
     let context = '';
+    
+    if (qaPairs && qaPairs.length > 0) {
+      console.log(`Found ${qaPairs.length} Q&A pairs`);
+      const qaContext = qaPairs.map(qa => `Q: ${qa.question}\nA: ${qa.answer}`).join('\n\n');
+      context += qaContext;
+    }
+    
     if (chunks && chunks.length > 0) {
-      console.log(`Found ${chunks.length} relevant chunks`);
-      context = chunks.map(c => c.chunk_text).join('\n\n');
-    } else {
-      console.log('No document chunks found');
+      console.log(`Found ${chunks.length} document chunks`);
+      const docContext = chunks.map(c => c.chunk_text).join('\n\n');
+      if (context) context += '\n\n---\n\n';
+      context += docContext;
+    }
+    
+    if (!context) {
+      console.log('No knowledge base content found');
     }
 
     // System prompt with hybrid approach (Option A)
