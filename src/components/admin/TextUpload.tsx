@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { FileText, Loader2 } from 'lucide-react';
+import { Type, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const TextUpload = () => {
@@ -20,15 +21,12 @@ const TextUpload = () => {
     setUploading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
-      const { error } = await supabase.functions.invoke('upload-document', {
+      const { data, error } = await supabase.functions.invoke('upload-document', {
         body: {
           fileName: title,
           fileType: 'text/plain',
           content: content,
-          userId: user.id,
+          sourceType: 'text',
         },
       });
 
@@ -36,13 +34,12 @@ const TextUpload = () => {
 
       toast({
         title: 'Text uploaded successfully',
-        description: 'Content has been added to the knowledge base.',
+        description: 'Your text has been added to the knowledge base.',
       });
 
       setTitle('');
       setContent('');
     } catch (error) {
-      console.error('Upload error:', error);
       toast({
         title: 'Upload failed',
         description: error instanceof Error ? error.message : 'Failed to upload text',
@@ -54,46 +51,52 @@ const TextUpload = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center gap-2">
-        <FileText className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-semibold">Add Text Content</h3>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="title">Title</Label>
-        <Input
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g., Warranty Policy"
-          required
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="content">Content</Label>
-        <Textarea
-          id="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Paste your text content here..."
-          className="min-h-[200px]"
-          required
-        />
-      </div>
-
-      <Button type="submit" disabled={uploading} className="w-full">
-        {uploading ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Uploading...
-          </>
-        ) : (
-          'Add to Knowledge Base'
-        )}
-      </Button>
-    </form>
+    <Card className="max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Type className="w-5 h-5" />
+          Add Text Content
+        </CardTitle>
+        <CardDescription>
+          Manually enter text content to add to the knowledge base
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g., Warranty Information"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="content">Content</Label>
+            <Textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Enter the text content here..."
+              rows={10}
+              required
+            />
+          </div>
+          <Button type="submit" disabled={uploading} className="w-full" size="lg">
+            {uploading ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              'Add to Knowledge Base'
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

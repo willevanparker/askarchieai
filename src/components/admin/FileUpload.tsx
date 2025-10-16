@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
@@ -26,17 +27,14 @@ const FileUpload = () => {
     setUploading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
       const content = await file.text();
 
-      const { error } = await supabase.functions.invoke('upload-document', {
+      const { data, error } = await supabase.functions.invoke('upload-document', {
         body: {
           fileName: file.name,
           fileType: file.type,
           content: content,
-          userId: user.id,
+          sourceType: 'file',
         },
       });
 
@@ -49,7 +47,6 @@ const FileUpload = () => {
 
       event.target.value = '';
     } catch (error) {
-      console.error('Upload error:', error);
       toast({
         title: 'Upload failed',
         description: error instanceof Error ? error.message : 'Failed to upload file',
@@ -61,50 +58,52 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <FileText className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-semibold">Upload Files</h3>
-      </div>
-      
-      <p className="text-sm text-muted-foreground">
-        Upload PDF, CSV, or TXT files to add to Archie's knowledge base.
-      </p>
-
-      <label className="block">
-        <Input
-          type="file"
-          accept=".pdf,.csv,.txt"
-          onChange={handleFileUpload}
-          disabled={uploading}
-          className="hidden"
-          id="file-upload"
-        />
-        <Button
-          asChild
-          disabled={uploading}
-          className="w-full cursor-pointer"
-        >
-          <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center gap-2">
-            {uploading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Processing...
-              </>
-            ) : (
-              <>
-                <Upload className="w-4 h-4" />
-                Choose File
-              </>
-            )}
-          </label>
-        </Button>
-      </label>
-
-      <p className="text-xs text-muted-foreground text-center">
-        Supported formats: PDF, CSV, TXT
-      </p>
-    </div>
+    <Card className="max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <FileText className="w-5 h-5" />
+          Upload Files
+        </CardTitle>
+        <CardDescription>
+          Upload PDF, CSV, or text files to add to Archie's knowledge base
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <label className="block">
+          <Input
+            type="file"
+            accept=".pdf,.csv,.txt"
+            onChange={handleFileUpload}
+            disabled={uploading}
+            className="hidden"
+            id="file-input"
+          />
+          <Button
+            asChild
+            disabled={uploading}
+            className="w-full cursor-pointer"
+            size="lg"
+          >
+            <label htmlFor="file-input" className="cursor-pointer flex items-center justify-center gap-2">
+              {uploading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <Upload className="w-5 h-5" />
+                  Choose File to Upload
+                </>
+              )}
+            </label>
+          </Button>
+        </label>
+        <p className="text-sm text-muted-foreground mt-4 text-center">
+          Supported formats: PDF, CSV, TXT
+        </p>
+      </CardContent>
+    </Card>
   );
 };
 

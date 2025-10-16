@@ -16,25 +16,44 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    const { url } = await req.json();
+    console.log(`Scraping website: ${url}`);
+
+    // Fetch the website content
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch website: ${response.statusText}`);
+    }
+
+    const html = await response.text();
+    
+    // Simple HTML to text conversion (removes tags)
+    const text = html
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // Get authenticated user (admin)
     const authHeader = req.headers.get('Authorization');
-    if (!authHeader) throw new Error('No authorization header');
+    const token = authHeader?.replace('Bearer ', '');
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token!);
+    
+    if (authError || !user) {
+      throw new Error('Unauthorized');
+    }
 
-    const token = authHeader.replace('Bearer ', '');
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-    if (authError || !user) throw new Error('Unauthorized');
-
-    const { fileName, fileType, content, sourceType = 'file' } = await req.json();
-    console.log(`Processing document: ${fileName} (${sourceType})`);
-
-    // Store the document with admin user_id
+    // Store the document
     const { data: doc, error: docError } = await supabase
       .from('documents')
       .insert({
         user_id: user.id,
-        file_name: fileName,
-        file_type: fileType,
-        content: content,
-        source_type: sourceType
+        file_name: url,
+        file_type: 'text/html',
+        content: text,
+        source_type: 'website',
+        metadata: { url }
       })
       .select()
       .single();
@@ -44,11 +63,8 @@ serve(async (req) => {
       throw docError;
     }
 
-    // Split content into chunks (simple approach: split by paragraphs, max 500 chars)
-    const chunks = chunkText(content, 500);
-    console.log(`Created ${chunks.length} chunks from document`);
-
-    // Store chunks
+    // Chunk the text
+    const chunks = chunkText(text, 500);
     const chunkInserts = chunks.map((chunk, index) => ({
       document_id: doc.id,
       chunk_text: chunk,
@@ -64,14 +80,14 @@ serve(async (req) => {
       throw chunkError;
     }
 
-    console.log('Document processed successfully');
+    console.log('Website scraped successfully');
     return new Response(
-      JSON.stringify({ success: true, documentId: doc.id }),
+      JSON.stringify({ success: true }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {
-    console.error('Error in upload-document:', error);
+    console.error('Error in scrape-website:', error);
     return new Response(
       JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -79,7 +95,6 @@ serve(async (req) => {
   }
 });
 
-// Simple text chunking function
 function chunkText(text: string, maxChunkSize: number): string[] {
   const chunks: string[] = [];
   const paragraphs = text.split(/\n\n+/);

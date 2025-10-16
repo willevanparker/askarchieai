@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,90 +10,75 @@ import { supabase } from '@/integrations/supabase/client';
 const WebsiteUpload = () => {
   const { toast } = useToast();
   const [url, setUrl] = useState('');
-  const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url.trim()) return;
 
-    setUploading(true);
+    setLoading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
-      // Fetch website content
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch website');
-      
-      const html = await response.text();
-      
-      // Simple HTML to text conversion (strip tags)
-      const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-      const { error } = await supabase.functions.invoke('upload-document', {
-        body: {
-          fileName: `Website: ${new URL(url).hostname}`,
-          fileType: 'text/html',
-          content: text.substring(0, 50000), // Limit to 50k chars
-          userId: user.id,
-        },
+      const { data, error } = await supabase.functions.invoke('scrape-website', {
+        body: { url },
       });
 
       if (error) throw error;
 
       toast({
-        title: 'Website content uploaded',
-        description: 'Website has been scraped and added to the knowledge base.',
+        title: 'Website scraped successfully',
+        description: 'Content has been added to the knowledge base.',
       });
 
       setUrl('');
     } catch (error) {
-      console.error('Upload error:', error);
       toast({
-        title: 'Upload failed',
-        description: error instanceof Error ? error.message : 'Failed to upload website',
+        title: 'Scraping failed',
+        description: error instanceof Error ? error.message : 'Failed to scrape website',
         variant: 'destructive',
       });
     } finally {
-      setUploading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center gap-2">
-        <Globe className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-semibold">Scrape Website</h3>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="url">Website URL</Label>
-        <Input
-          id="url"
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="https://example.com/page"
-          required
-        />
-      </div>
-
-      <p className="text-sm text-muted-foreground">
-        The website will be scraped and its content added to Archie's knowledge base.
-      </p>
-
-      <Button type="submit" disabled={uploading} className="w-full">
-        {uploading ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Scraping...
-          </>
-        ) : (
-          'Scrape & Upload'
-        )}
-      </Button>
-    </form>
+    <Card className="max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Globe className="w-5 h-5" />
+          Scrape Website
+        </CardTitle>
+        <CardDescription>
+          Enter a URL to scrape and add its content to the knowledge base
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="url">Website URL</Label>
+            <Input
+              id="url"
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="https://example.com"
+              required
+            />
+          </div>
+          <Button type="submit" disabled={loading} className="w-full" size="lg">
+            {loading ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Scraping Website...
+              </>
+            ) : (
+              'Scrape and Add to Knowledge Base'
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

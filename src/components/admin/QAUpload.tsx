@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -30,13 +31,12 @@ const QAUpload = () => {
 
       toast({
         title: 'Q&A added successfully',
-        description: 'Question and answer pair has been added to the knowledge base.',
+        description: 'The question and answer pair has been added to the knowledge base.',
       });
 
       setQuestion('');
       setAnswer('');
     } catch (error) {
-      console.error('Upload error:', error);
       toast({
         title: 'Upload failed',
         description: error instanceof Error ? error.message : 'Failed to add Q&A',
@@ -48,47 +48,53 @@ const QAUpload = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center gap-2">
-        <MessageSquare className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-semibold">Add Q&A Pair</h3>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="question">Question</Label>
-        <Textarea
-          id="question"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="What is your warranty policy?"
-          className="min-h-[80px]"
-          required
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="answer">Answer</Label>
-        <Textarea
-          id="answer"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          placeholder="Our warranty covers..."
-          className="min-h-[120px]"
-          required
-        />
-      </div>
-
-      <Button type="submit" disabled={uploading} className="w-full">
-        {uploading ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Adding...
-          </>
-        ) : (
-          'Add Q&A Pair'
-        )}
-      </Button>
-    </form>
+    <Card className="max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <MessageSquare className="w-5 h-5" />
+          Add Q&A Pair
+        </CardTitle>
+        <CardDescription>
+          Add question and answer pairs for precise responses
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="question">Question</Label>
+            <Textarea
+              id="question"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="e.g., What is your warranty policy?"
+              rows={3}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="answer">Answer</Label>
+            <Textarea
+              id="answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              placeholder="Our warranty covers..."
+              rows={6}
+              required
+            />
+          </div>
+          <Button type="submit" disabled={uploading} className="w-full" size="lg">
+            {uploading ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Adding...
+              </>
+            ) : (
+              'Add Q&A to Knowledge Base'
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

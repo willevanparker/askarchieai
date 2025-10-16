@@ -5,3 +5,6 @@ verify_jwt = true
 
 [functions.archie-chat]
 verify_jwt = false
+
+[functions.scrape-website]
+verify_jwt = true
