@@ -68,6 +68,11 @@ const Terms = () => {
                   service quality, but we do not sell personal information to third parties.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
+                  <strong>Global Privacy Control (GPC):</strong> We honor the Global Privacy Control 
+                  signal. If your browser sends a GPC signal, we will not load analytics or tracking 
+                  technologies on your device.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
                   When you click affiliate links, you'll be directed to third-party websites that 
                   have their own privacy policies and terms of service. We encourage you to review 
                   these before providing any personal information.

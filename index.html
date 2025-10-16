@@ -8,13 +8,27 @@
     <meta name="description" content="Get knowledgeable answers to all your car questions. From buying to maintenance, Archie helps you navigate the automotive world with confidence." />
     <meta name="author" content="AskArchie.ai" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GMQQNF18G"></script>
+    <!-- Google tag (gtag.js) with GPC support -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4GMQQNF18G');
+      // Check for Global Privacy Control signal
+      const respectsGPC = navigator.globalPrivacyControl === true;
+      
+      if (!respectsGPC) {
+        // Only load Google Analytics if GPC is not enabled
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-4GMQQNF18G';
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4GMQQNF18G', {
+          'anonymize_ip': true
+        });
+      } else {
+        console.log('Global Privacy Control detected - analytics disabled');
+      }
     </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
