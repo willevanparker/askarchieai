@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ArchieChat from "@/components/ArchieChat";
+import ChatBaseEmbed from "@/components/ChatBaseEmbed";
 
 const Chat = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const Chat = () => {
       <Navbar />
       <main className="flex-1 container mx-auto py-8">
         <div className="h-[calc(100vh-12rem)]">
-          <ArchieChat />
+          <ChatBaseEmbed />
         </div>
       </main>
       <Footer />
