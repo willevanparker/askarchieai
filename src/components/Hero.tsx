@@ -60,8 +60,7 @@ const Hero = () => {
           
           <div className="mt-12 text-center">
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From buying your first car to understanding repairs, get expert answers instantly. 
-              Archie knows the industry inside and out—and explains it clearly.
+              From buying your first car to understanding repairs, Archie knows the industry inside and out — can explain it clearly, guide you confidently, and provide recommendations when you need them most.
             </p>
           </div>
         </div>
