@@ -55,7 +55,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-border mt-8 pt-6">
+          <div className="bg-muted/50 rounded-lg p-4 mb-6">
+            <p className="text-sm text-muted-foreground text-center">
+              <span className="font-semibold">Disclaimer:</span> This service provides information only. While we strive for the best accuracy, AI can make mistakes. We recommend double-checking important details with an automotive professional.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} AskArchie.ai. All rights reserved.
           </p>
