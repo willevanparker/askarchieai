@@ -113,68 +113,22 @@ export const ChatBaseEmbed = () => {
 
 ---
 
-### 1.4 Chat Page Implementation ⏳
+### 1.4 Chat Page Implementation 🚧
 
-**Status:** ⏳ Pending ChatBase integration
+**Status:** 🚧 In Progress (ChatBase iframe integrated on `/chat`)
 
 **Subtasks:**
 - ✅ Create `/chat` route
 - ✅ Build mock ChatInterface component
-- ⏳ Replace mock with ChatBase iframe embed
+- ✅ Replace mock with ChatBase iframe embed
 - ⏳ Add example prompt suggestions
 - ⏳ Style ChatBase iframe to match brand
 
-**ChatBase Styling Script:**
-```html
-<!-- Add to index.html or inject via React -->
-<script>
-  window.embeddedChatbotConfig = {
-    chatbotId: "06a81a19-258d-4b0c-99b0-1c7781226da2",
-    domain: "www.chatbase.co",
-    theme: {
-      primaryColor: "#0A64BC",
-      backgroundColor: "#FAFAFA",
-      fontFamily: "Inter, sans-serif"
-    }
-  }
-</script>
-```
-
-**Example Prompts Component:**
-```tsx
-// src/components/ExamplePrompts.tsx
-const EXAMPLE_PROMPTS = [
-  "What is a doc fee?",
-  "Should I buy an extended warranty?",
-  "What does my check engine light mean?",
-  "How do dealer financing rates work?",
-  "What are dealer add-ons I should avoid?"
-];
-
-export const ExamplePrompts = ({ onSelectPrompt }: Props) => {
-  return (
-    <div className="flex flex-wrap gap-2 p-4">
-      {EXAMPLE_PROMPTS.map((prompt) => (
-        <button
-          key={prompt}
-          onClick={() => onSelectPrompt(prompt)}
-          className="px-4 py-2 bg-secondary hover:bg-secondary/80 
-                     text-secondary-foreground rounded-full text-sm 
-                     transition-colors"
-        >
-          {prompt}
-        </button>
-      ))}
-    </div>
-  );
-};
-```
-
 **Files:**
 - ✅ `src/pages/Chat.tsx`
-- 🚧 `src/components/ChatInterface.tsx` (needs ChatBase replacement)
+- 🛈 `src/components/ChatInterface.tsx` (legacy mock; not used)
 - ⏳ `src/components/ExamplePrompts.tsx` (TO CREATE)
-- ⏳ `src/components/ChatBaseEmbed.tsx` (TO CREATE)
+- ✅ `src/components/ChatBaseEmbed.tsx`
 
 ---
 

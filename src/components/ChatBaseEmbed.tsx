@@ -1,30 +1,22 @@
-import { useEffect } from "react";
+import React from "react";
 
 interface ChatBaseEmbedProps {
   className?: string;
 }
 
-declare global {
-  interface Window {
-    embeddedChatbotConfig: {
-      chatbotId: string;
-      domain: string;
-    };
-  }
-}
+const CHATBASE_BOT_ID = "06a81a19-258d-4b0c-99b0-1c7781226da2";
 
 const ChatBaseEmbed = ({ className = "" }: ChatBaseEmbedProps) => {
-  // ChatBase script is now loaded directly in index.html as per ChatBase support instructions
-
   return (
-    <div className={`w-full h-full flex items-center justify-center ${className}`}>
-      <div className="text-center">
-        <p className="text-muted-foreground mb-4">Loading Archie...</p>
-        <p className="text-sm text-muted-foreground">
-          The chat widget will appear in the bottom right corner
-        </p>
-      </div>
-    </div>
+    <section className={`w-full h-full ${className}`} aria-label="Chat with Archie">
+      <iframe
+        src={`https://www.chatbase.co/chatbot-iframe/${CHATBASE_BOT_ID}`}
+        title="Archie Chat"
+        className="w-full h-full"
+        loading="lazy"
+        allow="clipboard-write; microphone; payment"
+      />
+    </section>
   );
 };
 
