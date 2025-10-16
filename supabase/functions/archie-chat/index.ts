@@ -58,7 +58,7 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
       { role: 'user', content: message }
     ];
 
-    // Call Lovable AI
+    // Call Lovable AI with GPT-5
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -66,7 +66,7 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'openai/gpt-5',
         messages,
         stream: true,
       }),
