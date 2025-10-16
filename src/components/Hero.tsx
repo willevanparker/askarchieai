@@ -8,6 +8,15 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
         <div className="max-w-3xl mx-auto">
           <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
+                Car question?
+              </h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-8">
+                Ask Archie.
+              </h1>
+            </div>
+            
             <div className="text-center text-sm text-muted-foreground mb-8">
               Today 2:14 PM
             </div>
