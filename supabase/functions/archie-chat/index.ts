@@ -20,17 +20,13 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { message, userId } = await req.json();
-    console.log(`Chat request from user ${userId}: ${message.substring(0, 50)}...`);
+    const { message, sessionId } = await req.json();
+    console.log(`Chat request from session ${sessionId}: ${message.substring(0, 50)}...`);
 
-    // Search for relevant chunks from user's documents
-    const { data: userChunks, error: chunksError } = await supabase
+    // Search for relevant chunks from all public documents (no user filtering)
+    const { data: chunks, error: chunksError } = await supabase
       .from('document_chunks')
-      .select(`
-        chunk_text,
-        documents!inner(user_id)
-      `)
-      .eq('documents.user_id', userId)
+      .select('chunk_text')
       .limit(5);
 
     if (chunksError) {
@@ -39,11 +35,11 @@ serve(async (req) => {
 
     // Build context from chunks
     let context = '';
-    if (userChunks && userChunks.length > 0) {
-      console.log(`Found ${userChunks.length} relevant chunks`);
-      context = userChunks.map(c => c.chunk_text).join('\n\n');
+    if (chunks && chunks.length > 0) {
+      console.log(`Found ${chunks.length} relevant chunks`);
+      context = chunks.map(c => c.chunk_text).join('\n\n');
     } else {
-      console.log('No document chunks found for user');
+      console.log('No document chunks found');
     }
 
     // System prompt with hybrid approach (Option A)
@@ -56,17 +52,9 @@ ${context}
 Remember: Prioritize the knowledge base content, but if it doesn't address the question, provide general helpful automotive guidance.`
       : `You are Archie, a helpful car expert assistant. Provide general automotive advice and guidance. Note: No specific company knowledge base is available yet, so responses are based on general automotive expertise.`;
 
-    // Get recent chat history
-    const { data: history } = await supabase
-      .from('chat_messages')
-      .select('role, content')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-      .limit(10);
-
+    // Skip chat history for anonymous users (can add session-based history later if needed)
     const messages = [
       { role: 'system', content: systemPrompt },
-      ...(history?.reverse() || []),
       { role: 'user', content: message }
     ];
 
@@ -102,15 +90,9 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
       throw new Error('AI gateway error');
     }
 
-    // Store user message
-    await supabase.from('chat_messages').insert({
-      user_id: userId,
-      role: 'user',
-      content: message
-    });
-
-    // Stream response and collect for storage
-    let fullResponse = '';
+    // Skip storing messages for anonymous users
+    // Stream response
+    
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
@@ -134,7 +116,6 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
                   const parsed = JSON.parse(data);
                   const content = parsed.choices?.[0]?.delta?.content;
                   if (content) {
-                    fullResponse += content;
                     controller.enqueue(encoder.encode(`data: ${data}\n\n`));
                   }
                 } catch (e) {
@@ -144,15 +125,7 @@ Remember: Prioritize the knowledge base content, but if it doesn't address the q
             }
           }
 
-          // Store assistant response
-          if (fullResponse) {
-            await supabase.from('chat_messages').insert({
-              user_id: userId,
-              role: 'assistant',
-              content: fullResponse
-            });
-          }
-
+          // Skip storing for anonymous users
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
         } catch (error) {

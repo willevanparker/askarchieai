@@ -31,14 +31,11 @@ const ArchieChat = () => {
     setIsLoading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast({
-          title: 'Authentication required',
-          description: 'Please sign in to chat with Archie.',
-          variant: 'destructive',
-        });
-        return;
+      // Use anonymous session ID from localStorage
+      let sessionId = localStorage.getItem('archie_session_id');
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem('archie_session_id', sessionId);
       }
 
       const response = await fetch(
@@ -47,9 +44,8 @@ const ArchieChat = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ message: userMessage, userId: user.id }),
+          body: JSON.stringify({ message: userMessage, sessionId }),
         }
       );
 

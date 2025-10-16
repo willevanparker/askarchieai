@@ -16,14 +16,14 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { fileName, fileType, content, userId } = await req.json();
-    console.log(`Processing document: ${fileName} for user: ${userId}`);
+    const { fileName, fileType, content, sessionId } = await req.json();
+    console.log(`Processing document: ${fileName} for session: ${sessionId}`);
 
-    // Store the document
+    // Store the document without user_id (public knowledge base)
     const { data: doc, error: docError } = await supabase
       .from('documents')
       .insert({
-        user_id: userId,
+        user_id: null,
         file_name: fileName,
         file_type: fileType,
         content: content

@@ -26,14 +26,11 @@ const DocumentUpload = () => {
     setUploading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast({
-          title: 'Authentication required',
-          description: 'Please sign in to upload documents.',
-          variant: 'destructive',
-        });
-        return;
+      // Use anonymous session ID
+      let sessionId = localStorage.getItem('archie_session_id');
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem('archie_session_id', sessionId);
       }
 
       // Read file content
@@ -45,7 +42,7 @@ const DocumentUpload = () => {
           fileName: file.name,
           fileType: file.type,
           content: content,
-          userId: user.id,
+          sessionId: sessionId,
         },
       });
 
