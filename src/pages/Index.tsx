@@ -51,7 +51,7 @@ const Index = () => {
                 How <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Can Help
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Expert industry guidance powered by AI
+                Expert industry guidance supercharged by AI
               </p>
             </div>
 
