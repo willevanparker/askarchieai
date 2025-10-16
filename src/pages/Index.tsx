@@ -8,7 +8,7 @@ const Index = () => {
   const expertiseAreas = [
     {
       icon: Car,
-      title: "Buying a Car",
+      title: "Buying or Leasing a Car",
       description: "Navigate the buying process, understand pricing, and negotiate with confidence",
     },
     {
