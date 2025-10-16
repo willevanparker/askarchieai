@@ -40,7 +40,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
                 <p className="text-muted-foreground">
-                  We prioritize giving you accurate, helpful information first. But if you have 
+                  We prioritize giving you helpful information. But if you have 
                   feedback, Archie is all ears. Contact him at just@askarchie.ai
                 </p>
               </div>

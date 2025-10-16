@@ -14,12 +14,12 @@ const Index = () => {
     {
       icon: Wrench,
       title: "Repairs & Maintenance",
-      description: "Diagnose issues, understand repair costs, and know what's really necessary",
+      description: "Diagnose potential issues, understand repair costs and quotes, and know what's really necessary",
     },
     {
       icon: DollarSign,
       title: "Financing & Loans",
-      description: "Compare financing options, understand interest rates, and get pre-approved",
+      description: "Compare financing options, understand interest rates, and get pre-approval advice",
     },
     {
       icon: Shield,
@@ -48,10 +48,10 @@ const Index = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                How <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Can Help
+                Ways <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Can Help
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Expert guidance supercharged by AI
+                AI-supercharged insights, built on real-world automotive experience
               </p>
             </div>
 
