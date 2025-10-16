@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="max-w-3xl mx-auto">
           <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border">
             <div className="text-center mb-8">
