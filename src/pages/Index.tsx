@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import ComparisonSection from "@/components/ComparisonSection";
 import { Card } from "@/components/ui/card";
 import { Car, Wrench, DollarSign, Shield, HelpCircle, FileText } from "lucide-react";
 
@@ -69,7 +70,9 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 bg-secondary/30">
+        <ComparisonSection />
+
+        <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to get answers?</h2>
             <a href="/chat">
