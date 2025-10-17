@@ -13,13 +13,6 @@ const Footer = () => {
             <p className="text-sm text-gray-400 mb-6 max-w-xs">
               AI-supercharged automotive search.
             </p>
-            <Link 
-              to="/chat" 
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 text-primary rounded-lg text-sm font-medium hover:bg-primary/30 transition-colors mb-6"
-            >
-              <span className="text-primary">✨</span>
-              Try Archie Now
-            </Link>
             <div className="flex items-center gap-4">
               <a 
                 href="https://www.instagram.com/askarchieai/" 
@@ -78,16 +71,16 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="termly-display-preferences text-gray-400 hover:text-white transition-colors">
-                  Consent Preferences
-                </a>
+                <Link to="/faq" className="text-gray-400 hover:text-white transition-colors">
+                  FAQ
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal Column */}
+          {/* Company Column */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Legal</h3>
+            <h3 className="font-semibold mb-4 text-white">Company</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">
@@ -103,6 +96,11 @@ const Footer = () => {
                 <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">
                   Cookie Policy
                 </Link>
+              </li>
+              <li>
+                <a href="#" className="termly-display-preferences text-gray-400 hover:text-white transition-colors">
+                  Consent Preferences
+                </a>
               </li>
             </ul>
           </div>
