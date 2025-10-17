@@ -24,13 +24,13 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="flex justify-start">
                 <div className="bg-secondary px-6 py-4 rounded-3xl rounded-tl-sm max-w-xs">
-                  <p className="text-lg font-medium">I have a question about doc fees.</p>
+                  <p className="text-lg font-medium">My car is making a strange noise? Can you help?</p>
                 </div>
               </div>
               
               <div className="flex justify-end">
                 <div className="bg-primary text-primary-foreground px-6 py-4 rounded-3xl rounded-tr-sm max-w-xs">
-                  <p className="text-lg font-medium">Gotcha. What would you like to know?</p>
+                  <p className="text-lg font-medium">Yep! Does it happen when you're sitting still or driving?</p>
                 </div>
               </div>
             </div>
