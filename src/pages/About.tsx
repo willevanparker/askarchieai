@@ -17,31 +17,11 @@ const About = () => {
 
             <div className="prose prose-lg max-w-none mb-12">
               <p className="text-muted-foreground leading-relaxed">
-                Hi! I'm Archie. Whether you're navigating the car buyer experience or just trying to understand why your check engine light is on—I'm here to help.
+                Hi! I'm Archie. Whether you're navigating the car buying experience or just trying to understand why your check engine light is on—I'm here to help.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
-              <div className="bg-card border border-border rounded-2xl p-6">
-                <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                  <Sparkles className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Expert Knowledge</h3>
-                <p className="text-muted-foreground">
-                  I'm trained extensively using real-world data (think an entire library of automotive knowledge), supercharged by AI. That means I can help with sales, service, and everything in between.
-                </p>
-              </div>
-
-              <div className="bg-card border border-border rounded-2xl p-6">
-                <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                  <Shield className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
-                <p className="text-muted-foreground">
-                  I try my best to give helpful information, but even an AI-supercharged automotive advocate can make mistakes! If you have feedback, I'm all ears! Send me an email at just@askarchie.ai.
-                </p>
-              </div>
-
               <div className="bg-card border border-border rounded-2xl p-6">
                 <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-primary" />
@@ -54,11 +34,31 @@ const About = () => {
 
               <div className="bg-card border border-border rounded-2xl p-6">
                 <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Expert Knowledge</h3>
+                <p className="text-muted-foreground">
+                  I'm trained extensively using real-world data (think an entire library of automotive knowledge), supercharged by AI. That means I can help with sales, service, and everything in between.
+                </p>
+              </div>
+
+              <div className="bg-card border border-border rounded-2xl p-6">
+                <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                   <Target className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Contextual Recommendations</h3>
                 <p className="text-muted-foreground">
                   When relevant, I can connect you with trusted services for financing, warranties, insurance, and more—only when it makes sense. So, if you're asking questions about what kind of car insurance is best, I can recommend a few options!
+                </p>
+              </div>
+
+              <div className="bg-card border border-border rounded-2xl p-6">
+                <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
+                <p className="text-muted-foreground">
+                  I try my best to give helpful information, but even an AI-supercharged automotive advocate can make mistakes! If you have feedback, I'm all ears! Send me an email at just@askarchie.ai.
                 </p>
               </div>
             </div>
