@@ -24,7 +24,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="flex justify-start">
                 <div className="bg-secondary px-6 py-4 rounded-3xl rounded-tl-sm max-w-xs">
-                  <p className="text-lg font-medium">My car is making a strange noise? Can you help?</p>
+                  <p className="text-lg font-medium">My car is making a strange noise. Can you help?</p>
                 </div>
               </div>
               
