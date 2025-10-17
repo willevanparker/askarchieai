@@ -10,7 +10,7 @@ const Footer = () => {
               Ask<span className="text-primary">A</span>rch<span className="text-primary">i</span>e
             </Link>
             <p className="text-sm text-muted-foreground">
-              Making automotive knowledge accessible to everyone.
+              AI-supercharged automotive search.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Support</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Have questions or feedback? We'd love to hear from you.
+              Have questions or feedback? I'd love to hear from you.
             </p>
             <a 
               href="mailto:just@askarchie.ai" 
@@ -70,14 +70,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-6">
-          <div className="bg-muted/50 rounded-lg p-4 mb-6">
-            <p className="text-sm text-muted-foreground text-center">
-              <span className="font-semibold">Disclaimer:</span> This service provides information only. While we strive for the best accuracy, AI can make mistakes. We recommend double-checking important details with an automotive professional.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             © 2025 Hamster Financial, LLC (d/b/a AskArchie). All rights reserved.
           </p>
@@ -106,6 +99,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </footer>
   );

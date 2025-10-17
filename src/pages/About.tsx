@@ -17,9 +17,7 @@ const About = () => {
 
             <div className="prose prose-lg max-w-none mb-12">
               <p className="text-muted-foreground leading-relaxed">
-                AskArchie.ai was created to provide confidence and clarity to the automotive industry. 
-                Whether you're a first-time buyer, seasoned owner, or someone just trying to understand 
-                why their check engine light came on—Archie is here to help.
+                Hi! I'm Archie. Whether you're navigating the car buyer experience or just trying to understand why your check engine light is on—I'm here to help.
               </p>
             </div>
 
@@ -30,7 +28,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Expert Knowledge</h3>
                 <p className="text-muted-foreground">
-                  Trained extensively using real-world data, supercharged by AI. That means Archie can help with sales, service, and everything in between.
+                  I'm trained extensively using real-world data (think an entire library of automotive knowledge), supercharged by AI. That means I can help with sales, service, and everything in between.
                 </p>
               </div>
 
@@ -40,8 +38,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
                 <p className="text-muted-foreground">
-                  We prioritize giving you helpful information. But if you have 
-                  feedback, Archie is all ears. Contact him at just@askarchie.ai
+                  I try my best to give helpful information, but even an AI-supercharged automotive advocate can make mistakes! If you have feedback, I'm all ears! Send me an email at just@askarchie.ai.
                 </p>
               </div>
 
@@ -51,8 +48,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">For Everyone</h3>
                 <p className="text-muted-foreground">
-                  From complete beginners to experienced car owners, Archie speaks your 
-                  language and meets you where you are.
+                  From complete beginners to experienced car owners, I can help! No question is too small. Hear a strange noise? Ask away. Wondering what a fee is on a contract? I can help with that too!
                 </p>
               </div>
 
@@ -62,8 +58,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Contextual Recommendations</h3>
                 <p className="text-muted-foreground">
-                  When relevant, Archie can connect you with trusted services for financing, 
-                  warranties, insurance, and more—only when it makes sense.
+                  When relevant, I can connect you with trusted services for financing, warranties, insurance, and more—only when it makes sense. So, if you're asking questions about what kind of car insurance is best, I can recommend a few options!
                 </p>
               </div>
             </div>
@@ -86,9 +81,10 @@ const About = () => {
                   <li>Navigating state-specific regulations</li>
                   <li>And more...</li>
                 </ul>
-                <p>
-                  And when Archie detects that you might benefit from a specific service—like extended 
-                  warranty coverage for a repair concern—he'll offer relevant, helpful suggestions.
+              </div>
+              <div className="bg-muted/50 rounded-lg p-4 mt-6">
+                <p className="text-sm text-muted-foreground text-center">
+                  <span className="font-semibold">Disclaimer:</span> This service provides information only. While we strive for the best accuracy, AI can make mistakes. We recommend double-checking important details with an automotive professional.
                 </p>
               </div>
             </div>
