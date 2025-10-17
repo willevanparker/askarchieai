@@ -10,7 +10,7 @@ const ComparisonSection = () => {
             See <span className="text-accent">A</span>rch<span className="text-accent">i</span>e in Action
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Same question, smarter answer. See how Archie's automotive expertise makes the difference.
+            Same question, different answer. See how Archie's automotive experience makes the difference.
           </p>
         </div>
 
@@ -41,7 +41,7 @@ const ComparisonSection = () => {
               <h3 className="text-xl font-semibold text-center">
                 <span className="text-accent">A</span>rch<span className="text-accent">i</span>e
               </h3>
-              <p className="text-sm text-muted-foreground text-center">Automotive-Specific AI</p>
+              <p className="text-sm text-muted-foreground text-center">AI-supercharged response</p>
             </div>
             <div className="relative w-full max-w-[300px]">
               {/* iPhone Frame with highlight */}
@@ -58,13 +58,6 @@ const ComparisonSection = () => {
           </div>
         </div>
 
-        <div className="mt-12 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full">
-            <span className="text-sm font-medium">
-              💡 Archie goes beyond definitions—offering personalized, actionable advice for car buyers.
-            </span>
-          </div>
-        </div>
       </div>
     </section>
   );
