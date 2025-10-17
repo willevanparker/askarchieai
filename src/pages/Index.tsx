@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import GoogleAd from "@/components/GoogleAd";
 import { Card } from "@/components/ui/card";
 import { Car, Wrench, DollarSign, Shield, HelpCircle, FileText } from "lucide-react";
 
@@ -43,6 +44,23 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+
+        {/* Mobile Ad Between Sections */}
+        <div className="lg:hidden py-8 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="bg-muted/30 rounded-lg border border-border p-4 min-h-[250px] flex items-center justify-center">
+              <div className="text-center text-sm text-muted-foreground">
+                Ad Space
+              </div>
+              {/* Uncomment when you have your AdSense ID:
+              <GoogleAd 
+                slot="YOUR_AD_SLOT_ID" 
+                format="rectangle"
+              />
+              */}
+            </div>
+          </div>
+        </div>
 
         <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">

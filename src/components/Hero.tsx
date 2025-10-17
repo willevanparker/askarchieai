@@ -6,15 +6,16 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
-              Car question?
-            </h1>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-8">
-              Ask Archie.
-            </h1>
-          </div>
+        <div className="grid lg:grid-cols-[1fr,300px] gap-8 max-w-7xl mx-auto">
+          <div className="max-w-3xl">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
+                Car question?
+              </h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-8">
+                Ask Archie.
+              </h1>
+            </div>
           
           <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-lg border">
             <div className="text-center text-sm text-muted-foreground mb-8">
@@ -64,6 +65,22 @@ const Hero = () => {
             </p>
           </div>
         </div>
+
+        {/* Desktop Ad Sidebar */}
+        <div className="hidden lg:block">
+          <div className="sticky top-8 bg-muted/30 rounded-lg border border-border p-4 min-h-[600px] flex items-center justify-center">
+            <div className="text-center text-sm text-muted-foreground">
+              Ad Space
+            </div>
+            {/* Uncomment when you have your AdSense ID:
+            <GoogleAd 
+              slot="YOUR_AD_SLOT_ID" 
+              format="vertical"
+            />
+            */}
+          </div>
+        </div>
+      </div>
       </div>
     </section>
   );
