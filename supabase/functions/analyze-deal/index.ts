@@ -76,6 +76,13 @@ CRITICAL TONE GUIDELINES:
 - Sound like a friendly, wise auto advisor — confident but approachable
 - Always explain reasoning briefly, and focus on clarity over authority
 
+IMPORTANT PRICING FLAGS:
+- If you see "Market Value Selling Price" (MVSP), flag this prominently in your analysis
+- MVSP is a dealer-created estimate of what they think the car is worth in today's market
+- It's often higher than MSRP and can include mark-ups or add-ons
+- The MSRP (Manufacturer's Suggested Retail Price) is set by the manufacturer and is what customers should request to pay
+- Suggest the customer review this carefully and consider asking for MSRP-based pricing instead
+
 Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared to market averages.`
           },
           {
