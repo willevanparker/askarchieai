@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface DealUploadProps {
-  onAnalysisComplete?: () => void;
+  onAnalysisComplete?: (analysisId: string) => void;
 }
 
 export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
@@ -139,13 +139,13 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
         description: "Your deal has been analyzed successfully.",
       });
 
-      // Notify parent component
-      if (onAnalysisComplete) {
-        onAnalysisComplete();
-      }
+      // Clear the file selection
+      setFiles([]);
 
-      // Navigate to results page with the analysis ID
-      navigate(`/analysis-results?id=${data.analysisId}`);
+      // Notify parent component with analysis ID
+      if (onAnalysisComplete) {
+        onAnalysisComplete(data.analysisId);
+      }
     } catch (error: any) {
       console.error("Error analyzing deal:", error);
       toast({
