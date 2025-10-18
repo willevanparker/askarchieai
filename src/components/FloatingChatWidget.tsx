@@ -49,7 +49,7 @@ const FloatingChatWidget = () => {
           {/* ChatBase Embed */}
           <div className="flex-1 overflow-hidden">
             <iframe
-              src="https://www.chatbase.co/chatbot-iframe/p9I-SWnP0BYR36k3MkIu6"
+              src="https://www.chatbase.co/chatbot-iframe/GM054S1a9A3U4EGfZEUfs"
               width="100%"
               height="100%"
               frameBorder="0"
