@@ -97,7 +97,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In to Purchase"}
+              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In / Sign Up"}
             </Button>
           </div>
         </section>
@@ -270,7 +270,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In to Purchase"}
+              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In / Sign Up"}
             </Button>
           </div>
         </section>
