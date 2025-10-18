@@ -254,20 +254,6 @@ export default function Premium() {
           </section>
         )}
 
-        {/* Sign in prompt if not logged in */}
-        {!user && (
-          <section className="py-16 text-center">
-            <Card className="max-w-md mx-auto p-8">
-              <h3 className="text-xl font-semibold mb-2">Ready to analyze?</h3>
-              <p className="text-muted-foreground mb-6">
-                Sign in or create an account to use your credits
-              </p>
-              <Button onClick={() => navigate("/auth")} size="lg">
-                Sign In / Sign Up
-              </Button>
-            </Card>
-          </section>
-        )}
 
         {/* CTA */}
         <section className="py-16 sm:py-20 bg-primary/5">
