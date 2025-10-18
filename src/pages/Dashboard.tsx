@@ -167,71 +167,55 @@ export default function Dashboard() {
 
         {/* Analysis Results */}
         {currentAnalysis && (
-          <Card className="p-8">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Analysis Results</h2>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setCurrentAnalysis(null)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
+          <div className="space-y-8">
+            <div className="flex items-center justify-between">
+              <h1 className="text-4xl font-bold">Analysis Results</h1>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCurrentAnalysis(null)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
 
-              <div className="text-center space-y-4">
+            <Card className="p-12">
+              <div className="text-center space-y-8">
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">Deal Rating</p>
-                  <p className={`text-6xl font-bold ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`}>
+                  <p className={`text-8xl font-bold ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`}>
                     {currentAnalysis.rating ? currentAnalysis.rating.toFixed(1) : 'N/A'}
-                    <span className="text-2xl text-muted-foreground">/10</span>
+                    <span className="text-3xl text-muted-foreground">/10</span>
                   </p>
                 </div>
 
                 {currentAnalysis.verdict && (
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Verdict</p>
-                    <p className="text-lg font-semibold">{currentAnalysis.verdict}</p>
+                  <div className="max-w-2xl mx-auto">
+                    <p className="text-sm text-muted-foreground mb-2">Verdict</p>
+                    <p className="text-2xl font-semibold">{currentAnalysis.verdict}</p>
                   </div>
                 )}
               </div>
+            </Card>
 
-              {currentAnalysis.summary && (
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold">Summary</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {currentAnalysis.summary}
-                  </p>
-                </div>
-              )}
+            {currentAnalysis.summary && (
+              <Card className="p-8">
+                <h2 className="text-2xl font-bold mb-4">Summary</h2>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  {currentAnalysis.summary}
+                </p>
+              </Card>
+            )}
 
-              {currentAnalysis.negotiation_tip && (
-                <div className="space-y-2 p-4 bg-primary/5 rounded-lg border border-primary/10">
-                  <h3 className="text-lg font-semibold text-primary">Negotiation Tip</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {currentAnalysis.negotiation_tip}
-                  </p>
-                </div>
-              )}
-
-              <div className="flex gap-3">
-                <Button 
-                  onClick={() => setCurrentAnalysis(null)}
-                  className="flex-1"
-                >
-                  Analyze Another Deal
-                </Button>
-                <Button 
-                  onClick={() => navigate("/chat")}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  Ask Archie a Question
-                </Button>
-              </div>
-            </div>
-          </Card>
+            {currentAnalysis.negotiation_tip && (
+              <Card className="p-8 border-primary/20 bg-primary/5">
+                <h2 className="text-2xl font-bold mb-4 text-primary">💡 Negotiation Tip</h2>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  {currentAnalysis.negotiation_tip}
+                </p>
+              </Card>
+            )}
+          </div>
         )}
 
         {/* Deal History Section */}
