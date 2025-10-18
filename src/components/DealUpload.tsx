@@ -130,8 +130,8 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
         onAnalysisComplete();
       }
 
-      // Navigate to results page
-      navigate(`/analysis-results?session=${sessionId}`);
+      // Navigate to results page with the analysis ID
+      navigate(`/analysis-results?id=${data.analysisId}`);
     } catch (error: any) {
       console.error("Error analyzing deal:", error);
       toast({
