@@ -150,7 +150,7 @@ const AnalysisResults = () => {
               onClick={() => navigate("/premium")}
               size="lg"
             >
-              Analyze Another Deal
+              Purchase Again
             </Button>
             <Button
               onClick={() => navigate("/chat")}

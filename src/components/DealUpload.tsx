@@ -140,9 +140,9 @@ export const DealUpload = () => {
     <Card className="p-8 max-w-2xl mx-auto">
       <div className="space-y-6">
         <div>
-          <h3 className="text-2xl font-bold mb-2">Upload Your Deal</h3>
+          <h3 className="text-2xl font-bold mb-2">Upload</h3>
           <p className="text-muted-foreground">
-            Upload up to 3 dealership quotes, worksheets, or contracts (PDF or image)
+            Upload a quote, worksheet, or contract (PDF or image)
           </p>
         </div>
 
@@ -211,7 +211,7 @@ export const DealUpload = () => {
               Analyzing...
             </>
           ) : (
-            "Analyze Deal"
+            "Submit"
           )}
         </Button>
       </div>
