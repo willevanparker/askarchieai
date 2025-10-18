@@ -60,7 +60,7 @@ const Hero = () => {
           
           <div className="mt-12 text-center">
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              <span className="font-bold">Who is Archie?</span> Archie is your go-to source for all things automotive, supercharged by AI. It's like having a friend in the car business, that never sleeps.
+              <span className="font-bold">Who is Archie?</span> Archie an automotive AI advocate! It's like having a friend in the car business, who loves alliteration, in the palm of your hand.
             </p>
           </div>
         </div>
