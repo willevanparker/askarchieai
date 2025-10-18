@@ -29,13 +29,7 @@ const FloatingChatWidget = () => {
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-[400px] h-[600px] max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-primary text-white p-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-lg font-bold">A</span>
-              </div>
-              <span className="font-semibold">Archie AI</span>
-            </div>
+          <div className="bg-primary text-white p-4 flex items-center justify-end">
             <Button
               variant="ghost"
               size="icon"
