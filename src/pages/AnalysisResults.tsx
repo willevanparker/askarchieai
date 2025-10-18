@@ -99,12 +99,9 @@ const AnalysisResults = () => {
       <main className="flex-grow py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">
+            <h1 className="text-4xl font-bold mb-2">
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e's Analysis
             </h1>
-            <p className="text-muted-foreground">
-              Here's what we found about your deal
-            </p>
           </div>
 
           <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">

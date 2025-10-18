@@ -215,7 +215,7 @@ const Premium = () => {
         </section>
 
         {/* Upload Section - Only show if user has premium access */}
-        {hasPremiumAccess ? (
+        {hasPremiumAccess && (
           <section id="upload" className="py-16 sm:py-20 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-8 text-center">
@@ -228,28 +228,6 @@ const Premium = () => {
                 </p>
               </div>
               <DealUpload />
-            </div>
-          </section>
-        ) : (
-          <section id="upload" className="py-16 sm:py-20 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <Card className="p-8 max-w-2xl mx-auto text-center">
-                <h3 className="text-2xl font-bold mb-4">Ready to Analyze Your Deal?</h3>
-                <p className="text-muted-foreground mb-6">
-                  Get expert AI analysis of your car dealership quote for just $9
-                </p>
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
-                  onClick={handleGetPremium}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Loading..." : "Get Premium Access"}
-                </Button>
-                <p className="text-xs text-muted-foreground mt-4">
-                  Access is valid for your current browser session
-                </p>
-              </Card>
             </div>
           </section>
         )}
