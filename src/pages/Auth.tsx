@@ -8,6 +8,18 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { z } from "zod";
+
+const authSchema = z.object({
+  email: z.string().trim().email("Invalid email format").max(255, "Email too long"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(128, "Password too long")
+    .regex(/[A-Z]/, "Must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Must contain at least one number"),
+});
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -31,10 +43,26 @@ export default function Auth() {
     setLoading(true);
 
     try {
+      // Validate input
+      const validationResult = authSchema.safeParse({ email, password });
+      
+      if (!validationResult.success) {
+        const firstError = validationResult.error.errors[0];
+        toast({
+          title: "Validation Error",
+          description: firstError.message,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      const { email: validEmail, password: validPassword } = validationResult.data;
+
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
+          email: validEmail,
+          password: validPassword,
         });
         
         if (error) throw error;
@@ -46,8 +74,8 @@ export default function Auth() {
         navigate("/dashboard");
       } else {
         const { error } = await supabase.auth.signUp({
-          email,
-          password,
+          email: validEmail,
+          password: validPassword,
           options: {
             emailRedirectTo: `${window.location.origin}/dashboard`,
           },
@@ -110,8 +138,13 @@ export default function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                minLength={6}
+                minLength={8}
               />
+              {!isLogin && (
+                <p className="text-xs text-muted-foreground">
+                  Must be 8+ characters with uppercase, lowercase, and number
+                </p>
+              )}
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
