@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
-import { CreditCard, Upload, LogOut, X } from "lucide-react";
+import { CreditCard, Upload, LogOut, X, Zap, CheckCircle2 } from "lucide-react";
 import { DealUpload } from "@/components/DealUpload";
 
 interface Analysis {
@@ -102,9 +102,9 @@ export default function Dashboard() {
   };
 
   const getRatingColor = (rating: number): string => {
-    if (rating >= 8) return "text-green-600";
-    if (rating >= 5) return "text-yellow-600";
-    return "text-red-600";
+    if (rating >= 8) return "text-green-500";
+    if (rating >= 6) return "text-yellow-500";
+    return "text-red-500";
   };
 
   const handleSignOut = async () => {
@@ -167,54 +167,59 @@ export default function Dashboard() {
 
         {/* Analysis Results */}
         {currentAnalysis && (
-          <div className="space-y-8">
-            <div className="flex items-center justify-between">
-              <h1 className="text-4xl font-bold">Analysis Results</h1>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setCurrentAnalysis(null)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+          <div className="space-y-6">
+            <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
+                    <Zap className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">Archie's Analysis</h3>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setCurrentAnalysis(null)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
 
-            <Card className="p-12">
-              <div className="text-center space-y-8">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-2">Deal Rating</p>
-                  <p className={`text-8xl font-bold ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`}>
-                    {currentAnalysis.rating ? currentAnalysis.rating.toFixed(1) : 'N/A'}
-                    <span className="text-3xl text-muted-foreground">/10</span>
-                  </p>
+              <div className="mb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-semibold">Rating:</span>
+                  <CheckCircle2 className={`h-5 w-5 ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`} />
+                  <span className={`text-lg font-bold ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`}>
+                    {currentAnalysis.verdict} ({currentAnalysis.rating ? currentAnalysis.rating.toFixed(1) : 'N/A'} / 10)
+                  </span>
                 </div>
 
-                {currentAnalysis.verdict && (
-                  <div className="max-w-2xl mx-auto">
-                    <p className="text-sm text-muted-foreground mb-2">Verdict</p>
-                    <p className="text-2xl font-semibold">{currentAnalysis.verdict}</p>
+                {currentAnalysis.summary && (
+                  <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
+                    <p className="font-medium mb-2">Summary:</p>
+                    <p className="text-muted-foreground text-sm">
+                      {currentAnalysis.summary}
+                    </p>
                   </div>
                 )}
               </div>
+
+              {currentAnalysis.negotiation_tip && (
+                <div className="bg-background/80 p-4 rounded-lg border">
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-primary/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                      💡
+                    </div>
+                    <div>
+                      <p className="font-semibold mb-2">Archie's Negotiation Tip</p>
+                      <p className="text-sm text-muted-foreground">
+                        {currentAnalysis.negotiation_tip}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </Card>
-
-            {currentAnalysis.summary && (
-              <Card className="p-8">
-                <h2 className="text-2xl font-bold mb-4">Summary</h2>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  {currentAnalysis.summary}
-                </p>
-              </Card>
-            )}
-
-            {currentAnalysis.negotiation_tip && (
-              <Card className="p-8 border-primary/20 bg-primary/5">
-                <h2 className="text-2xl font-bold mb-4 text-primary">💡 Negotiation Tip</h2>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  {currentAnalysis.negotiation_tip}
-                </p>
-              </Card>
-            )}
           </div>
         )}
 
