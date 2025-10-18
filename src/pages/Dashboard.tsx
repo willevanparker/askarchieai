@@ -6,7 +6,8 @@ import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
-import { CreditCard, Upload, MessageSquare, LogOut } from "lucide-react";
+import { CreditCard, Upload, LogOut } from "lucide-react";
+import { DealUpload } from "@/components/DealUpload";
 
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
@@ -120,37 +121,12 @@ export default function Dashboard() {
           )}
         </Card>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <Card className="p-6">
-            <Upload className="w-8 h-8 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Upload</h3>
-            <p className="text-muted-foreground mb-4">
-              Upload a quote and get instant AI analysis
-            </p>
-            <Button
-              className="w-full"
-              onClick={() => navigate("/premium#upload")}
-              disabled={credits === 0}
-            >
-              {credits === 0 ? "No Credits Available" : "Upload Deal"}
-            </Button>
-          </Card>
-
-          <Card className="p-6">
-            <MessageSquare className="w-8 h-8 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Ask Archie</h3>
-            <p className="text-muted-foreground mb-4">
-              Get more answers to car questions
-            </p>
-            <Button
-              className="w-full"
-              variant="outline"
-              onClick={() => navigate("/chat")}
-            >
-              Chat Now
-            </Button>
-          </Card>
-        </div>
+        <DealUpload 
+          onAnalysisComplete={async () => {
+            await fetchCredits(user.id);
+            await fetchDealHistory(user.id);
+          }}
+        />
 
         {/* Deal History Section */}
         {dealHistory.length > 0 && (
