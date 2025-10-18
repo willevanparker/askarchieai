@@ -8,7 +8,8 @@ import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 
-import exampleDeal from "@/assets/example-deal.png";
+import exampleInput from "@/assets/example-input.png";
+import exampleOutput from "@/assets/example-output.png";
 import { CheckCircle2, Upload, Zap } from "lucide-react";
 
 export default function Premium() {
@@ -117,7 +118,7 @@ export default function Premium() {
                         </DialogTrigger>
                         <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
                           <img 
-                            src={exampleDeal} 
+                            src={exampleInput} 
                             alt="Example dealership quote" 
                             className="w-full h-auto"
                           />
@@ -179,43 +180,62 @@ export default function Premium() {
           </div>
         </section>
 
-        {/* Example Results Preview */}
+        {/* Example Input & Output */}
         <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto space-y-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">See It In Action</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Here's a real example of what you upload and what Archie delivers
+              </p>
+            </div>
+            
+            <div className="max-w-5xl mx-auto space-y-8">
+              {/* Example Input */}
+              <Card className="p-6 sm:p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
+                    <Upload className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">What You Upload</h3>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <img 
+                    src={exampleInput} 
+                    alt="Example dealership quote showing vehicle details and pricing" 
+                    className="w-full h-auto rounded border"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-4 text-center">
+                  A photo or scan of your dealership quote, worksheet, or contract
+                </p>
+              </Card>
+
+              {/* Arrow Indicator */}
+              <div className="flex justify-center">
+                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-primary" />
+                </div>
+              </div>
+
+              {/* Example Output */}
               <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
-                    <Zap className="h-5 w-5 text-primary" />
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold">Archie's Analysis</h3>
+                  <h3 className="text-xl font-bold">What Archie Delivers</h3>
                 </div>
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-lg font-semibold">Rating:</span>
-                    <CheckCircle2 className="h-5 w-5 text-green-500" />
-                    <span className="text-lg font-bold text-green-500">Good Deal (8.4 / 10)</span>
-                  </div>
-                  <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
-                    <p className="font-medium mb-2">Summary:</p>
-                    <p className="text-muted-foreground text-sm">
-                      You're getting a 20% discount off MSRP — well above market average. The only negotiation targets are the $1,633 doc fee and the $392 Perma Plate. If you can trim those back or get a free service thrown in, it would be an excellent deal.
-                    </p>
-                  </div>
+                <div className="bg-background rounded-lg p-4">
+                  <img 
+                    src={exampleOutput} 
+                    alt="Archie's analysis showing deal rating, summary, and negotiation tips" 
+                    className="w-full h-auto rounded border"
+                  />
                 </div>
-                <div className="bg-background/80 p-4 rounded-lg border">
-                  <div className="flex items-start gap-3">
-                    <div className="h-6 w-6 bg-primary/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
-                      💡
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-2">Archie's Negotiation Tip</p>
-                      <p className="text-sm text-muted-foreground">
-                        "Ask the dealer to waive the Perma Plate and reduce the doc fee to under $900. That alone saves you around $1,100 — enough for a year of insurance or a nice weekend trip in your new car."
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <p className="text-sm text-muted-foreground mt-4 text-center">
+                  A detailed analysis with rating, summary, and actionable negotiation advice
+                </p>
               </Card>
             </div>
           </div>
