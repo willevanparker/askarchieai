@@ -11,7 +11,7 @@ const Footer = () => {
               Ask<span className="text-accent">A</span>rch<span className="text-accent">i</span>e
             </Link>
             <p className="text-sm text-gray-400 mb-6 max-w-xs">
-              AI-supercharged automotive search.
+              Automotive intelligence.
             </p>
             <div className="flex items-center gap-4">
               <a 
