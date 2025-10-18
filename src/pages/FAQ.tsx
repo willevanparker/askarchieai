@@ -65,6 +65,28 @@ const FAQ = () => {
               </AccordionContent>
             </AccordionItem>
 
+            <AccordionItem value="item-6" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left font-semibold">
+                How much is Archie Premium?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                <p>
+                  $9 for up to three submissions.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-7" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left font-semibold">
+                Do I need an account to chat with Archie or use Premium?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                <p>
+                  Nope.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
             <AccordionItem value="item-4" className="border rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
                 How does privacy and data protection work?

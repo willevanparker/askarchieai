@@ -1,0 +1,203 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { CheckCircle2, Upload, Zap, Download, Share2 } from "lucide-react";
+
+const Premium = () => {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="py-16 sm:py-24 bg-gradient-to-b from-primary/5 to-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
+            </h1>
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Let Archie analyze your car deal and tell you if it's worth it
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <div className="text-3xl font-bold text-primary">$9</div>
+              <div className="text-lg text-muted-foreground">for 3 deal analyses</div>
+            </div>
+            <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
+              Get Premium Now
+            </Button>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-16 sm:py-20 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Get expert analysis of your car deal in three simple steps
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="p-8 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="text-2xl font-bold text-primary">1</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Upload className="h-5 w-5 text-primary" />
+                      <h3 className="text-xl font-semibold">Upload Your Quote</h3>
+                    </div>
+                    <p className="text-muted-foreground">
+                      Take a photo or upload your dealership quote (PDF, JPG, PNG supported). Include all the details — pricing, fees, add-ons, everything.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="text-2xl font-bold text-primary">2</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Zap className="h-5 w-5 text-primary" />
+                      <h3 className="text-xl font-semibold">Archie Analyzes</h3>
+                    </div>
+                    <p className="text-muted-foreground">
+                      Archie's AI vision analyzes your deal, comparing pricing, fees, and add-ons against market data. Get a clear verdict: Good Deal or Not.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="mt-8 max-w-4xl mx-auto">
+              <Card className="p-8 bg-primary/5 border-primary/20">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold mb-4">Your Results Include:</h3>
+                  <div className="grid sm:grid-cols-3 gap-6 text-left">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                      <div>
+                        <div className="font-semibold mb-1">Deal Rating</div>
+                        <p className="text-sm text-muted-foreground">Clear score out of 10 with verdict</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                      <div>
+                        <div className="font-semibold mb-1">Smart Analysis</div>
+                        <p className="text-sm text-muted-foreground">Breakdown of fees, discounts, and red flags</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                      <div>
+                        <div className="font-semibold mb-1">Negotiation Tips</div>
+                        <p className="text-sm text-muted-foreground">Specific advice to improve your deal</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Save & Share */}
+        <section className="py-16 sm:py-20 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6">Save & Share Your Analysis</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Once Archie finishes analyzing your deal, you can save the results to your phone or share them instantly.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-lg border">
+                  <Download className="h-5 w-5 text-primary" />
+                  <span className="font-medium">Save as PDF or Image</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-lg border">
+                  <Share2 className="h-5 w-5 text-primary" />
+                  <span className="font-medium">Share via Email, Text, or WhatsApp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Example Results Preview */}
+        <section className="py-16 sm:py-20 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">See It In Action</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Here's what an Archie Premium analysis looks like
+              </p>
+            </div>
+
+            <div className="max-w-3xl mx-auto space-y-6">
+              <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
+                    <Zap className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">Archie Vision Verdict</h3>
+                </div>
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg font-semibold">Rating:</span>
+                    <CheckCircle2 className="h-5 w-5 text-green-500" />
+                    <span className="text-lg font-bold text-green-500">Good Deal (8.4 / 10)</span>
+                  </div>
+                  <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
+                    <p className="font-medium mb-2">Summary:</p>
+                    <p className="text-muted-foreground text-sm">
+                      You're getting a 20% discount off MSRP — well above market average. The only negotiation targets are the $1,633 doc fee and the $392 Perma Plate. If you can trim those back or get a free service thrown in, it would be an excellent deal.
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-background/80 p-4 rounded-lg border">
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-primary/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                      💡
+                    </div>
+                    <div>
+                      <p className="font-semibold mb-2">Archie's Negotiation Tip</p>
+                      <p className="text-sm text-muted-foreground">
+                        "Ask the dealer to waive the Perma Plate and reduce the doc fee to under $900. That alone saves you around $1,100 — enough for a year of insurance or a nice weekend trip in your new RDX."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-16 sm:py-20 bg-primary/5">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              Ready to Analyze Your Deal?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Get 3 expert analyses for just $9. No subscription, no account required.
+            </p>
+            <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
+              Get Started with Premium
+            </Button>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Premium;

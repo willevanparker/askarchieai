@@ -4,13 +4,15 @@ import Footer from "@/components/Footer";
 import ComparisonSection from "@/components/ComparisonSection";
 import { Card } from "@/components/ui/card";
 import { Car, Wrench, DollarSign, Shield, HelpCircle, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const expertiseAreas = [
     {
       icon: Car,
       title: "Buying or Leasing a Car",
-      description: "Navigate the buying process, understand pricing, and negotiate with confidence",
+      description: "Navigate the buying process, understand pricing, and negotiate with confidence. And with Premium, Archie can even analyze a car deal for you.",
+      isPremium: true,
     },
     {
       icon: Wrench,
@@ -60,12 +62,29 @@ const Index = () => {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {expertiseAreas.map((area, index) => (
-                <Card key={index} className="p-6 hover:shadow-lg transition-shadow duration-300 border-border">
+                <Card 
+                  key={index} 
+                  className={`p-6 hover:shadow-lg transition-shadow duration-300 ${
+                    area.isPremium ? 'border-2 border-primary' : 'border-border'
+                  }`}
+                >
                   <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                     <area.icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">{area.title}</h3>
-                  <p className="text-sm text-muted-foreground">{area.description}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {area.isPremium ? (
+                      <>
+                        Navigate the buying process, understand pricing, and negotiate with confidence. And with{' '}
+                        <Link to="/premium" className="text-primary hover:underline font-medium">
+                          Premium
+                        </Link>
+                        , Archie can even analyze a car deal for you.
+                      </>
+                    ) : (
+                      area.description
+                    )}
+                  </p>
                 </Card>
               ))}
             </div>

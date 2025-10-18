@@ -32,6 +32,14 @@ const Navbar = () => {
             >
               About
             </Link>
+            <Link 
+              to="/premium" 
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                isActive('/premium') ? 'text-primary' : 'text-muted-foreground'
+              }`}
+            >
+              Premium
+            </Link>
           </div>
           
           <Link to="/chat">
