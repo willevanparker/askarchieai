@@ -5,8 +5,44 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle2, Upload, Zap } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import exampleDeal from "@/assets/example-deal.png";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Premium = () => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGetPremium = async () => {
+    try {
+      setIsLoading(true);
+      console.log("Creating checkout session...");
+      
+      const { data, error } = await supabase.functions.invoke("create-checkout");
+      
+      if (error) {
+        console.error("Error creating checkout:", error);
+        throw error;
+      }
+      
+      if (data?.url) {
+        console.log("Redirecting to checkout:", data.url);
+        window.open(data.url, '_blank');
+      } else {
+        throw new Error("No checkout URL received");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast({
+        title: "Error",
+        description: "Failed to start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -21,8 +57,13 @@ const Premium = () => {
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
-              Get Premium Now
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
+              onClick={handleGetPremium}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Get Premium Now"}
             </Button>
           </div>
         </section>
@@ -171,8 +212,13 @@ const Premium = () => {
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
-              Get Premium Now
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
+              onClick={handleGetPremium}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Get Premium Now"}
             </Button>
           </div>
         </section>
