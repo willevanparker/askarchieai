@@ -108,7 +108,7 @@ export default function Premium() {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Car shopping? Archie will analyze up to five documents for just $9.
+                Car shopping? Archie will analyze up to 5 documents for just $9.
               </p>
             </div>
 

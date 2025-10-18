@@ -30,7 +30,7 @@ const PaymentSuccess = () => {
 
       toast({
         title: "Credits added!",
-        description: "10 credits have been added to your account.",
+        description: "5 credits have been added to your account.",
       });
     } catch (error: any) {
       console.error("Error granting credits:", error);

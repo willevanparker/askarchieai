@@ -44,10 +44,10 @@ serve(async (req) => {
       throw new Error("User not authenticated");
     }
 
-    // Grant credits (10 credits for $9)
+    // Grant credits (5 credits for $9)
     const { error: creditsError } = await supabaseClient.rpc("add_credits", {
       user_uuid: user.id,
-      amount: 10,
+      amount: 5,
     });
 
     if (creditsError) {
@@ -55,7 +55,7 @@ serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ success: true, credits_added: 10 }),
+      JSON.stringify({ success: true, credits_added: 5 }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
