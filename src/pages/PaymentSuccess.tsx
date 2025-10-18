@@ -11,7 +11,12 @@ const PaymentSuccess = () => {
   const sessionId = searchParams.get("session_id");
 
   useEffect(() => {
-    console.log("Payment successful! Session ID:", sessionId);
+    if (sessionId) {
+      console.log("Payment successful! Session ID:", sessionId);
+      // Store session verification in sessionStorage (cleared when browser closes)
+      sessionStorage.setItem("archie_premium_session", sessionId);
+      sessionStorage.setItem("archie_premium_timestamp", Date.now().toString());
+    }
   }, [sessionId]);
 
   return (

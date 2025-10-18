@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, FileText, X, Loader2 } from "lucide-react";
@@ -9,8 +9,24 @@ import { useNavigate } from "react-router-dom";
 export const DealUpload = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Verify premium access on mount
+  useEffect(() => {
+    const sessionId = sessionStorage.getItem("archie_premium_session");
+    if (!sessionId) {
+      toast({
+        title: "Premium Access Required",
+        description: "Please purchase premium access to analyze deals",
+        variant: "destructive",
+      });
+      setHasAccess(false);
+    } else {
+      setHasAccess(true);
+    }
+  }, [toast]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
@@ -45,6 +61,15 @@ export const DealUpload = () => {
   };
 
   const handleUpload = async () => {
+    if (!hasAccess) {
+      toast({
+        title: "Access Required",
+        description: "Premium access is required to analyze deals",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (files.length === 0) {
       toast({
         title: "No files selected",
@@ -102,6 +127,14 @@ export const DealUpload = () => {
       setIsUploading(false);
     }
   };
+
+  if (!hasAccess) {
+    return (
+      <Card className="p-8 max-w-2xl mx-auto text-center">
+        <p className="text-muted-foreground">Premium access required</p>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-8 max-w-2xl mx-auto">

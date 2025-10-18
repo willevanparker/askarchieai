@@ -7,12 +7,22 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import exampleDeal from "@/assets/example-deal.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DealUpload } from "@/components/DealUpload";
 
 const Premium = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [hasPremiumAccess, setHasPremiumAccess] = useState(false);
+
+  // Check for premium access on mount
+  useEffect(() => {
+    const sessionId = sessionStorage.getItem("archie_premium_session");
+    if (sessionId) {
+      setHasPremiumAccess(true);
+      console.log("Premium access verified from session");
+    }
+  }, []);
 
   const handleGetPremium = async () => {
     try {
@@ -204,12 +214,45 @@ const Premium = () => {
           </div>
         </section>
 
-        {/* Upload Section */}
-        <section id="upload" className="py-16 sm:py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <DealUpload />
-          </div>
-        </section>
+        {/* Upload Section - Only show if user has premium access */}
+        {hasPremiumAccess ? (
+          <section id="upload" className="py-16 sm:py-20 bg-background">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mb-8 text-center">
+                <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-600 px-4 py-2 rounded-full mb-4">
+                  <CheckCircle2 className="h-5 w-5" />
+                  <span className="font-medium">Premium Active</span>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  Upload unlimited deals during this browser session
+                </p>
+              </div>
+              <DealUpload />
+            </div>
+          </section>
+        ) : (
+          <section id="upload" className="py-16 sm:py-20 bg-background">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <Card className="p-8 max-w-2xl mx-auto text-center">
+                <h3 className="text-2xl font-bold mb-4">Ready to Analyze Your Deal?</h3>
+                <p className="text-muted-foreground mb-6">
+                  Get expert AI analysis of your car dealership quote for just $9
+                </p>
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
+                  onClick={handleGetPremium}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Loading..." : "Get Premium Access"}
+                </Button>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Access is valid for your current browser session
+                </p>
+              </Card>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section className="py-16 sm:py-20 bg-primary/5">
