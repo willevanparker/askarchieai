@@ -1,44 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Upload, FileText, X, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Upload, X, FileText, Image as ImageIcon, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
-export const DealUpload = () => {
+interface DealUploadProps {
+  onAnalysisComplete?: () => void;
+}
+
+export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
   const [files, setFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
-  const [hasAccess, setHasAccess] = useState(false);
-  const { toast } = useToast();
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const navigate = useNavigate();
-
-  // Verify premium access on mount
-  useEffect(() => {
-    const sessionId = sessionStorage.getItem("archie_premium_session");
-    if (!sessionId) {
-      toast({
-        title: "Premium Access Required",
-        description: "Please purchase premium access to analyze deals",
-        variant: "destructive",
-      });
-      setHasAccess(false);
-    } else {
-      setHasAccess(true);
-    }
-  }, [toast]);
+  const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
-    const validFiles = selectedFiles.filter(file => {
-      const isValidType = file.type === 'application/pdf' || 
-                         file.type.startsWith('image/');
-      const isValidSize = file.size <= 10 * 1024 * 1024; // 10MB limit
-      
+    const validFiles = selectedFiles.filter((file) => {
+      const isValidType =
+        file.type === "application/pdf" || file.type.startsWith("image/");
+      const isValidSize = file.size <= 10 * 1024 * 1024;
+
       if (!isValidType) {
         toast({
           title: "Invalid file type",
-          description: `${file.name} is not a PDF or image`,
+          description: `${file.name} must be a PDF or image`,
           variant: "destructive",
         });
       }
@@ -49,92 +37,101 @@ export const DealUpload = () => {
           variant: "destructive",
         });
       }
-      
+
       return isValidType && isValidSize;
     });
 
-    setFiles(prev => [...prev, ...validFiles].slice(0, 3)); // Max 3 files
+    setFiles((prev) => [...prev, ...validFiles].slice(0, 1));
   };
 
   const removeFile = (index: number) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleUpload = async () => {
-    if (!hasAccess) {
-      toast({
-        title: "Access Required",
-        description: "Premium access is required to analyze deals",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  const handleAnalyze = async () => {
     if (files.length === 0) {
       toast({
         title: "No files selected",
-        description: "Please select at least one file to analyze",
+        description: "Please upload at least one document to analyze.",
         variant: "destructive",
       });
       return;
     }
 
-    setIsUploading(true);
+    setIsAnalyzing(true);
 
     try {
-      // Generate session ID
-      const sessionId = crypto.randomUUID();
+      // Check if user has credits
+      const { data: { user } } = await supabase.auth.getUser();
       
-      // Upload files to storage
-      const uploadPromises = files.map(async (file, index) => {
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${sessionId}-${index}.${fileExt}`;
-        const filePath = `${fileName}`;
+      if (!user) {
+        toast({
+          title: "Authentication required",
+          description: "Please sign in to analyze deals.",
+          variant: "destructive",
+        });
+        navigate("/auth");
+        return;
+      }
 
-        const { error: uploadError } = await supabase.storage
-          .from('deal-documents')
-          .upload(filePath, file);
+      // Consume a credit
+      const { data: consumeResult, error: consumeError } = await supabase.rpc(
+        "consume_credit",
+        { user_uuid: user.id }
+      );
 
-        if (uploadError) throw uploadError;
-        return filePath;
-      });
+      if (consumeError || !consumeResult) {
+        toast({
+          title: "No credits available",
+          description: "Please purchase more credits to continue.",
+          variant: "destructive",
+        });
+        setIsAnalyzing(false);
+        return;
+      }
 
-      const filePaths = await Promise.all(uploadPromises);
-      console.log("Files uploaded:", filePaths);
+      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      let uploadedFilePath = "";
 
-      // Analyze the first file (we can expand to analyze multiple later)
+      // Upload the first file to Supabase Storage
+      const file = files[0];
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${sessionId}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("deal-documents")
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      uploadedFilePath = filePath;
+
+      // Call the analyze-deal edge function
       const { data, error } = await supabase.functions.invoke("analyze-deal", {
-        body: {
-          filePath: filePaths[0],
-          sessionId: sessionId,
-        },
+        body: { sessionId, filePath: uploadedFilePath },
       });
 
       if (error) throw error;
 
-      console.log("Analysis complete:", data);
+      // Notify parent component
+      if (onAnalysisComplete) {
+        onAnalysisComplete();
+      }
 
       // Navigate to results page
-      navigate(`/analysis-results?id=${data.analysisId}`);
-    } catch (error) {
-      console.error("Upload/analysis error:", error);
+      navigate(`/analysis-results?session=${sessionId}`);
+    } catch (error: any) {
+      console.error("Error analyzing deal:", error);
       toast({
         title: "Error",
         description: error.message || "Failed to analyze deal. Please try again.",
         variant: "destructive",
       });
     } finally {
-      setIsUploading(false);
+      setIsAnalyzing(false);
     }
   };
-
-  if (!hasAccess) {
-    return (
-      <Card className="p-8 max-w-2xl mx-auto text-center">
-        <p className="text-muted-foreground">Premium access required</p>
-      </Card>
-    );
-  }
 
   return (
     <Card className="p-8 max-w-2xl mx-auto">
@@ -152,21 +149,22 @@ export const DealUpload = () => {
             id="file-upload"
             className="hidden"
             accept="application/pdf,image/*"
-            multiple
             onChange={handleFileChange}
-            disabled={files.length >= 3 || isUploading}
+            disabled={files.length >= 1 || isAnalyzing}
           />
           <label
             htmlFor="file-upload"
             className={`cursor-pointer flex flex-col items-center gap-4 ${
-              files.length >= 3 || isUploading ? 'opacity-50 cursor-not-allowed' : ''
+              files.length >= 1 || isAnalyzing
+                ? "opacity-50 cursor-not-allowed"
+                : ""
             }`}
           >
             <Upload className="h-12 w-12 text-primary" />
             <div>
               <p className="text-lg font-medium">Click to upload files</p>
               <p className="text-sm text-muted-foreground mt-1">
-                PDF or images (JPG, PNG) up to 10MB each
+                PDF or images (JPG, PNG) up to 10MB
               </p>
             </div>
           </label>
@@ -174,7 +172,7 @@ export const DealUpload = () => {
 
         {files.length > 0 && (
           <div className="space-y-2">
-            <p className="text-sm font-medium">Selected files ({files.length}/3):</p>
+            <p className="text-sm font-medium">Selected file:</p>
             {files.map((file, index) => (
               <div
                 key={index}
@@ -189,7 +187,7 @@ export const DealUpload = () => {
                   size="icon"
                   variant="ghost"
                   onClick={() => removeFile(index)}
-                  disabled={isUploading}
+                  disabled={isAnalyzing}
                   className="h-8 w-8"
                 >
                   <X className="h-4 w-4" />
@@ -200,14 +198,14 @@ export const DealUpload = () => {
         )}
 
         <Button
-          onClick={handleUpload}
-          disabled={files.length === 0 || isUploading}
-          className="w-full bg-primary hover:bg-primary-dark text-lg py-6"
+          onClick={handleAnalyze}
+          disabled={files.length === 0 || isAnalyzing}
+          className="w-full"
           size="lg"
         >
-          {isUploading ? (
+          {isAnalyzing ? (
             <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Analyzing...
             </>
           ) : (
@@ -217,4 +215,4 @@ export const DealUpload = () => {
       </div>
     </Card>
   );
-};
+}

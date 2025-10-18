@@ -1,52 +1,66 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, Upload, Zap } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import exampleDeal from "@/assets/example-deal.png";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { DealUpload } from "@/components/DealUpload";
+import exampleDeal from "@/assets/example-deal.png";
+import { CheckCircle2, Upload, Zap } from "lucide-react";
 
-const Premium = () => {
+export default function Premium() {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [hasPremiumAccess, setHasPremiumAccess] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [credits, setCredits] = useState<number>(0);
 
-  // Check for premium access on mount
   useEffect(() => {
-    const sessionId = sessionStorage.getItem("archie_premium_session");
-    if (sessionId) {
-      setHasPremiumAccess(true);
-      console.log("Premium access verified from session");
-    }
+    checkAuth();
   }, []);
 
+  const checkAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+    
+    if (user) {
+      await fetchCredits(user.id);
+    }
+  };
+
+  const fetchCredits = async (userId: string) => {
+    const { data } = await supabase
+      .from("user_credits")
+      .select("credits")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    setCredits(data?.credits || 0);
+  };
+
   const handleGetPremium = async () => {
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      console.log("Creating checkout session...");
-      
       const { data, error } = await supabase.functions.invoke("create-checkout");
-      
-      if (error) {
-        console.error("Error creating checkout:", error);
-        throw error;
-      }
-      
+
+      if (error) throw error;
+
       if (data?.url) {
-        console.log("Redirecting to checkout:", data.url);
-        window.open(data.url, '_blank');
-      } else {
-        throw new Error("No checkout URL received");
+        window.open(data.url, "_blank");
       }
-    } catch (error) {
-      console.error("Checkout error:", error);
+    } catch (error: any) {
+      console.error("Error creating checkout:", error);
       toast({
         title: "Error",
-        description: "Failed to start checkout. Please try again.",
+        description: "Failed to create checkout session. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -66,7 +80,7 @@ const Premium = () => {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
+              Get 10 deal analyses for <span className="text-primary font-bold">just $9</span>
             </p>
             <Button 
               size="lg" 
@@ -74,7 +88,7 @@ const Premium = () => {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : "Get Premium Now"}
+              {isLoading ? "Loading..." : user ? "Buy 10 Credits - $9" : "Sign In to Purchase"}
             </Button>
           </div>
         </section>
@@ -214,21 +228,35 @@ const Premium = () => {
           </div>
         </section>
 
-        {/* Upload Section - Only show if user has premium access */}
-        {hasPremiumAccess && (
-          <section id="upload" className="py-16 sm:py-20 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-600 px-4 py-2 rounded-full mb-4">
-                  <CheckCircle2 className="h-5 w-5" />
-                  <span className="font-medium">Premium Active</span>
+        {/* Upload Section - Only shown if user has credits */}
+        {user && credits > 0 && (
+          <section className="py-16 bg-muted/30">
+            <div className="container max-w-4xl">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
+                  <span className="font-medium">{credits} {credits === 1 ? 'Credit' : 'Credits'} Available</span>
                 </div>
                 <p className="text-muted-foreground text-sm">
-                  Unlimited uploads during this browser session
+                  Each analysis uses 1 credit
                 </p>
               </div>
-              <DealUpload />
+              <DealUpload onAnalysisComplete={() => fetchCredits(user.id)} />
             </div>
+          </section>
+        )}
+
+        {/* Sign in prompt if not logged in */}
+        {!user && (
+          <section className="py-16 text-center">
+            <Card className="max-w-md mx-auto p-8">
+              <h3 className="text-xl font-semibold mb-2">Ready to analyze?</h3>
+              <p className="text-muted-foreground mb-6">
+                Sign in or create an account to use your credits
+              </p>
+              <Button onClick={() => navigate("/auth")} size="lg">
+                Sign In / Sign Up
+              </Button>
+            </Card>
           </section>
         )}
 
@@ -239,7 +267,7 @@ const Premium = () => {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h2>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
+              Get 10 deal analyses for <span className="text-primary font-bold">just $9</span>
             </p>
             <Button 
               size="lg" 
@@ -247,7 +275,7 @@ const Premium = () => {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : "Get Premium Now"}
+              {isLoading ? "Loading..." : user ? "Buy 10 Credits - $9" : "Sign In to Purchase"}
             </Button>
           </div>
         </section>
@@ -256,6 +284,4 @@ const Premium = () => {
       <Footer />
     </div>
   );
-};
-
-export default Premium;
+}
