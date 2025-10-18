@@ -19,12 +19,8 @@ const Premium = () => {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              No subscription, no account required. Just $9.
+              No subscription, no account required. <span className="text-primary">Just $9.</span>
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div className="text-3xl font-bold text-primary">$9</div>
-              <div className="text-lg text-muted-foreground">for 3 deal analyses</div>
-            </div>
             <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
               Get Premium Now
             </Button>
@@ -37,7 +33,7 @@ const Premium = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Get an analysis of your car purchase in one simple step
+                Get an analysis of your car purchase in two simple steps
               </p>
             </div>
 
@@ -84,7 +80,7 @@ const Premium = () => {
                       <h3 className="text-xl font-semibold">Archie Analyzes</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Archie analyzes your upload, comparing pricing, fees, and add-ons against market data and provides AI-supercharged feedback.
+                      Archie analyzes your upload, comparing pricing, fees, and add-ons against market data and provides AI-supercharged feedback, including a deal rating, smart summary, and negotiation tips.
                     </p>
                   </div>
                 </div>
@@ -106,7 +102,7 @@ const Premium = () => {
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                       <div>
-                        <div className="font-semibold mb-1">Smart Analysis</div>
+                        <div className="font-semibold mb-1">Smart Summary</div>
                         <p className="text-sm text-muted-foreground">Breakdown of fees, discounts, and red flags</p>
                       </div>
                     </div>
@@ -114,7 +110,7 @@ const Premium = () => {
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                       <div>
                         <div className="font-semibold mb-1">Negotiation Tips</div>
-                        <p className="text-sm text-muted-foreground">Specific advice to improve your deal</p>
+                        <p className="text-sm text-muted-foreground">Specific advice to improve your deal and potentially save money</p>
                       </div>
                     </div>
                   </div>
@@ -172,9 +168,6 @@ const Premium = () => {
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
               No subscription, no account required. Just $9.
             </h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Get 3 expert analyses for just $9. No subscription, no account required.
-            </p>
             <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
               Get Started with Premium
             </Button>
