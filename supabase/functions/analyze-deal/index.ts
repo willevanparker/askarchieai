@@ -31,12 +31,23 @@ serve(async (req) => {
       throw new Error("Failed to download file");
     }
 
-    // Convert file to base64
+    // Convert file to base64 - handle large files properly
     const arrayBuffer = await fileData.arrayBuffer();
-    const base64File = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    // Convert to base64 in chunks to avoid stack overflow
+    let binary = '';
+    const chunkSize = 8192;
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, i + chunkSize);
+      binary += String.fromCharCode.apply(null, Array.from(chunk));
+    }
+    const base64File = btoa(binary);
     
     // Determine mime type
-    const mimeType = filePath.toLowerCase().endsWith('.pdf') ? 'application/pdf' : 'image/jpeg';
+    const mimeType = filePath.toLowerCase().endsWith('.pdf') ? 'application/pdf' : 
+                     filePath.toLowerCase().endsWith('.png') ? 'image/png' :
+                     'image/jpeg';
 
     console.log("Calling Lovable AI for analysis...");
 
