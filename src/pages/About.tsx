@@ -58,7 +58,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Transparent & Trustworthy</h3>
                 <p className="text-muted-foreground">
-                  I try my best to give helpful information, but even an AI-supercharged automotive advocate can make mistakes! If you have feedback, I'm all ears! Send me an email at just@askarchie.ai.
+                  I try my best to give helpful information, but even supercharged automotive intelligence can make mistakes! If you have feedback, I'm all ears! Send me an email at just@askarchie.ai.
                 </p>
               </div>
             </div>

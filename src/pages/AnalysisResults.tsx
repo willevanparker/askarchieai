@@ -147,10 +147,10 @@ const AnalysisResults = () => {
           <div className="flex gap-4 justify-center">
             <Button
               variant="outline"
-              onClick={() => navigate("/premium")}
+              onClick={() => navigate("/premium#upload")}
               size="lg"
             >
-              Purchase Again
+              Upload
             </Button>
             <Button
               onClick={() => navigate("/chat")}

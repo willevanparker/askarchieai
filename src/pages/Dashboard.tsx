@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
   const [credits, setCredits] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+  const [dealHistory, setDealHistory] = useState<any[]>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -29,6 +30,7 @@ export default function Dashboard() {
     
     setUser(user);
     await fetchCredits(user.id);
+    await fetchDealHistory(user.id);
     setLoading(false);
   };
 
@@ -45,6 +47,27 @@ export default function Dashboard() {
     }
 
     setCredits(data?.credits || 0);
+  };
+
+  const fetchDealHistory = async (userId: string) => {
+    const { data, error } = await supabase
+      .from("user_deal_history")
+      .select(`
+        id,
+        file_name,
+        created_at,
+        analysis_id
+      `)
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(10);
+
+    if (error) {
+      console.error("Error fetching deal history:", error);
+      return;
+    }
+
+    setDealHistory(data || []);
   };
 
   const handleSignOut = async () => {
@@ -87,7 +110,7 @@ export default function Dashboard() {
           <div className="text-5xl font-bold text-primary mb-4">{credits}</div>
           <p className="text-muted-foreground mb-6">
             {credits === 0
-              ? "You have no credits. Purchase credits to analyze deals."
+              ? "You have no credits. Purchase credits for Archie to analyze documents."
               : `You have ${credits} ${credits === 1 ? "credit" : "credits"} remaining.`}
           </p>
           {credits === 0 && (
@@ -100,13 +123,13 @@ export default function Dashboard() {
         <div className="grid md:grid-cols-2 gap-4">
           <Card className="p-6">
             <Upload className="w-8 h-8 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Analyze a Deal</h3>
+            <h3 className="text-xl font-semibold mb-2">Upload</h3>
             <p className="text-muted-foreground mb-4">
               Upload a quote and get instant AI analysis
             </p>
             <Button
               className="w-full"
-              onClick={() => navigate("/premium")}
+              onClick={() => navigate("/premium#upload")}
               disabled={credits === 0}
             >
               {credits === 0 ? "No Credits Available" : "Upload Deal"}
@@ -117,7 +140,7 @@ export default function Dashboard() {
             <MessageSquare className="w-8 h-8 text-primary mb-4" />
             <h3 className="text-xl font-semibold mb-2">Ask Archie</h3>
             <p className="text-muted-foreground mb-4">
-              Get answers to any car buying questions
+              Get more answers to car questions
             </p>
             <Button
               className="w-full"
@@ -128,6 +151,41 @@ export default function Dashboard() {
             </Button>
           </Card>
         </div>
+
+        {/* Deal History Section */}
+        {dealHistory.length > 0 && (
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold mb-4">Recent Analyses</h3>
+            <div className="space-y-3">
+              {dealHistory.map((deal) => (
+                <div
+                  key={deal.id}
+                  className="flex items-center justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+                  onClick={() => navigate(`/analysis-results?id=${deal.analysis_id}`)}
+                >
+                  <div className="flex items-center gap-3">
+                    <Upload className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">{deal.file_name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(deal.created_at).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="ghost" size="sm">
+                    View
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
       </div>
       <Footer />
     </div>

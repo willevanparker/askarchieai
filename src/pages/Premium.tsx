@@ -88,7 +88,7 @@ export default function Premium() {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Get 10 deal analyses for <span className="text-primary font-bold">just $9</span>
+              No subscription required. <span className="text-primary font-bold">Just $9.</span>
             </p>
             <Button 
               size="lg" 
@@ -96,7 +96,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Buy 10 Credits - $9" : "Sign In to Purchase"}
+              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In to Purchase"}
             </Button>
           </div>
         </section>
@@ -107,7 +107,7 @@ export default function Premium() {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Get an analysis of your car purchase in two simple steps
+                Car shopping? Archie will analyze up to five documents for just $9.
               </p>
             </div>
 
@@ -238,7 +238,7 @@ export default function Premium() {
 
         {/* Upload Section - Only shown if user has credits */}
         {user && credits > 0 && (
-          <section className="py-16 bg-muted/30">
+          <section id="upload" className="py-16 bg-muted/30">
             <div className="container max-w-4xl">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
@@ -275,7 +275,7 @@ export default function Premium() {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h2>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Get 10 deal analyses for <span className="text-primary font-bold">just $9</span>
+              No subscription required. <span className="text-primary font-bold">Just $9.</span>
             </p>
             <Button 
               size="lg" 
@@ -283,7 +283,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Buy 10 Credits - $9" : "Sign In to Purchase"}
+              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In to Purchase"}
             </Button>
           </div>
         </section>

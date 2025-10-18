@@ -120,6 +120,20 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
 
       if (error) throw error;
 
+      // Store in user's deal history
+      const { error: historyError } = await supabase
+        .from("user_deal_history")
+        .insert({
+          user_id: user.id,
+          analysis_id: data.analysisId,
+          file_name: file.name,
+          file_path: uploadedFilePath,
+        });
+
+      if (historyError) {
+        console.error("Error saving to history:", historyError);
+      }
+
       toast({
         title: "Analysis complete!",
         description: "Your deal has been analyzed successfully.",

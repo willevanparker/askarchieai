@@ -7,12 +7,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="md:col-span-1">
-            <Link to="/" className="font-bold text-xl mb-4 inline-block">
-              <span className="text-accent">A</span>rch<span className="text-accent">i</span>e
-            </Link>
-            <p className="text-sm text-gray-400 mb-6 max-w-xs">
-              Automotive intelligence.
-            </p>
+          <Link to="/" className="font-bold text-xl mb-4 inline-block">
+            <span className="text-accent">A</span>rch<span className="text-accent">i</span>e
+          </Link>
             <div className="flex items-center gap-4">
               <a 
                 href="https://www.instagram.com/askarchieai/" 
@@ -113,7 +110,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-12 pt-6">
           <p className="text-sm text-gray-400 text-center">
-            © 2025 Hamster Financial, LLC (d/b/a Archie). All rights reserved.
+            © 2025 Archie. All rights reserved.
           </p>
         </div>
       </div>
