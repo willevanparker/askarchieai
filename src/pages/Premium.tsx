@@ -22,18 +22,6 @@ export default function Premium() {
     checkAuth();
   }, []);
 
-  useEffect(() => {
-    // Handle hash navigation for anchor links
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
-    }
-  }, [window.location.hash]);
 
   const checkAuth = async () => {
     const { data: { user } } = await supabase.auth.getUser();
