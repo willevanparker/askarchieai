@@ -1,12 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { supabase } from "@/integrations/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
   
   const isActive = (path: string) => location.pathname === path;
 
@@ -26,7 +43,7 @@ const Navbar = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -38,6 +55,21 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            
+            {user ? (
+              <Link to="/dashboard">
+                <Button size="sm" variant="default">
+                  <User className="mr-2 h-4 w-4" />
+                  Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/auth">
+                <Button size="sm" variant="default">
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
           
           {/* Mobile Menu */}
@@ -61,6 +93,23 @@ const Navbar = () => {
                     {link.label}
                   </Link>
                 ))}
+                
+                <div className="border-t border-border pt-4 mt-4">
+                  {user ? (
+                    <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full" size="lg">
+                        <User className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link to="/auth" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full" size="lg">
+                        Sign In
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

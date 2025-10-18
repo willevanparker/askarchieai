@@ -87,8 +87,14 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
           variant: "destructive",
         });
         setIsAnalyzing(false);
+        navigate("/premium");
         return;
       }
+
+      toast({
+        title: "Analysis started",
+        description: "Uploading your deal for analysis...",
+      });
 
       const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       let uploadedFilePath = "";
@@ -113,6 +119,11 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
       });
 
       if (error) throw error;
+
+      toast({
+        title: "Analysis complete!",
+        description: "Your deal has been analyzed successfully.",
+      });
 
       // Notify parent component
       if (onAnalysisComplete) {

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { DealUpload } from "@/components/DealUpload";
 import exampleDeal from "@/assets/example-deal.png";
@@ -43,6 +43,10 @@ export default function Premium() {
 
   const handleGetPremium = async () => {
     if (!user) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to purchase credits.",
+      });
       navigate("/auth");
       return;
     }
@@ -54,6 +58,10 @@ export default function Premium() {
       if (error) throw error;
 
       if (data?.url) {
+        toast({
+          title: "Redirecting to checkout",
+          description: "Opening Stripe payment page...",
+        });
         window.open(data.url, "_blank");
       }
     } catch (error: any) {
