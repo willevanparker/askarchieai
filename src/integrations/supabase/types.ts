@@ -38,6 +38,39 @@ export type Database = {
         }
         Relationships: []
       }
+      deal_analyses: {
+        Row: {
+          created_at: string | null
+          file_path: string
+          id: string
+          negotiation_tip: string | null
+          rating: number | null
+          session_id: string
+          summary: string | null
+          verdict: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          file_path: string
+          id?: string
+          negotiation_tip?: string | null
+          rating?: number | null
+          session_id: string
+          summary?: string | null
+          verdict?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          file_path?: string
+          id?: string
+          negotiation_tip?: string | null
+          rating?: number | null
+          session_id?: string
+          summary?: string | null
+          verdict?: string | null
+        }
+        Relationships: []
+      }
       document_chunks: {
         Row: {
           chunk_index: number

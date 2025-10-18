@@ -33,17 +33,17 @@ const PaymentSuccess = () => {
             <Button 
               size="lg" 
               className="w-full bg-primary hover:bg-primary-dark"
-              onClick={() => navigate("/chat")}
+              onClick={() => navigate("/premium#upload")}
             >
-              Start Analyzing Deals
+              Upload Deal for Analysis
             </Button>
             <Button 
               size="lg" 
               variant="outline"
               className="w-full"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/chat")}
             >
-              Go to Homepage
+              Ask Archie Questions
             </Button>
           </div>
           {sessionId && (

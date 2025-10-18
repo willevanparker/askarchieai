@@ -8,6 +8,7 @@ import exampleDeal from "@/assets/example-deal.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { DealUpload } from "@/components/DealUpload";
 
 const Premium = () => {
   const { toast } = useToast();
@@ -200,6 +201,13 @@ const Premium = () => {
                 </div>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* Upload Section */}
+        <section id="upload" className="py-16 sm:py-20 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <DealUpload />
           </div>
         </section>
 
