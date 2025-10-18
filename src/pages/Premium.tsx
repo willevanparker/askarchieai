@@ -19,7 +19,7 @@ const Premium = () => {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              No subscription, no account required. <span className="text-primary">Just $9.</span>
+              No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
             </p>
             <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
               Get Premium Now
@@ -166,10 +166,13 @@ const Premium = () => {
         <section className="py-16 sm:py-20 bg-primary/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              No subscription, no account required. Just $9.
+              <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h2>
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              No subscription, no account required. <span className="text-primary font-bold">Just $9.</span>
+            </p>
             <Button size="lg" className="bg-primary hover:bg-primary-dark text-lg px-8 py-6">
-              Get Started with Premium
+              Get Premium Now
             </Button>
           </div>
         </section>
