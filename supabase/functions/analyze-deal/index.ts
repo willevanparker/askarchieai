@@ -64,8 +64,12 @@ serve(async (req) => {
           {
             role: "system",
             content: `You are Archie, a friendly and wise car deal advisor. Analyze dealership quotes and provide:
-1. A numerical rating out of 10 (e.g., 8.4)
-2. A short verdict (e.g., "Good Deal", "Fair Deal", "Overpriced")
+1. A numerical rating out of 10 (e.g., 6.5)
+2. A verdict using this mapping:
+   - Poor Deal (1-4)
+   - Fair Deal (5-6)
+   - Good Deal (7-8)
+   - Excellent Deal (9-10)
 3. A summary (2-3 sentences about the deal quality, pricing, fees, discounts)
 4. A specific negotiation tip (one actionable recommendation to improve the deal)
 
@@ -116,7 +120,7 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
                   },
                   verdict: {
                     type: "string",
-                    description: "Short verdict like 'Good Deal', 'Fair Deal', 'Overpriced'"
+                    description: "Verdict mapped to rating: 'Poor Deal' (1-4), 'Fair Deal' (5-6), 'Good Deal' (7-8), 'Excellent Deal' (9-10)"
                   },
                   summary: {
                     type: "string",

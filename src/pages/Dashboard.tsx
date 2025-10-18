@@ -102,9 +102,9 @@ export default function Dashboard() {
   };
 
   const getRatingColor = (rating: number): string => {
-    if (rating >= 8) return "text-green-500";
-    if (rating >= 6) return "text-yellow-500";
-    return "text-red-500";
+    if (rating >= 7) return "text-green-500"; // Good (7-8) and Excellent (9-10)
+    if (rating >= 5) return "text-yellow-500"; // Fair (5-6)
+    return "text-red-500"; // Poor (1-4)
   };
 
   const handleSignOut = async () => {
