@@ -2,7 +2,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, Upload, Zap, Download, Share2 } from "lucide-react";
+import { CheckCircle2, Upload, Zap } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import exampleDeal from "@/assets/example-deal.png";
 
 const Premium = () => {
   return (
@@ -17,7 +19,7 @@ const Premium = () => {
               <span className="text-accent">A</span>rch<span className="text-accent">i</span>e Premium
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Let Archie analyze your car deal and tell you if it's worth it
+              No subscription, no account required. Just $9.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               <div className="text-3xl font-bold text-primary">$9</div>
@@ -35,7 +37,7 @@ const Premium = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Get expert analysis of your car deal in three simple steps
+                Get an analysis of your car purchase in one simple step
               </p>
             </div>
 
@@ -51,7 +53,21 @@ const Premium = () => {
                       <h3 className="text-xl font-semibold">Upload Your Quote</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Take a photo or upload your dealership quote (PDF, JPG, PNG supported). Include all the details — pricing, fees, add-ons, everything.
+                      Take a photo or upload up to three dealership worksheets, quotes, or contracts (PDF, JPG, PNG supported). Include all the details — pricing, fees, add-ons, everything.{" "}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button className="text-primary hover:underline font-medium">
+                            Here's an example.
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+                          <img 
+                            src={exampleDeal} 
+                            alt="Example dealership quote" 
+                            className="w-full h-auto"
+                          />
+                        </DialogContent>
+                      </Dialog>
                     </p>
                   </div>
                 </div>
@@ -68,7 +84,7 @@ const Premium = () => {
                       <h3 className="text-xl font-semibold">Archie Analyzes</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Archie's AI vision analyzes your deal, comparing pricing, fees, and add-ons against market data. Get a clear verdict: Good Deal or Not.
+                      Archie analyzes your upload, comparing pricing, fees, and add-ons against market data and provides AI-supercharged feedback.
                     </p>
                   </div>
                 </div>
@@ -78,7 +94,7 @@ const Premium = () => {
             <div className="mt-8 max-w-4xl mx-auto">
               <Card className="p-8 bg-primary/5 border-primary/20">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold mb-4">Your Results Include:</h3>
+                  <h3 className="text-2xl font-bold mb-4">The analysis includes:</h3>
                   <div className="grid sm:grid-cols-3 gap-6 text-left">
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
@@ -108,45 +124,16 @@ const Premium = () => {
           </div>
         </section>
 
-        {/* Save & Share */}
+        {/* Example Results Preview */}
         <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">Save & Share Your Analysis</h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Once Archie finishes analyzing your deal, you can save the results to your phone or share them instantly.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-lg border">
-                  <Download className="h-5 w-5 text-primary" />
-                  <span className="font-medium">Save as PDF or Image</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-lg border">
-                  <Share2 className="h-5 w-5 text-primary" />
-                  <span className="font-medium">Share via Email, Text, or WhatsApp</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Example Results Preview */}
-        <section className="py-16 sm:py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">See It In Action</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Here's what an Archie Premium analysis looks like
-              </p>
-            </div>
-
             <div className="max-w-3xl mx-auto space-y-6">
               <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
                     <Zap className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold">Archie Vision Verdict</h3>
+                  <h3 className="text-xl font-bold">Archie's Analysis</h3>
                 </div>
                 <div className="mb-4">
                   <div className="flex items-center gap-2 mb-2">
@@ -169,7 +156,7 @@ const Premium = () => {
                     <div>
                       <p className="font-semibold mb-2">Archie's Negotiation Tip</p>
                       <p className="text-sm text-muted-foreground">
-                        "Ask the dealer to waive the Perma Plate and reduce the doc fee to under $900. That alone saves you around $1,100 — enough for a year of insurance or a nice weekend trip in your new RDX."
+                        "Ask the dealer to waive the Perma Plate and reduce the doc fee to under $900. That alone saves you around $1,100 — enough for a year of insurance or a nice weekend trip in your new car."
                       </p>
                     </div>
                   </div>
@@ -183,7 +170,7 @@ const Premium = () => {
         <section className="py-16 sm:py-20 bg-primary/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Ready to Analyze Your Deal?
+              No subscription, no account required. Just $9.
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Get 3 expert analyses for just $9. No subscription, no account required.

@@ -98,6 +98,17 @@ const FAQ = () => {
               </AccordionContent>
             </AccordionItem>
 
+            <AccordionItem value="item-8" className="border rounded-lg px-6">
+              <AccordionTrigger className="text-left font-semibold">
+                What is your refund policy?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                <p>
+                  If you are not satisfied with your purchase for any reason, simply request a refund via email and one will be provided, no questions asked.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
             <AccordionItem value="item-5" className="border rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
                 How do I contact support?

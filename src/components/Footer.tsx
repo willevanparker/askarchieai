@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="md:col-span-1">
             <Link to="/" className="font-bold text-xl mb-4 inline-block">
-              Ask<span className="text-accent">A</span>rch<span className="text-accent">i</span>e
+              <span className="text-accent">A</span>rch<span className="text-accent">i</span>e
             </Link>
             <p className="text-sm text-gray-400 mb-6 max-w-xs">
               Automotive intelligence.
@@ -113,7 +113,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-12 pt-6">
           <p className="text-sm text-gray-400 text-center">
-            © 2025 Hamster Financial, LLC (d/b/a AskArchie). All rights reserved.
+            © 2025 Hamster Financial, LLC (d/b/a Archie). All rights reserved.
           </p>
         </div>
       </div>
