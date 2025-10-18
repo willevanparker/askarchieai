@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
-import { DealUpload } from "@/components/DealUpload";
+
 import exampleDeal from "@/assets/example-deal.png";
 import { CheckCircle2, Upload, Zap } from "lucide-react";
 
@@ -16,30 +16,14 @@ export default function Premium() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
-  const [credits, setCredits] = useState<number>(0);
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-
   const checkAuth = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     setUser(user);
-    
-    if (user) {
-      await fetchCredits(user.id);
-    }
-  };
-
-  const fetchCredits = async (userId: string) => {
-    const { data } = await supabase
-      .from("user_credits")
-      .select("credits")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    setCredits(data?.credits || 0);
   };
 
   const handleGetPremium = async () => {
@@ -237,22 +221,6 @@ export default function Premium() {
           </div>
         </section>
 
-        {/* Upload Section - Only shown if user has credits */}
-        {user && credits > 0 && (
-          <section id="upload" className="py-16 bg-muted/30">
-            <div className="container max-w-4xl">
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
-                  <span className="font-medium">{credits} {credits === 1 ? 'Credit' : 'Credits'} Available</span>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  Each analysis uses 1 credit
-                </p>
-              </div>
-              <DealUpload onAnalysisComplete={() => fetchCredits(user.id)} />
-            </div>
-          </section>
-        )}
 
 
         {/* CTA */}
