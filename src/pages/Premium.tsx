@@ -234,7 +234,7 @@ export default function Premium() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground mt-4 text-center">
-                  A detailed analysis with rating, summary, and actionable negotiation advice
+                  A detailed analysis with rating, summary, and actionable tips. Reminder: Archie can make mistakes. Check important info.
                 </p>
               </Card>
             </div>
