@@ -18,11 +18,16 @@ const conversations = [
 const Hero = () => {
   const { openChat } = useChat();
   const [currentConversation, setCurrentConversation] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentConversation((prev) => (prev + 1) % conversations.length);
-    }, 4000);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentConversation((prev) => (prev + 1) % conversations.length);
+        setIsTransitioning(false);
+      }, 500);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -44,7 +49,9 @@ const Hero = () => {
               Today 2:14 PM
             </div>
             
-            <div key={currentConversation} className="space-y-6 animate-fade-in">
+            <div 
+              className={`space-y-6 transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
+            >
               <div className="flex justify-start">
                 <div className="bg-secondary px-6 py-4 rounded-3xl rounded-tl-sm max-w-xs">
                   <p className="text-lg font-medium">{conversations[currentConversation].user}</p>
