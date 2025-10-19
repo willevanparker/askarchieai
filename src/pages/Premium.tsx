@@ -95,7 +95,7 @@ export default function Premium() {
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Analysis</h3>
                   <p className="text-sm text-muted-foreground">
-                    Get AI-powered insights, ratings, and actionable tips.
+                    Get AI-powered insights, ratings, and actionable tips
                   </p>
                 </Card>
 
