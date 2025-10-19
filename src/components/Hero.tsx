@@ -11,7 +11,7 @@ const conversations = [
   },
   {
     user: "I'm shopping for a new car. Can you help?",
-    archie: "Sure! Let's find you the perfect car. A few quick questions first:"
+    archie: "Let's find you the perfect car. A few questions first:"
   }
 ];
 
