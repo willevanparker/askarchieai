@@ -226,12 +226,8 @@ export default function Premium() {
                   </div>
                   <h3 className="text-xl font-bold">What Archie Delivers</h3>
                 </div>
-                <div className="bg-background rounded-lg p-4">
-                  <img 
-                    src={exampleOutput} 
-                    alt="Archie's analysis showing deal rating, summary, and negotiation tips" 
-                    className="w-full h-auto rounded border"
-                  />
+                <div className="bg-background rounded-lg p-8 border text-center text-muted-foreground">
+                  Preview image removed.
                 </div>
                 <p className="text-sm text-muted-foreground mt-4 text-center">
                   A detailed analysis with rating, summary, and actionable tips. Reminder: Archie can make mistakes. Check important info.
