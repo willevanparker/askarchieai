@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 const Privacy = () => {
   useEffect(() => {
-    // Load Termly embed script
+    // Load Termly embed script using their recommended inline approach
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.id = 'termly-jssdk';
