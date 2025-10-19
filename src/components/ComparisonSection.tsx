@@ -7,7 +7,7 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            See <span className="text-accent">A</span>rch<span className="text-accent">i</span>e in Action
+            <span className="text-accent">A</span>rch<span className="text-accent">i</span>e in Action
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Same question, different answer. See how Archie's automotive experience makes the difference.
