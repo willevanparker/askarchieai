@@ -47,8 +47,6 @@ const Index = () => {
       <main>
         <Hero />
 
-        <ComparisonSection />
-
         <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -90,6 +88,8 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        <ComparisonSection />
 
         <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -92,7 +92,7 @@ const Hero = () => {
               Cars are complicated. Owning one shouldn't be.
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-2">
-              <span className="font-bold">Meet Archie.</span>
+              <span className="font-bold">Meet Archie.</span> Scroll to see how Archie can help you.
             </p>
           </div>
         </div>
