@@ -89,22 +89,22 @@ export default function Premium() {
             <div className="mt-12 max-w-4xl mx-auto">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {/* Analysis - Selected */}
-                <Card className="p-6 border-2 border-primary hover:shadow-lg transition-shadow duration-300">
-                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                <Card className="p-6 border-2 border-primary hover:shadow-lg transition-shadow duration-300 text-center">
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 mx-auto">
                     <FileLineChart className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Analysis</h3>
                   <p className="text-sm text-muted-foreground">
-                    Upload your car deal and get AI-powered analysis with ratings and negotiation tips
+                    Get AI-powered insights, ratings, and actionable tips.
                   </p>
                 </Card>
 
                 {/* Dealer Ratings - Beta */}
-                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative">
+                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative text-center">
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 mx-auto">
                     <Star className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Dealer Ratings</h3>
@@ -114,11 +114,11 @@ export default function Premium() {
                 </Card>
 
                 {/* Live Chat - Beta */}
-                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative">
+                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative text-center">
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 mx-auto">
                     <MessageCircle className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Live Chat</h3>
