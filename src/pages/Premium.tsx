@@ -90,7 +90,7 @@ export default function Premium() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {/* Analysis - Selected */}
                 <div className="relative border-4 border-primary rounded-2xl p-6 bg-background">
-                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                  <h3 className="text-2xl font-bold text-primary text-center">
                     Analysis
                   </h3>
                 </div>
@@ -100,7 +100,7 @@ export default function Premium() {
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                  <h3 className="text-2xl font-bold text-primary text-center">
                     Dealer Ratings
                   </h3>
                 </div>
@@ -110,7 +110,7 @@ export default function Premium() {
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                  <h3 className="text-2xl font-bold text-primary text-center">
                     Live Chat
                   </h3>
                 </div>
