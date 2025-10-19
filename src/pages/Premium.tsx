@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 import exampleInput from "@/assets/example-input.png";
 import exampleOutput from "@/assets/archie-output-v2.png";
-import { CheckCircle2, Upload, Zap } from "lucide-react";
+import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle } from "lucide-react";
 
 export default function Premium() {
   const navigate = useNavigate();
@@ -87,33 +87,45 @@ export default function Premium() {
 
             {/* Product Boxes */}
             <div className="mt-12 max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {/* Analysis - Selected */}
-                <div className="relative border-4 border-primary rounded-2xl p-6 bg-background">
-                  <h3 className="text-2xl font-bold text-primary text-center">
-                    Analysis
-                  </h3>
-                </div>
+                <Card className="p-6 border-2 border-primary hover:shadow-lg transition-shadow duration-300">
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                    <FileLineChart className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Analysis</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Upload your car deal and get AI-powered analysis with ratings and negotiation tips
+                  </p>
+                </Card>
 
                 {/* Dealer Ratings - Beta */}
-                <div className="relative border-4 border-primary/40 rounded-2xl p-6 bg-background opacity-60 cursor-not-allowed">
+                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative">
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <h3 className="text-2xl font-bold text-primary text-center">
-                    Dealer Ratings
-                  </h3>
-                </div>
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                    <Star className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Dealer Ratings</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Post and see dealer reviews to make informed decisions
+                  </p>
+                </Card>
 
                 {/* Live Chat - Beta */}
-                <div className="relative border-4 border-primary/40 rounded-2xl p-6 bg-background opacity-60 cursor-not-allowed">
+                <Card className="p-6 border-border opacity-60 cursor-not-allowed relative">
                   <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                     Beta
                   </div>
-                  <h3 className="text-2xl font-bold text-primary text-center">
-                    Live Chat
-                  </h3>
-                </div>
+                  <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                    <MessageCircle className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Live Chat</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Chat live with a representative for in-depth support
+                  </p>
+                </Card>
               </div>
             </div>
           </div>
