@@ -71,7 +71,7 @@ const FAQ = () => {
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 <p>
-                  $9 for up to three submissions.
+                  $9 for up to five submissions.
                 </p>
               </AccordionContent>
             </AccordionItem>
