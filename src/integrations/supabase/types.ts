@@ -47,6 +47,7 @@ export type Database = {
           rating: number | null
           session_id: string
           summary: string | null
+          trade_in_note: string | null
           verdict: string | null
         }
         Insert: {
@@ -57,6 +58,7 @@ export type Database = {
           rating?: number | null
           session_id: string
           summary?: string | null
+          trade_in_note?: string | null
           verdict?: string | null
         }
         Update: {
@@ -67,6 +69,7 @@ export type Database = {
           rating?: number | null
           session_id?: string
           summary?: string | null
+          trade_in_note?: string | null
           verdict?: string | null
         }
         Relationships: []

@@ -72,6 +72,7 @@ serve(async (req) => {
    - Excellent Deal (9-10)
 3. A summary (2-3 sentences about the deal quality, pricing, fees, discounts)
 4. A specific negotiation tip (one actionable recommendation to improve the deal)
+5. Trade-in detection: If you detect any trade-in related terms (e.g., "trade-in," "trade allowance," "trade-in value," "trade-in amount," "vehicle allowance"), include a trade-in note
 
 CRITICAL TONE GUIDELINES:
 - Never use assertive or confrontational language
@@ -86,6 +87,10 @@ IMPORTANT PRICING FLAGS:
 - It's often higher than MSRP and can include mark-ups or add-ons
 - The MSRP (Manufacturer's Suggested Retail Price) is set by the manufacturer and is what customers should request to pay
 - Suggest the customer review this carefully and consider asking for MSRP-based pricing instead
+
+TRADE-IN DETECTION:
+- If you detect any mention of trade-in or related variations (trade allowance, trade-in value, trade-in amount, vehicle allowance), populate the trade_in_note field with: "Recommendation: Verify the trade-in value with a trusted source like Kelley Blue Book (KBB.com) or a third-party appraisal to ensure it's fair."
+- If no trade-in is detected, leave trade_in_note as null
 
 Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared to market averages.`
           },
@@ -129,6 +134,10 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
                   negotiation_tip: {
                     type: "string",
                     description: "One specific, actionable negotiation tip"
+                  },
+                  trade_in_note: {
+                    type: "string",
+                    description: "If trade-in is detected, include: 'Recommendation: Verify the trade-in value with a trusted source like Kelley Blue Book (KBB.com) or a third-party appraisal to ensure it's fair.' Otherwise, leave as null"
                   }
                 },
                 required: ["rating", "verdict", "summary", "negotiation_tip"],
@@ -184,6 +193,7 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
         verdict: analysis.verdict,
         summary: analysis.summary,
         negotiation_tip: analysis.negotiation_tip,
+        trade_in_note: analysis.trade_in_note || null,
       })
       .select()
       .single();
@@ -202,6 +212,7 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
         verdict: analysis.verdict,
         summary: analysis.summary,
         negotiation_tip: analysis.negotiation_tip,
+        trade_in_note: analysis.trade_in_note || null,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );

@@ -13,6 +13,7 @@ interface Analysis {
   verdict: string;
   summary: string;
   negotiation_tip: string;
+  trade_in_note: string | null;
   created_at: string;
 }
 
@@ -142,6 +143,22 @@ const AnalysisResults = () => {
                 </div>
               </div>
             </div>
+
+            {analysis.trade_in_note && (
+              <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-900 mt-4">
+                <div className="flex items-start gap-3">
+                  <div className="h-6 w-6 bg-blue-500/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                    ℹ️
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2 text-blue-900 dark:text-blue-100">Trade-In Notice</p>
+                    <p className="text-sm text-blue-800 dark:text-blue-200">
+                      {analysis.trade_in_note}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </Card>
 
           <div className="flex gap-4 justify-center">
