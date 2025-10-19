@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 
 import exampleInput from "@/assets/example-input.png";
-import exampleOutput from "@/assets/example-output.png";
+import exampleOutput from "@/assets/archie-output-v2.png";
 import { CheckCircle2, Upload, Zap } from "lucide-react";
 
 export default function Premium() {
@@ -226,8 +226,12 @@ export default function Premium() {
                   </div>
                   <h3 className="text-xl font-bold">What Archie Delivers</h3>
                 </div>
-                <div className="bg-background rounded-lg p-8 border text-center text-muted-foreground">
-                  Preview image removed.
+                <div className="bg-background rounded-lg p-4">
+                  <img 
+                    src={exampleOutput} 
+                    alt="Archie's analysis showing deal rating, summary, and negotiation tips" 
+                    className="w-full h-auto rounded border"
+                  />
                 </div>
                 <p className="text-sm text-muted-foreground mt-4 text-center">
                   A detailed analysis with rating, summary, and actionable tips. Reminder: Archie can make mistakes. Check important info.
