@@ -109,7 +109,7 @@ export default function Premium() {
                       <h3 className="text-xl font-semibold">Upload Your Quote</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Take a photo or upload a worksheet, quote, or contract (PDF, JPG, PNG supported). Include all the details — city & state, pricing, fees, add-ons, everything.{" "}
+                      Take a photo or upload a worksheet, quote, or contract (PDF, JPG, PNG supported). Insure the document is legible and all details — VIN, city & state, pricing, fees, add-ons, etc — are present.{" "}
                       <Dialog>
                         <DialogTrigger asChild>
                           <button className="text-primary hover:underline font-medium">
