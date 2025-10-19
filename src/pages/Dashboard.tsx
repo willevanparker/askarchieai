@@ -24,6 +24,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [dealHistory, setDealHistory] = useState<any[]>([]);
   const [currentAnalysis, setCurrentAnalysis] = useState<Analysis | null>(null);
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -107,6 +108,32 @@ export default function Dashboard() {
     return "text-red-500"; // Poor (1-4)
   };
 
+  const handleBuyMore = async () => {
+    setIsCheckoutLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout");
+
+      if (error) throw error;
+
+      if (data?.url) {
+        toast({
+          title: "Redirecting to checkout",
+          description: "Opening Stripe payment page...",
+        });
+        window.open(data.url, "_blank");
+      }
+    } catch (error: any) {
+      console.error("Error creating checkout:", error);
+      toast({
+        title: "Error",
+        description: "Failed to create checkout session. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckoutLoading(false);
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     toast({
@@ -150,11 +177,13 @@ export default function Dashboard() {
               ? "You have no credits. Purchase credits for Archie to analyze documents."
               : `You have ${credits} ${credits === 1 ? "credit" : "credits"} remaining.`}
           </p>
-          {credits === 0 && (
-            <Button size="lg" onClick={() => navigate("/premium")}>
-              Buy Credits - $9
-            </Button>
-          )}
+          <Button 
+            size="lg" 
+            onClick={handleBuyMore}
+            disabled={isCheckoutLoading}
+          >
+            {isCheckoutLoading ? "Loading..." : "Buy more"}
+          </Button>
         </Card>
 
         <DealUpload 
