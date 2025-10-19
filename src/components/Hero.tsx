@@ -89,7 +89,10 @@ const Hero = () => {
           
           <div className="mt-12 text-center">
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Cars are complicated. Owning one shouldn't be. <span className="font-bold">Meet Archie.</span>
+              Cars are complicated. Owning one shouldn't be.
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-2">
+              <span className="font-bold">Meet Archie.</span>
             </p>
           </div>
         </div>
