@@ -67,7 +67,7 @@ const FAQ = () => {
 
             <AccordionItem value="item-6" className="border rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                How much is Archie Premium?
+                How much is Archie Insights?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 <p>
@@ -78,7 +78,7 @@ const FAQ = () => {
 
             <AccordionItem value="item-7" className="border rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                Do I need an account to chat with Archie or use Premium?
+                Do I need an account to chat with Archie or use Insights?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 <p>

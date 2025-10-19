@@ -84,7 +84,7 @@ const AnalysisResults = () => {
             <h2 className="text-2xl font-bold mb-4">Analysis Not Found</h2>
             <p className="text-muted-foreground mb-6">{error}</p>
             <Button onClick={() => navigate("/premium")}>
-              Back to Premium
+              Back to Insights
             </Button>
           </Card>
         </main>

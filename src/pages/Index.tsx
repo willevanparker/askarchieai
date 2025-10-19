@@ -11,7 +11,7 @@ const Index = () => {
     {
       icon: Car,
       title: "Buying or Leasing a Car",
-      description: "Navigate the buying process, understand pricing, and negotiate with confidence. And with Premium, Archie can even analyze a car deal for you.",
+      description: "Navigate the buying process, understand pricing, and negotiate with confidence. And with Insights, Archie can even analyze a car deal for you.",
       isPremium: true,
     },
     {
@@ -77,7 +77,7 @@ const Index = () => {
                       <>
                         Navigate the buying process, understand pricing, and negotiate with confidence. And with{' '}
                         <Link to="/premium" className="text-primary hover:underline font-medium">
-                          Premium
+                          Insights
                         </Link>
                         , Archie can even analyze a car deal for you.
                       </>

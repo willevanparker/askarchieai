@@ -70,7 +70,7 @@ const PaymentSuccess = () => {
           <h1 className="text-4xl font-bold mb-4">Payment Successful!</h1>
           <p className="text-xl text-muted-foreground mb-8">
             Welcome to <span className="text-accent">A</span>rch
-            <span className="text-accent">i</span>e Premium! You now have 5
+            <span className="text-accent">i</span>e Insights! You now have 5
             credits to analyze documents.
           </p>
           <div className="space-y-4">

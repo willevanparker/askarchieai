@@ -71,7 +71,7 @@ export default function Premium() {
         <section className="py-16 sm:py-24 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Premium
+              <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Insights
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription required. <span className="text-primary font-bold">Just $9.</span>
@@ -82,7 +82,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In / Sign Up"}
+              {isLoading ? "Loading..." : user ? "Get Insights" : "Sign In / Sign Up"}
             </Button>
           </div>
         </section>
@@ -247,7 +247,7 @@ export default function Premium() {
         <section className="py-16 sm:py-20 bg-primary/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Premium
+              <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Insights
             </h2>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription required. <span className="text-primary font-bold">Just $9.</span>
@@ -258,7 +258,7 @@ export default function Premium() {
               onClick={handleGetPremium}
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : user ? "Get Premium" : "Sign In / Sign Up"}
+              {isLoading ? "Loading..." : user ? "Get Insights" : "Sign In / Sign Up"}
             </Button>
           </div>
         </section>
