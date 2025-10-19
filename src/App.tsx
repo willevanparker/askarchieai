@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import FloatingChatWidget from "@/components/FloatingChatWidget";
+import { ChatProvider } from "@/contexts/ChatContext";
 import Index from "./pages/Index";
 import Chat from "./pages/Chat";
 import About from "./pages/About";
@@ -29,9 +30,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <FloatingChatWidget />
-        <Routes>
+        <ChatProvider>
+          <ScrollToTop />
+          <FloatingChatWidget />
+          <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/about" element={<About />} />
@@ -48,7 +50,8 @@ const App = () => (
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </ChatProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

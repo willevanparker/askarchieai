@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useChat } from "@/contexts/ChatContext";
 
 const FloatingChatWidget = () => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, openChat, closeChat } = useChat();
   
   // Don't show on chat page
   if (location.pathname === "/chat") {
@@ -17,7 +17,7 @@ const FloatingChatWidget = () => {
       {/* Floating Button */}
       {!isOpen && (
         <Button
-          onClick={() => setIsOpen(true)}
+          onClick={openChat}
           size="lg"
           className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-primary hover:bg-primary-dark shadow-lg hover:shadow-xl transition-all duration-300"
         >
@@ -33,7 +33,7 @@ const FloatingChatWidget = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(false)}
+              onClick={closeChat}
               className="h-8 w-8 text-white hover:bg-white/20"
             >
               <X className="h-5 w-5" />

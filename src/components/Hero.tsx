@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useChat } from "@/contexts/ChatContext";
 
 const Hero = () => {
+  const { openChat } = useChat();
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
@@ -37,15 +39,14 @@ const Hero = () => {
           </div>
           
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/chat" className="w-full sm:w-auto">
-              <Button 
-                size="lg"
-                className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl group"
-              >
-                Start Chatting
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={openChat}
+              size="lg"
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl group"
+            >
+              Start Chatting Now
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
             
             <Link to="/about" className="w-full sm:w-auto">
               <Button 
