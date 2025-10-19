@@ -84,6 +84,38 @@ export default function Premium() {
             >
               {isLoading ? "Loading..." : user ? "Get Insights" : "Sign In / Sign Up"}
             </Button>
+
+            {/* Product Boxes */}
+            <div className="mt-12 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                {/* Analysis - Selected */}
+                <div className="relative border-4 border-primary rounded-2xl p-6 bg-background">
+                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                    Analysis
+                  </h3>
+                </div>
+
+                {/* Dealer Ratings - Beta */}
+                <div className="relative border-4 border-primary/40 rounded-2xl p-6 bg-background opacity-60 cursor-not-allowed">
+                  <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                    Beta
+                  </div>
+                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                    Dealer Ratings
+                  </h3>
+                </div>
+
+                {/* Live Chat - Beta */}
+                <div className="relative border-4 border-primary/40 rounded-2xl p-6 bg-background opacity-60 cursor-not-allowed">
+                  <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                    Beta
+                  </div>
+                  <h3 className="text-2xl font-bold text-primary text-center" style={{ fontFamily: 'cursive' }}>
+                    Live Chat
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
