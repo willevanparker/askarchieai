@@ -10,31 +10,11 @@ const ComparisonSection = () => {
             <span className="text-accent">A</span>rch<span className="text-accent">i</span>e in Action
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Same question, different answer. See how Archie's automotive experience makes the difference.
+            See how Archie's automotive experience makes the difference.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {/* ChatGPT iPhone Mockup */}
-          <div className="flex flex-col items-center">
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold text-center">ChatGPT</h3>
-              <p className="text-sm text-muted-foreground text-center">Generic AI Response</p>
-            </div>
-            <div className="relative w-full max-w-[300px]">
-              {/* iPhone Frame */}
-              <div className="relative bg-black rounded-[3rem] p-3 shadow-2xl">
-                <div className="bg-white rounded-[2.5rem] overflow-hidden">
-                  <img 
-                    src={chatgptScreenshot} 
-                    alt="ChatGPT response to doc fee question"
-                    className="w-full h-auto"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div className="flex justify-center max-w-5xl mx-auto">
           {/* Archie iPhone Mockup */}
           <div className="flex flex-col items-center">
             <div className="mb-4">
