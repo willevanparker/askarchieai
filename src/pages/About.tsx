@@ -42,7 +42,10 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="bg-card border border-border rounded-2xl p-6">
+              <div className="bg-card border border-border rounded-2xl p-6 relative">
+                <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                  Beta
+                </div>
                 <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                   <Target className="h-6 w-6 text-primary" />
                 </div>
