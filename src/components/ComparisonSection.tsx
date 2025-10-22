@@ -25,7 +25,7 @@ const ComparisonSection = () => {
             </div>
             <div className="relative w-full max-w-[300px]">
               {/* iPhone Frame with highlight */}
-              <div className="relative bg-primary rounded-[3rem] p-3 shadow-2xl ring-4 ring-primary/20">
+              <div className="relative bg-black rounded-[3rem] p-3 shadow-2xl ring-4 ring-black/20">
                 <div className="bg-white rounded-[2.5rem] overflow-hidden">
                   <img 
                     src={archieScreenshot} 
