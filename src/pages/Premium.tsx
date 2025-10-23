@@ -6,12 +6,13 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { DealUpload } from "@/components/DealUpload";
 
 import exampleInput from "@/assets/example-input.png";
 import exampleOutput from "@/assets/archie-output-v2.png";
-import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle, X } from "lucide-react";
+import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle, X, Mail } from "lucide-react";
 
 interface Analysis {
   id: string;
@@ -30,6 +31,10 @@ export default function Premium() {
   const [user, setUser] = useState<any>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [currentAnalysis, setCurrentAnalysis] = useState<Analysis | null>(null);
+  // INSIGHTS_EMAIL_CAPTURE: Email capture state
+  const [emailForReport, setEmailForReport] = useState("");
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -108,6 +113,60 @@ export default function Premium() {
     // } finally {
     //   setIsLoading(false);
     // }
+  };
+
+  // INSIGHTS_EMAIL_CAPTURE: Function to send report via email
+  const handleSendEmail = async () => {
+    if (!emailForReport || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailForReport)) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!currentAnalysis) {
+      toast({
+        title: "No analysis available",
+        description: "Please complete an analysis first.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSendingEmail(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-insights-email", {
+        body: {
+          email: emailForReport,
+          analysis: {
+            summary: currentAnalysis.summary,
+            rating: currentAnalysis.rating,
+            verdict: currentAnalysis.verdict,
+            trade_in_note: currentAnalysis.trade_in_note,
+            negotiation_tip: currentAnalysis.negotiation_tip,
+          },
+        },
+      });
+
+      if (error) throw error;
+
+      setEmailSent(true);
+      toast({
+        title: "Email sent!",
+        description: "Check your inbox for your Insights report.",
+      });
+    } catch (error: any) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error sending email",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSendingEmail(false);
+    }
   };
 
   return (
@@ -437,6 +496,46 @@ export default function Premium() {
                     </div>
                   </div>
                 )}
+
+                {/* INSIGHTS_EMAIL_CAPTURE: Email capture form */}
+                <div className="mt-6 pt-6 border-t">
+                  <div className="text-center mb-4">
+                    <h4 className="text-lg font-semibold mb-2 flex items-center justify-center gap-2">
+                      <Mail className="h-5 w-5 text-primary" />
+                      Want this report emailed to you?
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Get a copy of your Insights report in your inbox
+                    </p>
+                  </div>
+                  
+                  {!emailSent ? (
+                    <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                      <Input
+                        type="email"
+                        placeholder="your@email.com"
+                        value={emailForReport}
+                        onChange={(e) => setEmailForReport(e.target.value)}
+                        disabled={isSendingEmail}
+                        className="flex-1"
+                      />
+                      <Button
+                        onClick={handleSendEmail}
+                        disabled={isSendingEmail || !emailForReport}
+                        className="bg-primary hover:bg-primary-dark"
+                      >
+                        {isSendingEmail ? "Sending..." : "Send Report"}
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-300 px-4 py-2 rounded-lg">
+                        <CheckCircle2 className="h-5 w-5" />
+                        <span className="font-medium">Report sent to {emailForReport}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </Card>
             </div>
           </section>

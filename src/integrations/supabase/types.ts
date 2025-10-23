@@ -38,6 +38,33 @@ export type Database = {
         }
         Relationships: []
       }
+      contacts: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          marketing_opt_in: boolean
+          source: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          marketing_opt_in?: boolean
+          source?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          marketing_opt_in?: boolean
+          source?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       deal_analyses: {
         Row: {
           created_at: string | null
@@ -249,10 +276,7 @@ export type Database = {
         Args: { amount: number; user_uuid: string }
         Returns: undefined
       }
-      consume_credit: {
-        Args: { user_uuid: string }
-        Returns: boolean
-      }
+      consume_credit: { Args: { user_uuid: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
