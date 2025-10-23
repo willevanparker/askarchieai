@@ -28,38 +28,47 @@ export default function Premium() {
   };
 
   const handleGetPremium = async () => {
-    if (!user) {
-      toast({
-        title: "Sign in required",
-        description: "Please sign in to purchase credits.",
-      });
-      navigate("/auth");
-      return;
-    }
+    // PAYWALL TEMPORARILY DISABLED - Direct users to upload instead of checkout
+    toast({
+      title: "Insights are now free!",
+      description: "Head to the upload page to analyze your deals.",
+    });
+    navigate("/dashboard");
+    return;
 
-    setIsLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("create-checkout");
+    // PAYWALL TEMPORARILY DISABLED - Original checkout flow below
+    // if (!user) {
+    //   toast({
+    //     title: "Sign in required",
+    //     description: "Please sign in to purchase credits.",
+    //   });
+    //   navigate("/auth");
+    //   return;
+    // }
 
-      if (error) throw error;
+    // setIsLoading(true);
+    // try {
+    //   const { data, error } = await supabase.functions.invoke("create-checkout");
 
-      if (data?.url) {
-        toast({
-          title: "Redirecting to checkout",
-          description: "Opening Stripe payment page...",
-        });
-        window.open(data.url, "_blank");
-      }
-    } catch (error: any) {
-      console.error("Error creating checkout:", error);
-      toast({
-        title: "Error",
-        description: "Failed to create checkout session. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    //   if (error) throw error;
+
+    //   if (data?.url) {
+    //     toast({
+    //       title: "Redirecting to checkout",
+    //       description: "Opening Stripe payment page...",
+    //     });
+    //     window.open(data.url, "_blank");
+    //   }
+    // } catch (error: any) {
+    //   console.error("Error creating checkout:", error);
+    //   toast({
+    //     title: "Error",
+    //     description: "Failed to create checkout session. Please try again.",
+    //     variant: "destructive",
+    //   });
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
@@ -73,6 +82,19 @@ export default function Premium() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
               <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Insights
             </h1>
+            {/* PAYWALL TEMPORARILY DISABLED - Updated messaging */}
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <span className="text-primary font-bold">Try it free!</span> No subscription or payment required.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
+              onClick={handleGetPremium}
+              disabled={isLoading}
+            >
+              Try Insights Free
+            </Button>
+            {/* PAYWALL TEMPORARILY DISABLED - Original pricing and auth button
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription required. <span className="text-primary font-bold">Just $9.</span>
             </p>
@@ -84,6 +106,7 @@ export default function Premium() {
             >
               {isLoading ? "Loading..." : user ? "Get Insights" : "Sign In / Sign Up"}
             </Button>
+            */}
 
             {/* Product Boxes */}
             <div className="mt-12 max-w-4xl mx-auto">
@@ -136,9 +159,11 @@ export default function Premium() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
+              {/* PAYWALL TEMPORARILY DISABLED - Updated copy */}
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Car shopping? Archie will analyze up to 5 documents for just $9.
+                Car shopping? Archie will analyze your documents — now free to try!
               </p>
+              {/* PAYWALL TEMPORARILY DISABLED - Original: Car shopping? Archie will analyze up to 5 documents for just $9. */}
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -293,6 +318,19 @@ export default function Premium() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
               <span className="text-primary">A</span>rch<span className="text-primary">i</span>e Insights
             </h2>
+            {/* PAYWALL TEMPORARILY DISABLED - Updated messaging */}
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <span className="text-primary font-bold">Try it free!</span> No subscription or payment required.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark text-lg px-8 py-6"
+              onClick={handleGetPremium}
+              disabled={isLoading}
+            >
+              Try Insights Free
+            </Button>
+            {/* PAYWALL TEMPORARILY DISABLED - Original pricing and auth button
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               No subscription required. <span className="text-primary font-bold">Just $9.</span>
             </p>
@@ -304,6 +342,7 @@ export default function Premium() {
             >
               {isLoading ? "Loading..." : user ? "Get Insights" : "Sign In / Sign Up"}
             </Button>
+            */}
           </div>
         </section>
       </main>

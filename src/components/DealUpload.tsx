@@ -61,35 +61,35 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
     setIsAnalyzing(true);
 
     try {
-      // Check if user has credits
-      const { data: { user } } = await supabase.auth.getUser();
+      // PAYWALL TEMPORARILY DISABLED - Check if user has credits
+      // const { data: { user } } = await supabase.auth.getUser();
       
-      if (!user) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to analyze deals.",
-          variant: "destructive",
-        });
-        navigate("/auth");
-        return;
-      }
+      // if (!user) {
+      //   toast({
+      //     title: "Authentication required",
+      //     description: "Please sign in to analyze deals.",
+      //     variant: "destructive",
+      //   });
+      //   navigate("/auth");
+      //   return;
+      // }
 
-      // Consume a credit
-      const { data: consumeResult, error: consumeError } = await supabase.rpc(
-        "consume_credit",
-        { user_uuid: user.id }
-      );
+      // PAYWALL TEMPORARILY DISABLED - Consume a credit
+      // const { data: consumeResult, error: consumeError } = await supabase.rpc(
+      //   "consume_credit",
+      //   { user_uuid: user.id }
+      // );
 
-      if (consumeError || !consumeResult) {
-        toast({
-          title: "No credits available",
-          description: "Please purchase more credits to continue.",
-          variant: "destructive",
-        });
-        setIsAnalyzing(false);
-        navigate("/premium");
-        return;
-      }
+      // if (consumeError || !consumeResult) {
+      //   toast({
+      //     title: "No credits available",
+      //     description: "Please purchase more credits to continue.",
+      //     variant: "destructive",
+      //   });
+      //   setIsAnalyzing(false);
+      //   navigate("/premium");
+      //   return;
+      // }
 
       toast({
         title: "Analysis started",
@@ -120,19 +120,19 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
 
       if (error) throw error;
 
-      // Store in user's deal history
-      const { error: historyError } = await supabase
-        .from("user_deal_history")
-        .insert({
-          user_id: user.id,
-          analysis_id: data.analysisId,
-          file_name: file.name,
-          file_path: uploadedFilePath,
-        });
+      // PAYWALL TEMPORARILY DISABLED - Store in user's deal history
+      // const { error: historyError } = await supabase
+      //   .from("user_deal_history")
+      //   .insert({
+      //     user_id: user.id,
+      //     analysis_id: data.analysisId,
+      //     file_name: file.name,
+      //     file_path: uploadedFilePath,
+      //   });
 
-      if (historyError) {
-        console.error("Error saving to history:", historyError);
-      }
+      // if (historyError) {
+      //   console.error("Error saving to history:", historyError);
+      // }
 
       toast({
         title: "Analysis complete!",
