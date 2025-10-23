@@ -188,10 +188,22 @@ export default function Dashboard() {
         </Card>
 
         <DealUpload 
-          onAnalysisComplete={async (analysisId) => {
+          onAnalysisComplete={async (result) => {
             await fetchCredits(user.id);
             await fetchDealHistory(user.id);
-            await fetchAnalysis(analysisId);
+            if (typeof result === "string") {
+              await fetchAnalysis(result);
+            } else if (result && typeof result === "object") {
+              setCurrentAnalysis({
+                id: result.analysisId,
+                rating: result.rating,
+                verdict: result.verdict,
+                summary: result.summary,
+                negotiation_tip: result.negotiation_tip,
+                trade_in_note: result.trade_in_note,
+                created_at: new Date().toISOString(),
+              });
+            }
           }}
         />
 

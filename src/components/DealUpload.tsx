@@ -7,7 +7,18 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface DealUploadProps {
-  onAnalysisComplete?: (analysisId: string) => void;
+  onAnalysisComplete?: (
+    result:
+      | string
+      | {
+          analysisId: string;
+          rating: number | null;
+          verdict: string | null;
+          summary: string | null;
+          negotiation_tip: string | null;
+          trade_in_note: string | null;
+        }
+  ) => void;
 }
 
 export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
@@ -142,9 +153,16 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
       // Clear the file selection
       setFiles([]);
 
-      // Notify parent component with analysis ID
+      // Notify parent component with analysis details (fallback to ID-only if needed)
       if (onAnalysisComplete) {
-        onAnalysisComplete(data.analysisId);
+        onAnalysisComplete({
+          analysisId: data.analysisId,
+          rating: data.rating ?? null,
+          verdict: data.verdict ?? null,
+          summary: data.summary ?? null,
+          negotiation_tip: data.negotiation_tip ?? null,
+          trade_in_note: data.trade_in_note ?? null,
+        });
       }
     } catch (error: any) {
       console.error("Error analyzing deal:", error);

@@ -86,9 +86,9 @@ export default function Premium() {
   };
 
   const getRatingColor = (rating: number): string => {
-    if (rating >= 7) return "text-green-500";
-    if (rating >= 5) return "text-yellow-500";
-    return "text-red-500";
+    if (rating >= 7) return "text-green-600";
+    if (rating >= 5) return "text-yellow-600";
+    return "text-red-600";
   };
 
   const handleGetPremium = async () => {
@@ -433,8 +433,21 @@ export default function Premium() {
           <section id="upload-section" className="py-16 sm:py-20 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <DealUpload 
-                onAnalysisComplete={async (analysisId) => {
-                  await fetchAnalysis(analysisId);
+                onAnalysisComplete={async (result) => {
+                  // Support both legacy (string id) and new full-payload
+                  if (typeof result === "string") {
+                    await fetchAnalysis(result);
+                  } else if (result && typeof result === "object") {
+                    setCurrentAnalysis({
+                      id: result.analysisId,
+                      rating: result.rating,
+                      verdict: result.verdict,
+                      summary: result.summary,
+                      negotiation_tip: result.negotiation_tip,
+                      trade_in_note: result.trade_in_note,
+                      created_at: new Date().toISOString(),
+                    });
+                  }
                   // Scroll to results
                   setTimeout(() => {
                     document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
