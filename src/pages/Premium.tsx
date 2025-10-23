@@ -171,17 +171,22 @@ export default function Premium() {
       });
 
       if (error) throw error;
+      if (!data?.success) {
+        throw new Error(data?.error || "Email was not sent");
+      }
 
       setEmailSent(true);
       toast({
         title: "Email sent!",
-        description: "Check your inbox for your Insights report.",
+        description: data?.used_fallback
+          ? "Sent from onboarding@resend.dev (temporary). We'll switch to askarchie.ai once verified."
+          : "Check your inbox for your Insights report.",
       });
     } catch (error: any) {
       console.error("Error sending email:", error);
       toast({
         title: "Error sending email",
-        description: "Please try again later.",
+        description: error?.message || "Please try again later.",
         variant: "destructive",
       });
     } finally {

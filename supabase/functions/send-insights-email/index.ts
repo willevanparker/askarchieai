@@ -170,18 +170,69 @@ const handler = async (req: Request): Promise<Response> => {
       </html>
     `;
 
-    // Send email using Resend
-    const emailResponse = await resend.emails.send({
+    // Send email using Resend with fallback if domain is not verified
+    const primaryResponse = await resend.emails.send({
       from: "Archie <insights@askarchie.ai>",
       to: [email],
       subject: "Your Archie Insights Report",
       html: emailHtml,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    // If provider rejects due to domain not verified (or any other error), try sandbox sender
+    if ((primaryResponse as any)?.error) {
+      console.log(
+        "Primary email send failed:",
+        JSON.stringify(primaryResponse, null, 2)
+      );
+
+      const fallbackResponse = await resend.emails.send({
+        from: "Archie <onboarding@resend.dev>",
+        to: [email],
+        subject: "Your Archie Insights Report",
+        html: emailHtml,
+      });
+
+      if ((fallbackResponse as any)?.error) {
+        console.log(
+          "Fallback email send failed:",
+          JSON.stringify(fallbackResponse, null, 2)
+        );
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error:
+              (fallbackResponse as any)?.error?.message ||
+              "Email send failed",
+            provider_error: (fallbackResponse as any)?.error,
+            domain_verified: false,
+          }),
+          {
+            status: 502,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          }
+        );
+      }
+
+      console.log("Email sent via fallback sender:", fallbackResponse);
+      return new Response(
+        JSON.stringify({
+          success: true,
+          data: fallbackResponse,
+          used_fallback: true,
+          note:
+            "Sent via Resend sandbox sender (onboarding@resend.dev) due to unverified domain.",
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    console.log("Email sent successfully:", primaryResponse);
 
     return new Response(
-      JSON.stringify({ success: true, data: emailResponse }),
+      JSON.stringify({ success: true, data: primaryResponse, used_fallback: false }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
