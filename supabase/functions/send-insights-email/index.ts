@@ -78,7 +78,7 @@ const handler = async (req: Request): Promise<Response> => {
                   <tr>
                     <td style="background-color: #ffffff; padding: 40px 40px 30px; border-radius: 8px 8px 0 0; border-bottom: 1px solid #e5e7eb;">
                       <h1 style="margin: 0; font-size: 28px; font-weight: 700; text-align: center;">
-                        <span style="color: #0A64BC;">A</span>rch<span style="color: #0A64BC;">i</span>e
+                        <span style="color: #0A64BC !important;"><font color="#0A64BC">A</font></span>rch<span style="color: #0A64BC !important;"><font color="#0A64BC">i</font></span>e
                       </h1>
                       <p style="margin: 10px 0 0; color: #212121; font-size: 16px; text-align: center;">
                         Your Insights Report
