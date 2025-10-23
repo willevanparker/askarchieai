@@ -174,22 +174,98 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
     const aiData = await aiResponse.json();
     console.log("AI response received:", JSON.stringify(aiData));
 
-    // Extract the tool call result - handle errors from AI provider
-    const choice = aiData.choices[0];
-    
-    // Check if there's an error in the response
-    if (choice?.error) {
-      console.error("AI provider error:", choice.error);
-      throw new Error(`AI analysis failed: ${choice.error.message || "Provider returned error"}`);
-    }
-    
-    const toolCall = choice?.message?.tool_calls?.[0];
-    if (!toolCall) {
-      console.error("No tool call in response. Full response:", JSON.stringify(aiData));
-      throw new Error("No analysis returned from AI");
+    // Helper to parse malformed provider raw function-call strings
+    const parseFromRaw = (raw?: string) => {
+      if (!raw) return null as any;
+      try {
+        const ratingMatch = raw.match(/rating\s*=\s*([0-9]+(?:\.[0-9]+)?)/i);
+        const verdictMatch = raw.match(/verdict\s*=\s*'([^']+)'/i);
+        const summaryMatch = raw.match(/summary\s*=\s*"([\s\S]*?)"/i);
+        const tipMatch = raw.match(/negotiation_tip\s*=\s*'([\s\S]*?)'/i);
+        const tradeMatch = raw.match(/trade_in_note\s*=\s*'([\s\S]*?)'/i);
+        const rating = ratingMatch ? parseFloat(ratingMatch[1]) : undefined;
+        if (rating === undefined || !verdictMatch || !summaryMatch || !tipMatch) return null as any;
+        return {
+          rating,
+          verdict: verdictMatch[1],
+          summary: summaryMatch[1],
+          negotiation_tip: tipMatch[1],
+          trade_in_note: tradeMatch ? tradeMatch[1] : null,
+        };
+      } catch (_) { return null as any; }
+    };
+
+    // Attempt 1: parse tool call output
+    let analysis: any | null = null;
+    const choice = aiData.choices?.[0];
+
+    if (choice?.message?.tool_calls?.[0]?.function?.arguments) {
+      try {
+        analysis = JSON.parse(choice.message.tool_calls[0].function.arguments);
+      } catch (e) {
+        console.warn("Failed to parse tool call arguments, will try fallbacks.", e);
+      }
     }
 
-    const analysis = JSON.parse(toolCall.function.arguments);
+    // Attempt 1b: if provider returned an error, try to salvage from raw
+    if (!analysis && choice?.error) {
+      console.error("AI provider error:", choice.error);
+      const raw = (choice.error as any)?.metadata?.raw as string | undefined;
+      const parsed = parseFromRaw(raw);
+      if (parsed) {
+        console.log("Recovered analysis from provider raw output.");
+        analysis = parsed;
+      }
+    }
+
+    // Attempt 2: Retry without tools, force pure JSON response
+    if (!analysis) {
+      console.log("Retrying AI analysis without tools using JSON-only prompt...");
+      const fallbackRes = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${Deno.env.get("LOVABLE_API_KEY")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: [
+            {
+              role: "system",
+              content:
+                "Return ONLY valid JSON matching this shape: { rating:number, verdict:string, summary:string, negotiation_tip:string, trade_in_note?: string|null }. No prose, no code fences.",
+            },
+            {
+              role: "user",
+              content: [
+                { type: "text", text: "Analyze this car dealership quote and output the JSON schema exactly." },
+                { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64File}` } },
+              ],
+            },
+          ],
+        }),
+      });
+
+      if (fallbackRes.ok) {
+        const fb = await fallbackRes.json();
+        const fbChoice = fb.choices?.[0];
+        let text = fbChoice?.message?.content ?? "";
+        if (typeof text !== "string") text = JSON.stringify(text ?? "");
+        const cleaned = text.replace(/```json|```/g, "").trim();
+        try {
+          analysis = JSON.parse(cleaned);
+        } catch (e) {
+          console.error("Fallback JSON parse failed:", cleaned);
+        }
+      } else {
+        console.error("Fallback request failed: ", await fallbackRes.text());
+      }
+    }
+
+    if (!analysis) {
+      throw new Error("AI analysis failed: Provider returned error");
+    }
+
     console.log("Parsed analysis:", analysis);
 
     // Save analysis to database
