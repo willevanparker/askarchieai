@@ -10,7 +10,7 @@ const Index = () => {
   const expertiseAreas = [
     {
       icon: Car,
-      title: "Buying or Leasing a Car",
+      title: "Car Buying Insights",
       description: "Navigate the buying process, understand pricing, and negotiate with confidence. And with Insights, Archie can even analyze a car deal for you.",
       isPremium: true,
     },
@@ -62,10 +62,15 @@ const Index = () => {
               {expertiseAreas.map((area, index) => (
                 <Card 
                   key={index} 
-                  className={`p-6 hover:shadow-lg transition-shadow duration-300 ${
-                    area.isPremium ? 'border-2 border-primary' : 'border-border'
+                  className={`p-6 hover:shadow-lg transition-shadow duration-300 relative ${
+                    area.isPremium ? 'bg-primary/5 border-2 border-primary' : 'border-border'
                   }`}
                 >
+                  {area.isPremium && (
+                    <div className="absolute -top-3 -right-3 bg-accent text-primary px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                      Free
+                    </div>
+                  )}
                   <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                     <area.icon className="h-6 w-6 text-primary" />
                   </div>
