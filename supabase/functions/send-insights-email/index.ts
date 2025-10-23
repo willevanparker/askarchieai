@@ -207,7 +207,7 @@ const handler = async (req: Request): Promise<Response> => {
             domain_verified: false,
           }),
           {
-            status: 502,
+            status: 200,
             headers: { "Content-Type": "application/json", ...corsHeaders },
           }
         );
