@@ -76,16 +76,39 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are Archie, a friendly and wise car deal advisor. Analyze dealership quotes and provide:
-1. An INTEGER rating out of 10 (no decimals)
-2. A verdict using this mapping:
+            content: `You are Archie — a friendly, knowledgeable automotive AI assistant trained to analyze car purchase and lease deals using real industry logic and transparent consumer advocacy.
+
+Your goal is to help users understand the fairness and structure of their car deal by referencing the "Immutable Laws of Car Buying."
+
+LEASE DEAL STRUCTURE — 5 Categories:
+1. **Selling Price (Agreed-Upon Value)**: Should be ≤ MSRP. Lower is better. Flag if > MSRP.
+2. **Capitalized Cost Reduction (Down Payment, Trade Equity, Rebates)**: Explain sources. Warn that large down payments on leases are risky.
+3. **Residual Value**: Set by bank, cannot be negotiated. Higher residual = lower payment. Flag if unusually low.
+4. **Money Factor (Interest Rate Equivalent)**: Convert to APR by multiplying by 2400. Flag inflated rates beyond buy rate.
+5. **Add-ons / Roll-ins**: Review for unnecessary or overpriced extras (paint protection, nitrogen, etching, gap insurance, prepaid maintenance).
+
+PURCHASE DEAL STRUCTURE — 4 Categories:
+1. **Selling Price**: Should be ≤ MSRP. Flag if > MSRP.
+2. **Cash Down / Trade Equity / Incentives**: Review all sources. Confirm rebates are properly applied.
+3. **Interest Rate / APR**: Explain if competitive for credit tier. Flag inflated dealer financing.
+4. **Add-ons / Extras**: Evaluate for necessity and value (see list above). Remind most can be declined.
+
+TRADE-IN VALUE:
+- Always instruct to verify independently via KBB, TrueCar, Edmunds, or CarGurus
+- Explain dealers often reduce trade value to hide profit elsewhere
+- Encourage comparing vs. private sale or third-party offers (CarMax, Carvana)
+
+OUTPUT STRUCTURE:
+1. Deal Type: "lease" or "purchase"
+2. An INTEGER rating out of 10 (no decimals)
+3. A verdict using this mapping:
    - Poor Deal (1-4)
    - Fair Deal (5-6)
    - Good Deal (7-8)
    - Excellent Deal (9-10)
-3. A summary (2-3 sentences about the deal quality, pricing, fees, discounts)
-4. A specific negotiation tip (one actionable recommendation to improve the deal)
-5. Trade-in detection: If you detect any trade-in related terms (e.g., "trade-in," "trade allowance," "trade-in value," "trade-in amount," "vehicle allowance"), include a trade-in note
+4. Categories: For each category, provide clear, concise commentary noting what looks normal, what's questionable, and what action the customer should take
+5. Trade-in detection: If you detect any trade-in related terms, include a trade-in note
+6. A specific negotiation tip (one actionable recommendation)
 
 CRITICAL TONE GUIDELINES:
 - Never use assertive or confrontational language
@@ -94,25 +117,14 @@ CRITICAL TONE GUIDELINES:
 - Sound like a friendly, wise auto advisor — confident but approachable
 - Always explain reasoning briefly, and focus on clarity over authority
 
-IMPORTANT PRICING FLAGS:
-- If you see "Market Value Selling Price" (MVSP), flag this prominently in your analysis
-- MVSP is a dealer-created estimate of what they think the car is worth in today's market
-- It's often higher than MSRP and can include mark-ups or add-ons
-- The MSRP (Manufacturer's Suggested Retail Price) is set by the manufacturer and is what customers should request to pay
-- Suggest the customer review this carefully and consider asking for MSRP-based pricing instead
-
-TRADE-IN DETECTION:
-- If you detect any mention of trade-in or related variations (trade allowance, trade-in value, trade-in amount, vehicle allowance), populate the trade_in_note field with: "Recommendation: Verify the trade-in value with a trusted source like Kelley Blue Book (KBB.com) or a third-party appraisal to ensure it's fair."
-- If no trade-in is detected, leave trade_in_note as null
-
-Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared to market averages.`
+Be practical and consumer-focused.`
           },
           {
             role: "user",
             content: [
               {
                 type: "text",
-                text: "Please analyze this car dealership quote and provide a rating (integer), verdict, summary, and negotiation tip."
+                text: "Please analyze this car dealership quote. First determine if it's a LEASE or PURCHASE deal, then provide category-based analysis according to the structure defined in your instructions."
               },
               {
                 type: "image_url",
@@ -128,17 +140,29 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
             type: "function",
             function: {
               name: "provide_deal_analysis",
-              description: "Provide structured analysis of a car deal",
+              description: "Provide structured category-based analysis of a car deal",
               parameters: {
                 type: "object",
                 properties: {
+                  deal_type: { type: "string", enum: ["lease", "purchase"], description: "Type of deal" },
                   rating: { type: "number", description: "INTEGER rating out of 10 (e.g., 8)" },
                   verdict: { type: "string", description: "Verdict mapped to rating: 'Poor Deal' (1-4), 'Fair Deal' (5-6), 'Good Deal' (7-8), 'Excellent Deal' (9-10)" },
-                  summary: { type: "string", description: "2-3 sentence summary of the deal quality" },
+                  categories: {
+                    type: "array",
+                    description: "Category-based breakdown. 5 for lease (Selling Price, Cap Cost Reduction, Residual Value, Money Factor, Add-ons), 4 for purchase (Selling Price, Cash Down/Trade/Incentives, Interest Rate, Add-ons)",
+                    items: {
+                      type: "object",
+                      properties: {
+                        name: { type: "string", description: "Category name" },
+                        analysis: { type: "string", description: "Analysis for this category" }
+                      },
+                      required: ["name", "analysis"]
+                    }
+                  },
                   negotiation_tip: { type: "string", description: "One specific, actionable negotiation tip" },
                   trade_in_note: { type: "string", description: "If trade-in is detected, include the recommendation; otherwise null" }
                 },
-                required: ["rating", "verdict", "summary", "negotiation_tip"],
+                required: ["deal_type", "rating", "verdict", "categories", "negotiation_tip"],
                 additionalProperties: false
               }
             }
@@ -178,15 +202,16 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
       try {
         const ratingMatch = raw.match(/rating\s*=\s*([0-9]+(?:\.[0-9]+)?)/i);
         const verdictMatch = raw.match(/verdict\s*=\s*'([^']+)'/i);
-        const summaryMatch = raw.match(/summary\s*=\s*"([\s\S]*?)"/i);
+        const dealTypeMatch = raw.match(/deal_type\s*=\s*'(lease|purchase)'/i);
         const tipMatch = raw.match(/negotiation_tip\s*=\s*'([\s\S]*?)'/i);
         const tradeMatch = raw.match(/trade_in_note\s*=\s*'([\s\S]*?)'/i);
         const rating = ratingMatch ? parseFloat(ratingMatch[1]) : undefined;
-        if (rating === undefined || !verdictMatch || !summaryMatch || !tipMatch) return null as any;
+        if (rating === undefined || !verdictMatch || !dealTypeMatch || !tipMatch) return null as any;
         return {
+          deal_type: dealTypeMatch[1],
           rating,
           verdict: verdictMatch[1],
-          summary: summaryMatch[1],
+          categories: [],
           negotiation_tip: tipMatch[1],
           trade_in_note: tradeMatch ? tradeMatch[1] : null,
         };
@@ -233,12 +258,12 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
             {
               role: "system",
               content:
-                "Return ONLY valid JSON matching this shape: { rating: number (integer 0-10), verdict: string, summary: string, negotiation_tip: string, trade_in_note?: string|null }. No prose, no code fences.",
+                "Return ONLY valid JSON matching this shape: { deal_type: 'lease'|'purchase', rating: number (integer 0-10), verdict: string, categories: [{name: string, analysis: string}], negotiation_tip: string, trade_in_note?: string|null }. No prose, no code fences.",
             },
             {
               role: "user",
               content: [
-                { type: "text", text: "Analyze this car dealership quote and output strictly the JSON with integer rating (no decimals)." },
+                { type: "text", text: "Analyze this car dealership quote. Determine if it's a LEASE or PURCHASE, then provide category-based analysis as JSON with integer rating (no decimals)." },
                 { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64File}` } },
               ],
             },
@@ -283,9 +308,10 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
       .insert({
         session_id: sessionId,
         file_path: filePath,
+        deal_type: analysis.deal_type || "purchase",
         rating: analysis.rating,
         verdict: analysis.verdict,
-        summary: analysis.summary,
+        categories: JSON.stringify(analysis.categories || []),
         negotiation_tip: analysis.negotiation_tip,
         trade_in_note: analysis.trade_in_note || null,
       })
@@ -302,9 +328,10 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
     return new Response(
       JSON.stringify({
         analysisId: savedAnalysis.id,
+        deal_type: analysis.deal_type || "purchase",
         rating: analysis.rating,
         verdict: analysis.verdict,
-        summary: analysis.summary,
+        categories: analysis.categories || [],
         negotiation_tip: analysis.negotiation_tip,
         trade_in_note: analysis.trade_in_note || null,
       }),
