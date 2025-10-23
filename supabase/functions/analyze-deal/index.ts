@@ -50,13 +50,15 @@ serve(async (req) => {
                      'image/jpeg';
 
     // Deterministic seed derived from file bytes (FNV-1a 32-bit)
+    // Ensure seed is within valid INT32 range (0 to 2147483647)
     const computeSeed = (bytes: Uint8Array) => {
       let hash = 2166136261 >>> 0;
       for (let i = 0; i < bytes.length; i++) {
         hash ^= bytes[i];
         hash = Math.imul(hash, 16777619) >>> 0;
       }
-        return hash;
+      // Constrain to valid INT32 range (max 2147483647)
+      return hash & 0x7FFFFFFF;
     };
     const seed = computeSeed(uint8Array);
 
