@@ -55,21 +55,6 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            
-            {user ? (
-              <Link to="/dashboard">
-                <Button size="sm" variant="default">
-                  <User className="mr-2 h-4 w-4" />
-                  Dashboard
-                </Button>
-              </Link>
-            ) : (
-              <Link to="/auth">
-                <Button size="sm" variant="default">
-                  Sign In
-                </Button>
-              </Link>
-            )}
           </div>
           
           {/* Mobile Menu */}
@@ -94,22 +79,6 @@ const Navbar = () => {
                   </Link>
                 ))}
                 
-                <div className="border-t border-border pt-4 mt-4">
-                  {user ? (
-                    <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full" size="lg">
-                        <User className="mr-2 h-4 w-4" />
-                        Dashboard
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Link to="/auth" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full" size="lg">
-                        Sign In
-                      </Button>
-                    </Link>
-                  )}
-                </div>
               </nav>
             </SheetContent>
           </Sheet>
