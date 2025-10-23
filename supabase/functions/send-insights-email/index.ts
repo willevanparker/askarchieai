@@ -76,12 +76,12 @@ const handler = async (req: Request): Promise<Response> => {
                   
                   <!-- Header -->
                   <tr>
-                    <td style="background: linear-gradient(135deg, #0A64BC 0%, #0849A0 100%); padding: 40px 40px 30px; border-radius: 8px 8px 0 0;">
-                      <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; text-align: center;">
-                        Ask<span style="color: #ffffff;">Archie</span>.ai
+                    <td style="background-color: #ffffff; padding: 40px 40px 30px; border-radius: 8px 8px 0 0; border-bottom: 1px solid #e5e7eb;">
+                      <h1 style="margin: 0; font-size: 28px; font-weight: 700; text-align: center;">
+                        <span style="color: #0A64BC;">A</span><span style="color: #212121;">rchie</span>
                       </h1>
-                      <p style="margin: 10px 0 0; color: rgba(255,255,255,0.9); font-size: 16px; text-align: center;">
-                        Your Car Deal Insights Report
+                      <p style="margin: 10px 0 0; color: #212121; font-size: 16px; text-align: center;">
+                        Your Insights Report
                       </p>
                     </td>
                   </tr>
@@ -147,7 +147,7 @@ const handler = async (req: Request): Promise<Response> => {
                   <tr>
                     <td style="padding: 0 40px 30px; text-align: center;">
                       <a href="https://askarchie.ai/premium" style="display: inline-block; background-color: #0A64BC; color: #ffffff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
-                        Analyze Another Deal
+                        Try Insights Again
                       </a>
                     </td>
                   </tr>
