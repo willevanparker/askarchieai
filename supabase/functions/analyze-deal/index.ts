@@ -174,9 +174,18 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
     const aiData = await aiResponse.json();
     console.log("AI response received:", JSON.stringify(aiData));
 
-    // Extract the tool call result
-    const toolCall = aiData.choices[0]?.message?.tool_calls?.[0];
+    // Extract the tool call result - handle errors from AI provider
+    const choice = aiData.choices[0];
+    
+    // Check if there's an error in the response
+    if (choice?.error) {
+      console.error("AI provider error:", choice.error);
+      throw new Error(`AI analysis failed: ${choice.error.message || "Provider returned error"}`);
+    }
+    
+    const toolCall = choice?.message?.tool_calls?.[0];
     if (!toolCall) {
+      console.error("No tool call in response. Full response:", JSON.stringify(aiData));
       throw new Error("No analysis returned from AI");
     }
 

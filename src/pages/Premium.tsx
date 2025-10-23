@@ -46,17 +46,37 @@ export default function Premium() {
   };
 
   const fetchAnalysis = async (analysisId: string) => {
+    if (!analysisId) {
+      console.error("No analysis ID provided");
+      toast({
+        title: "Error",
+        description: "Analysis failed to complete. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const { data, error } = await supabase
       .from("deal_analyses")
       .select("*")
       .eq("id", analysisId)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error("Error fetching analysis:", error);
       toast({
         title: "Error",
         description: "Failed to load analysis results.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!data) {
+      console.error("Analysis not found for ID:", analysisId);
+      toast({
+        title: "Error",
+        description: "Analysis not found. Please try uploading again.",
         variant: "destructive",
       });
       return;
