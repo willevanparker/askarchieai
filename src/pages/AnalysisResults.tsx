@@ -7,11 +7,17 @@ import { CheckCircle2, Zap, Loader2, AlertCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+interface Category {
+  name: string;
+  analysis: string;
+}
+
 interface Analysis {
   id: string;
   rating: number;
   verdict: string;
-  summary: string;
+  deal_type: string;
+  categories: string | Category[];
   negotiation_tip: string;
   trade_in_note: string | null;
   created_at: string;
@@ -42,6 +48,17 @@ const AnalysisResults = () => {
           .single();
 
         if (error) throw error;
+        
+        // Parse categories if stored as string
+        if (data && typeof data.categories === 'string') {
+          try {
+            data.categories = JSON.parse(data.categories);
+          } catch (e) {
+            console.error("Error parsing categories:", e);
+            data.categories = [];
+          }
+        }
+        
         setAnalysis(data);
       } catch (err) {
         console.error("Error fetching analysis:", err);
@@ -106,28 +123,38 @@ const AnalysisResults = () => {
           </div>
 
           <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-6">
               <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
                 <Zap className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-xl font-bold">Deal Analysis</h3>
+              <h3 className="text-xl font-bold">
+                {analysis.deal_type === 'lease' ? 'Lease' : 'Purchase'} Deal Analysis
+              </h3>
             </div>
 
-            <div className="mb-4">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
                 <span className="text-lg font-semibold">Rating:</span>
                 <CheckCircle2 className={`h-5 w-5 ${getRatingColor(analysis.rating)}`} />
                 <span className={`text-lg font-bold ${getRatingColor(analysis.rating)}`}>
-                  {analysis.verdict} ({analysis.rating.toFixed(1)} / 10)
+                  {analysis.verdict} ({analysis.rating} / 10)
                 </span>
               </div>
 
-              <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
-                <p className="font-medium mb-2">Summary:</p>
-                <p className="text-muted-foreground text-sm">
-                  {analysis.summary}
-                </p>
-              </div>
+              {/* Category-based Analysis */}
+              {Array.isArray(analysis.categories) && analysis.categories.length > 0 && (
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-base mb-3">Category Breakdown:</h4>
+                  {analysis.categories.map((category, index) => (
+                    <div key={index} className="bg-muted/50 border-l-4 border-primary p-4 rounded">
+                      <p className="font-medium mb-2">{category.name}</p>
+                      <p className="text-muted-foreground text-sm whitespace-pre-line">
+                        {category.analysis}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="bg-background/80 p-4 rounded-lg border">

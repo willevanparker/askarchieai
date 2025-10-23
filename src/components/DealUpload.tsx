@@ -6,15 +6,21 @@ import { Upload, X, FileText, Image as ImageIcon, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+interface Category {
+  name: string;
+  analysis: string;
+}
+
 interface DealUploadProps {
   onAnalysisComplete?: (
     result:
       | string
       | {
           analysisId: string;
+          deal_type: string;
           rating: number | null;
           verdict: string | null;
-          summary: string | null;
+          categories: Category[];
           negotiation_tip: string | null;
           trade_in_note: string | null;
         }
@@ -157,9 +163,10 @@ export function DealUpload({ onAnalysisComplete }: DealUploadProps) {
       if (onAnalysisComplete) {
         onAnalysisComplete({
           analysisId: data.analysisId,
+          deal_type: data.deal_type ?? "purchase",
           rating: data.rating ?? null,
           verdict: data.verdict ?? null,
-          summary: data.summary ?? null,
+          categories: data.categories ?? [],
           negotiation_tip: data.negotiation_tip ?? null,
           trade_in_note: data.trade_in_note ?? null,
         });

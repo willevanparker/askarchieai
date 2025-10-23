@@ -67,7 +67,9 @@ export type Database = {
       }
       deal_analyses: {
         Row: {
+          categories: Json | null
           created_at: string | null
+          deal_type: string | null
           file_path: string
           id: string
           negotiation_tip: string | null
@@ -78,7 +80,9 @@ export type Database = {
           verdict: string | null
         }
         Insert: {
+          categories?: Json | null
           created_at?: string | null
+          deal_type?: string | null
           file_path: string
           id?: string
           negotiation_tip?: string | null
@@ -89,7 +93,9 @@ export type Database = {
           verdict?: string | null
         }
         Update: {
+          categories?: Json | null
           created_at?: string | null
+          deal_type?: string | null
           file_path?: string
           id?: string
           negotiation_tip?: string | null
