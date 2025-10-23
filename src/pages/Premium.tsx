@@ -7,16 +7,29 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
+import { DealUpload } from "@/components/DealUpload";
 
 import exampleInput from "@/assets/example-input.png";
 import exampleOutput from "@/assets/archie-output-v2.png";
-import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle } from "lucide-react";
+import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle, X } from "lucide-react";
+
+interface Analysis {
+  id: string;
+  rating: number | null;
+  verdict: string | null;
+  summary: string | null;
+  negotiation_tip: string | null;
+  trade_in_note: string | null;
+  created_at: string;
+}
 
 export default function Premium() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [showUpload, setShowUpload] = useState(false);
+  const [currentAnalysis, setCurrentAnalysis] = useState<Analysis | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -27,13 +40,39 @@ export default function Premium() {
     setUser(user);
   };
 
+  const fetchAnalysis = async (analysisId: string) => {
+    const { data, error } = await supabase
+      .from("deal_analyses")
+      .select("*")
+      .eq("id", analysisId)
+      .single();
+
+    if (error) {
+      console.error("Error fetching analysis:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load analysis results.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setCurrentAnalysis(data);
+  };
+
+  const getRatingColor = (rating: number): string => {
+    if (rating >= 7) return "text-green-500";
+    if (rating >= 5) return "text-yellow-500";
+    return "text-red-500";
+  };
+
   const handleGetPremium = async () => {
-    // PAYWALL TEMPORARILY DISABLED - Direct users to upload instead of checkout
-    toast({
-      title: "Insights are now free!",
-      description: "Head to the upload page to analyze your deals.",
-    });
-    navigate("/dashboard");
+    // PAYWALL TEMPORARILY DISABLED - Show upload directly on this page
+    setShowUpload(true);
+    // Scroll to upload section
+    setTimeout(() => {
+      document.getElementById('upload-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
     return;
 
     // PAYWALL TEMPORARILY DISABLED - Original checkout flow below
@@ -309,6 +348,99 @@ export default function Premium() {
             </div>
           </div>
         </section>
+
+        {/* PAYWALL TEMPORARILY DISABLED - Upload Section */}
+        {showUpload && (
+          <section id="upload-section" className="py-16 sm:py-20 bg-background">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <DealUpload 
+                onAnalysisComplete={async (analysisId) => {
+                  await fetchAnalysis(analysisId);
+                  // Scroll to results
+                  setTimeout(() => {
+                    document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 500);
+                }}
+              />
+            </div>
+          </section>
+        )}
+
+        {/* PAYWALL TEMPORARILY DISABLED - Analysis Results Section */}
+        {currentAnalysis && (
+          <section id="results-section" className="py-16 sm:py-20 bg-muted/30">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+              <Card className="p-6 sm:p-8 bg-gradient-to-br from-background to-primary/5 border-primary/20">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
+                      <Zap className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold">Archie's Analysis</h3>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setCurrentAnalysis(null)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg font-semibold">Rating:</span>
+                    <CheckCircle2 className={`h-5 w-5 ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`} />
+                    <span className={`text-lg font-bold ${currentAnalysis.rating ? getRatingColor(currentAnalysis.rating) : ''}`}>
+                      {currentAnalysis.verdict} ({currentAnalysis.rating ? currentAnalysis.rating.toFixed(1) : 'N/A'} / 10)
+                    </span>
+                  </div>
+
+                  {currentAnalysis.summary && (
+                    <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
+                      <p className="font-medium mb-2">Summary:</p>
+                      <p className="text-muted-foreground text-sm">
+                        {currentAnalysis.summary}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {currentAnalysis.negotiation_tip && (
+                  <div className="bg-background/80 p-4 rounded-lg border">
+                    <div className="flex items-start gap-3">
+                      <div className="h-6 w-6 bg-primary/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                        💡
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-2">Archie's Negotiation Tip</p>
+                        <p className="text-sm text-muted-foreground">
+                          {currentAnalysis.negotiation_tip}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {currentAnalysis.trade_in_note && (
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-900 mt-4">
+                    <div className="flex items-start gap-3">
+                      <div className="h-6 w-6 bg-blue-500/10 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                        ℹ️
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-2 text-blue-900 dark:text-blue-100">Trade-In Notice</p>
+                        <p className="text-sm text-blue-800 dark:text-blue-200">
+                          {currentAnalysis.trade_in_note}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </Card>
+            </div>
+          </section>
+        )}
 
 
 
