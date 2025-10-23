@@ -49,7 +49,18 @@ serve(async (req) => {
                      filePath.toLowerCase().endsWith('.png') ? 'image/png' :
                      'image/jpeg';
 
-    console.log("Calling Lovable AI for analysis...");
+    // Deterministic seed derived from file bytes (FNV-1a 32-bit)
+    const computeSeed = (bytes: Uint8Array) => {
+      let hash = 2166136261 >>> 0;
+      for (let i = 0; i < bytes.length; i++) {
+        hash ^= bytes[i];
+        hash = Math.imul(hash, 16777619) >>> 0;
+      }
+        return hash;
+    };
+    const seed = computeSeed(uint8Array);
+
+    console.log("Calling Lovable AI for analysis with seed:", seed);
 
     // Call Lovable AI with vision capabilities
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -60,11 +71,13 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: "google/gemini-2.5-pro",
+        temperature: 0,
+        seed,
         messages: [
           {
             role: "system",
             content: `You are Archie, a friendly and wise car deal advisor. Analyze dealership quotes and provide:
-1. A numerical rating out of 10 (e.g., 6.5)
+1. An INTEGER rating out of 10 (no decimals)
 2. A verdict using this mapping:
    - Poor Deal (1-4)
    - Fair Deal (5-6)
@@ -99,7 +112,7 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
             content: [
               {
                 type: "text",
-                text: "Please analyze this car dealership quote and provide a rating, verdict, summary, and negotiation tip."
+                text: "Please analyze this car dealership quote and provide a rating (integer), verdict, summary, and negotiation tip."
               },
               {
                 type: "image_url",
@@ -119,26 +132,11 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
               parameters: {
                 type: "object",
                 properties: {
-                  rating: {
-                    type: "number",
-                    description: "Numerical rating out of 10 (e.g., 8.4)"
-                  },
-                  verdict: {
-                    type: "string",
-                    description: "Verdict mapped to rating: 'Poor Deal' (1-4), 'Fair Deal' (5-6), 'Good Deal' (7-8), 'Excellent Deal' (9-10)"
-                  },
-                  summary: {
-                    type: "string",
-                    description: "2-3 sentence summary of the deal quality"
-                  },
-                  negotiation_tip: {
-                    type: "string",
-                    description: "One specific, actionable negotiation tip"
-                  },
-                  trade_in_note: {
-                    type: "string",
-                    description: "If trade-in is detected, include: 'Recommendation: Verify the trade-in value with a trusted source like Kelley Blue Book (KBB.com) or a third-party appraisal to ensure it's fair.' Otherwise, leave as null"
-                  }
+                  rating: { type: "number", description: "INTEGER rating out of 10 (e.g., 8)" },
+                  verdict: { type: "string", description: "Verdict mapped to rating: 'Poor Deal' (1-4), 'Fair Deal' (5-6), 'Good Deal' (7-8), 'Excellent Deal' (9-10)" },
+                  summary: { type: "string", description: "2-3 sentence summary of the deal quality" },
+                  negotiation_tip: { type: "string", description: "One specific, actionable negotiation tip" },
+                  trade_in_note: { type: "string", description: "If trade-in is detected, include the recommendation; otherwise null" }
                 },
                 required: ["rating", "verdict", "summary", "negotiation_tip"],
                 additionalProperties: false
@@ -229,16 +227,18 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
         },
         body: JSON.stringify({
           model: "google/gemini-2.5-flash",
+          temperature: 0,
+          seed,
           messages: [
             {
               role: "system",
               content:
-                "Return ONLY valid JSON matching this shape: { rating:number, verdict:string, summary:string, negotiation_tip:string, trade_in_note?: string|null }. No prose, no code fences.",
+                "Return ONLY valid JSON matching this shape: { rating: number (integer 0-10), verdict: string, summary: string, negotiation_tip: string, trade_in_note?: string|null }. No prose, no code fences.",
             },
             {
               role: "user",
               content: [
-                { type: "text", text: "Analyze this car dealership quote and output the JSON schema exactly." },
+                { type: "text", text: "Analyze this car dealership quote and output strictly the JSON with integer rating (no decimals)." },
                 { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64File}` } },
               ],
             },
@@ -265,6 +265,15 @@ Be practical and consumer-focused. Focus on fees, add-ons, and pricing compared 
     if (!analysis) {
       throw new Error("AI analysis failed: Provider returned error");
     }
+
+    // Normalize rating to deterministic integer and map verdict
+    const ratingInt = Math.max(0, Math.min(10, Math.round(Number(analysis.rating))));
+    const verdictFromRating = ratingInt <= 4 ? "Poor Deal"
+      : ratingInt <= 6 ? "Fair Deal"
+      : ratingInt <= 8 ? "Good Deal"
+      : "Excellent Deal";
+    analysis.rating = ratingInt;
+    analysis.verdict = verdictFromRating;
 
     console.log("Parsed analysis:", analysis);
 
