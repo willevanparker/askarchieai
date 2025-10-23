@@ -50,16 +50,17 @@ const AnalysisResults = () => {
         if (error) throw error;
         
         // Parse categories if stored as string
-        if (data && typeof data.categories === 'string') {
+        const parsedData = { ...data } as any;
+        if (parsedData && typeof parsedData.categories === 'string') {
           try {
-            data.categories = JSON.parse(data.categories);
+            parsedData.categories = JSON.parse(parsedData.categories);
           } catch (e) {
             console.error("Error parsing categories:", e);
-            data.categories = [];
+            parsedData.categories = [];
           }
         }
         
-        setAnalysis(data);
+        setAnalysis(parsedData as Analysis);
       } catch (err) {
         console.error("Error fetching analysis:", err);
         setError("Failed to load analysis results");

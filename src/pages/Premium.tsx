@@ -14,11 +14,17 @@ import exampleInput from "@/assets/example-input.png";
 import exampleOutput from "@/assets/archie-output-v2.png";
 import { CheckCircle2, Upload, Zap, FileLineChart, Star, MessageCircle, X, Mail } from "lucide-react";
 
+interface Category {
+  name: string;
+  analysis: string;
+}
+
 interface Analysis {
   id: string;
   rating: number | null;
   verdict: string | null;
-  summary: string | null;
+  deal_type: string;
+  categories: Category[];
   negotiation_tip: string | null;
   trade_in_note: string | null;
   created_at: string;
@@ -82,7 +88,18 @@ export default function Premium() {
       return;
     }
 
-    setCurrentAnalysis(data);
+    // Parse categories if stored as string
+    const parsedData = { ...data } as any;
+    if (parsedData && typeof parsedData.categories === 'string') {
+      try {
+        parsedData.categories = JSON.parse(parsedData.categories);
+      } catch (e) {
+        console.error("Error parsing categories:", e);
+        parsedData.categories = [];
+      }
+    }
+    
+    setCurrentAnalysis(parsedData as Analysis);
   };
 
   const getRatingColor = (rating: number): string => {
@@ -161,7 +178,8 @@ export default function Premium() {
         body: {
           email: emailForReport,
           analysis: {
-            summary: currentAnalysis.summary,
+            deal_type: currentAnalysis.deal_type,
+            categories: currentAnalysis.categories,
             rating: currentAnalysis.rating,
             verdict: currentAnalysis.verdict,
             trade_in_note: currentAnalysis.trade_in_note,
@@ -447,7 +465,8 @@ export default function Premium() {
                       id: result.analysisId,
                       rating: result.rating,
                       verdict: result.verdict,
-                      summary: result.summary,
+                      deal_type: result.deal_type,
+                      categories: result.categories,
                       negotiation_tip: result.negotiation_tip,
                       trade_in_note: result.trade_in_note,
                       created_at: new Date().toISOString(),
@@ -493,12 +512,17 @@ export default function Premium() {
                     </span>
                   </div>
 
-                  {currentAnalysis.summary && (
-                    <div className="bg-muted/50 border-l-4 border-primary p-4 rounded">
-                      <p className="font-medium mb-2">Summary:</p>
-                      <p className="text-muted-foreground text-sm">
-                        {currentAnalysis.summary}
-                      </p>
+                  {currentAnalysis.categories && currentAnalysis.categories.length > 0 && (
+                    <div className="space-y-3">
+                      <p className="font-medium text-sm">Category Breakdown:</p>
+                      {currentAnalysis.categories.map((category, index) => (
+                        <div key={index} className="bg-muted/50 border-l-4 border-primary p-4 rounded">
+                          <p className="font-medium mb-2 text-sm">{category.name}</p>
+                          <p className="text-muted-foreground text-sm whitespace-pre-line">
+                            {category.analysis}
+                          </p>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

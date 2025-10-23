@@ -10,12 +10,18 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+interface Category {
+  name: string;
+  analysis: string;
+}
+
 interface InsightsEmailRequest {
   email: string;
   analysis: {
-    summary: string;
+    deal_type?: string;
     rating: number;
     verdict: string;
+    categories?: Category[];
     trade_in_note?: string;
     negotiation_tip?: string;
   };
@@ -97,13 +103,16 @@ const handler = async (req: Request): Promise<Response> => {
                     </td>
                   </tr>
 
-                  <!-- Summary -->
+                  <!-- Deal Type & Categories -->
                   <tr>
                     <td style="padding: 0 40px 20px;">
-                      <h2 style="margin: 0 0 12px; color: #111827; font-size: 20px; font-weight: 600;">Deal Summary</h2>
-                      <p style="margin: 0; color: #4b5563; font-size: 15px; line-height: 1.6;">
-                        ${analysis.summary}
-                      </p>
+                      <h2 style="margin: 0 0 16px; color: #111827; font-size: 20px; font-weight: 600;">${analysis.deal_type === 'lease' ? 'Lease' : 'Purchase'} Deal Analysis</h2>
+                      ${analysis.categories && analysis.categories.length > 0 ? analysis.categories.map((cat: Category) => `
+                        <div style="margin-bottom: 16px; padding: 16px; background-color: #f8f9fa; border-left: 4px solid #0A64BC; border-radius: 4px;">
+                          <h3 style="margin: 0 0 8px; color: #111827; font-size: 16px; font-weight: 600;">${cat.name}</h3>
+                          <p style="margin: 0; color: #4b5563; font-size: 14px; line-height: 1.6; white-space: pre-line;">${cat.analysis}</p>
+                        </div>
+                      `).join('') : ''}
                     </td>
                   </tr>
 
