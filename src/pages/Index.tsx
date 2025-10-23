@@ -68,7 +68,7 @@ const Index = () => {
                 >
                   {area.isPremium && (
                     <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                      Free
+                      Try it!
                     </div>
                   )}
                   <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
