@@ -1,4 +1,4 @@
-import archieScreenshot from "@/assets/archie-screenshot-new.png";
+import archieScreenshot from "@/assets/archie-screenshot.png";
 
 const ComparisonSection = () => {
   return (
