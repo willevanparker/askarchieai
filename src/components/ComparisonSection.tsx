@@ -1,4 +1,4 @@
-import archieScreenshot from "@/assets/archie-screenshot.png";
+import archieScreenshot from "@/assets/archie-example.png";
 
 const ComparisonSection = () => {
   return (
@@ -9,7 +9,7 @@ const ComparisonSection = () => {
             <span className="text-accent">A</span>rch<span className="text-accent">i</span>e in Action
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how Archie's automotive experience makes the difference.
+            See Archie's automotive experience in action on an actual user inquiry.
           </p>
         </div>
 
