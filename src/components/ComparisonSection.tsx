@@ -1,5 +1,4 @@
-import chatgptScreenshot from "@/assets/chatgpt-screenshot.png";
-import archieScreenshot from "@/assets/archie-screenshot.png";
+import archieScreenshot from "@/assets/archie-screenshot-new.png";
 
 const ComparisonSection = () => {
   return (
