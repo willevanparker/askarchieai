@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskArchie</title>
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #6b6b6b;
+      --line: #ded9d1;
+      --accent: #111111;
+      --accentText: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #faf8f4 0%, #f3efe8 100%);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 28px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: start;
+      padding: 24px 0 48px;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      margin: 0 0 18px;
+      max-width: 680px;
+    }
+
+    .hero-copy p {
+      font-size: 1.06rem;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-card {
+      padding: 22px;
+    }
+
+    .form-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #999;
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
+    }
+
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .helper {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .primary {
+      background: var(--accent);
+      color: var(--accentText);
+    }
+
+    .secondary {
+      background: #f1ede7;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .mini {
+      padding: 18px;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .mini p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(20,20,20,0.42);
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-panel {
+      width: min(860px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      border: 1px solid var(--line);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      background: #fff;
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      padding: 22px;
+    }
+
+    .response {
+      background: #faf8f4;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .chat-box {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .chat-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-row input {
+      flex: 1;
+    }
+
+    .close-btn {
+      background: transparent;
+      color: var(--muted);
+      padding: 8px;
+      border-radius: 10px;
+    }
+
+    .status {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 18px; }
+      form { grid-template-columns: 1fr; }
+      .actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .hero-copy h1 { max-width: 100%; }
+      .chat-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">AskArchie</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Buying a car?<br />Let Archie help.</h1>
+        <p>
+          Enter the details of your deal and Archie will break it down in plain English —
+          what looks standard, what may be padded, and what to ask next.
+        </p>
+
+        <div class="mini-grid">
+          <div class="card mini">
+            <h3>Understand the structure</h3>
+            <p>Translate pricing, fees, add-ons, and lease terms into something a buyer can actually use.</p>
+          </div>
+          <div class="card mini">
+            <h3>See the levers</h3>
+            <p>Spot where the payment may be getting pushed up and which parts of the deal are worth challenging.</p>
+          </div>
+          <div class="card mini">
+            <h3>Know what to do next</h3>
+            <p>Get suggested next questions so you can respond calmly instead of feeling cornered at the dealership.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card form-card">
+        <div class="form-title">Analyze your deal</div>
+        <form id="dealForm">
+          <div>
+            <label for="year">Year</label>
+            <input id="year" name="year" placeholder="2024" />
+          </div>
+          <div>
+            <label for="make">Make</label>
+            <input id="make" name="make" placeholder="BMW" />
+          </div>
+          <div class="full">
+            <label for="model">Model</label>
+            <input id="model" name="model" placeholder="X3 xDrive30i" />
+          </div>
+          <div>
+            <label for="dealType">Deal type</label>
+            <select id="dealType" name="dealType">
+              <option value="">Select one</option>
+              <option>Lease</option>
+              <option>Finance</option>
+              <option>Cash</option>
+            </select>
+          </div>
+          <div>
+            <label for="msrp">MSRP</label>
+            <input id="msrp" name="msrp" placeholder="$54,200" />
+          </div>
+          <div>
+            <label for="sellingPrice">Selling price</label>
+            <input id="sellingPrice" name="sellingPrice" placeholder="$53,500" />
+          </div>
+          <div>
+            <label for="apr">APR / money factor</label>
+            <input id="apr" name="apr" placeholder="7.4% or .00240" />
+          </div>
+          <div>
+            <label for="residual">Residual (if lease)</label>
+            <input id="residual" name="residual" placeholder="51%" />
+          </div>
+          <div>
+            <label for="docFee">Doc fee</label>
+            <input id="docFee" name="docFee" placeholder="$899" />
+          </div>
+          <div>
+            <label for="addons">Add-ons</label>
+            <input id="addons" name="addons" placeholder="Protection package, VIN etching" />
+          </div>
+          <div class="full">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Paste any other deal details here, including taxes, trade, monthly payment, due at signing, or anything the dealer told you."></textarea>
+          </div>
+          <div class="actions">
+            <div class="helper">Version 1 can run on structured inputs first. You can add uploads later once the core analysis feels right.</div>
+            <button class="primary" type="submit" id="analyzeBtn">Analyze My Deal</button>
+          </div>
+        </form>
+        <div class="status" id="status"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal" id="archieModal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div class="modal-title">Archie’s Take</div>
+        <button class="close-btn" id="closeModalBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="response" id="archieResponse">Archie’s analysis will appear here.</div>
+
+        <div class="chat-box">
+          <label for="followupInput">Ask Archie a follow-up</label>
+          <div class="chat-row">
+            <input id="followupInput" placeholder="Example: What should I ask the dealer next?" />
+            <button class="secondary" id="followupBtn">Send</button>
+          </div>
+          <div class="status" id="followupStatus"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dealForm = document.getElementById('dealForm');
+    const statusEl = document.getElementById('status');
+    const archieModal = document.getElementById('archieModal');
+    const archieResponse = document.getElementById('archieResponse');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const followupBtn = document.getElementById('followupBtn');
+    const followupInput = document.getElementById('followupInput');
+    const followupStatus = document.getElementById('followupStatus');
+
+    let dealContext = null;
+    let conversation = [];
+
+    function openModal() {
+      archieModal.classList.add('open');
+      archieModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      archieModal.classList.remove('open');
+      archieModal.setAttribute('aria-hidden', 'true');
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    archieModal.addEventListener('click', (e) => {
+      if (e.target === archieModal) closeModal();
+    });
+
+    dealForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(dealForm);
+      dealContext = Object.fromEntries(formData.entries());
+      conversation = [];
+
+      statusEl.textContent = 'Analyzing your deal...';
+      archieResponse.textContent = 'Working on it...';
+      openModal();
+
+      try {
+        // Replace /.netlify/functions/analyze-deal with your real endpoint.
+        // For now, this includes a fallback mock response so the page still works visually.
+        const response = await fetch('/.netlify/functions/analyze-deal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ deal: dealContext, messages: [] })
+        });
+
+        if (!response.ok) throw new Error('Function not connected yet');
+        const data = await response.json();
+
+        archieResponse.textContent = data.reply || 'No response returned.';
+        conversation.push({ role: 'assistant', content: data.reply || '' });
+        statusEl.textContent = 'Analysis ready.';
+      } catch (error) {
+        const fallback = `Overall Take\nThis looks like a promising AskArchie MVP layout. Your AI function is not connected yet, so this is placeholder copy for testing the user flow.\n\nWhat Looks Normal\n- The page structure is ready\n- The form is collecting the right first-pass fields\n- The modal flow works well for an initial Archie response\n\nWhat Looks Questionable\n- The backend function still needs to be connected\n- No real model response is being returned yet\n\nIf This Deal Were Clean\nOnce the Netlify function is wired up, this modal should return a structured deal analysis based on the user's inputs.\n\nWhat To Ask Next\n- Is the analyze-deal function deployed?\n- Is the API key stored in Netlify environment variables?\n- Is the form payload being passed correctly?`;
+        archieResponse.textContent = fallback;
+        conversation.push({ role: 'assistant', content: fallback });
+        statusEl.textContent = 'Preview mode: backend not connected yet.';
+      }
+    });
+
+    followupBtn.addEventListener('click', async () => {
+      const question = followupInput.value.trim();
+      if (!question || !dealContext) return;
+
+      followupStatus.textContent = 'Sending...';
+
+      try {
+        const response = await fetch('/.netlify/functions/analyze-deal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deal: dealContext,
+            messages: [...conversation, { role: 'user', content: question }],
+            followup: true
+          })
+        });
+
+        if (!response.ok) throw new Error('Follow-up not connected yet');
+        const data = await response.json();
+
+        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\n${data.reply || 'No reply returned.'}`;
+        conversation.push({ role: 'user', content: question });
+        conversation.push({ role: 'assistant', content: data.reply || '' });
+        followupInput.value = '';
+        followupStatus.textContent = 'Sent.';
+      } catch (error) {
+        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\nThis follow-up chat is ready for wiring once the Netlify function is connected.`;
+        conversation.push({ role: 'user', content: question });
+        conversation.push({ role: 'assistant', content: 'This follow-up chat is ready for wiring once the Netlify function is connected.' });
+        followupInput.value = '';
+        followupStatus.textContent = 'Preview mode: follow-up not connected yet.';
+      }
+    });
+  </script>
+</body>
+</html>
