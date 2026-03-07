@@ -89,8 +89,9 @@
     }
 
     .form-card {
-      padding: 22px;
-    }
+  padding: 22px;
+  scroll-margin-top: 20px;
+}
 
     .form-title {
       font-size: 1.05rem;
@@ -574,6 +575,18 @@ function setMode(mode) {
   dealPanel.classList.toggle('active', mode === 'deal');
   servicePanel.classList.toggle('active', mode === 'service');
   chatPanel.classList.toggle('active', mode === 'chat');
+
+  const activePanel =
+    mode === 'deal' ? dealPanel :
+    mode === 'service' ? servicePanel :
+    chatPanel;
+
+  if (window.innerWidth <= 920) {
+    activePanel.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }
 
 modeButtons.forEach((btn) => {
