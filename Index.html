@@ -184,6 +184,65 @@
       line-height: 1.55;
       color: var(--muted);
     }
+        .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .mode-card {
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      width: 100%;
+      color: var(--text);
+    }
+
+    .mode-card.active {
+      background: #ebe5dc;
+      border-color: #cfc6ba;
+    }
+
+    .mode-card h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .mode-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .mode-panel {
+      display: none;
+    }
+
+    .mode-panel.active {
+      display: block;
+    }
+
+    .chat-standalone {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chat-standalone textarea {
+      min-height: 140px;
+    }
+
+    .panel-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
 
     .modal {
       position: fixed;
@@ -268,7 +327,7 @@
 
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; }
-      .mini-grid { grid-template-columns: 1fr; }
+      .mode-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -296,80 +355,142 @@
           Think of Archie as your Car Companion. Wait. Car Coach. No. Champion. Too much alliteration? 
         </p>
 
-        <div class="mini-grid">
-          <div class="card mini">
-            <h3>Buying and selling</h3>
-            <p>Archie can help translate pricing, fees, add-ons, and lease terms into something you can actual understand.</p>
-          </div>
-          <div class="card mini">
-            <h3>Servicing</h3>
-            <p>What's a good price for an air filter? And how often does it need to be changed? Just Ask Archie</p>
-          </div>
-          <div class="card mini">
-            <h3>Something else</h3>
-            <p>Just have a general car question? Archie can help with that too.</p>
-          </div>
+                <div class="mode-grid">
+          <button class="mode-card active" type="button" data-mode="deal">
+            <h3>Buying &amp; Selling</h3>
+            <p>Break down pricing, fees, add-ons, trade terms, and lease structure into something clear and useful.</p>
+          </button>
+          <button class="mode-card" type="button" data-mode="service">
+            <h3>Service &amp; Repair</h3>
+            <p>Ask about maintenance timing, repair quotes, common services, and what may or may not be worth doing.</p>
+          </button>
+          <button class="mode-card" type="button" data-mode="chat">
+            <h3>Ask Anything</h3>
+            <p>Have a general car question? Archie can help with buying, ownership, maintenance, terminology, and more.</p>
+          </button>
         </div>
       </div>
 
-      <div class="card form-card">
-        <div class="form-title">Enter Deal Details</div>
-        <form id="dealForm">
-          <div>
-            <label for="year">Year</label>
-            <input id="year" name="year" placeholder="2024" />
+            <div class="card form-card">
+        <div id="dealPanel" class="mode-panel active">
+          <div class="form-title">Enter Deal Details</div>
+          <div class="panel-intro">
+            Use this when you're buying, selling, financing, or leasing and want Archie to break down how the deal works.
           </div>
-          <div>
-            <label for="make">Make</label>
-            <input id="make" name="make" placeholder="BMW" />
+          <form id="dealForm">
+            <div>
+              <label for="year">Year</label>
+              <input id="year" name="year" placeholder="2024" />
+            </div>
+            <div>
+              <label for="make">Make</label>
+              <input id="make" name="make" placeholder="BMW" />
+            </div>
+            <div class="full">
+              <label for="model">Model</label>
+              <input id="model" name="model" placeholder="X3 xDrive30i" />
+            </div>
+            <div>
+              <label for="dealType">Deal type</label>
+              <select id="dealType" name="dealType">
+                <option value="">Select one</option>
+                <option>Lease</option>
+                <option>Finance</option>
+                <option>Cash</option>
+              </select>
+            </div>
+            <div>
+              <label for="msrp">MSRP</label>
+              <input id="msrp" name="msrp" placeholder="$54,200" />
+            </div>
+            <div>
+              <label for="sellingPrice">Selling price</label>
+              <input id="sellingPrice" name="sellingPrice" placeholder="$53,500" />
+            </div>
+            <div>
+              <label for="apr">APR / money factor</label>
+              <input id="apr" name="apr" placeholder="7.4% or .00240" />
+            </div>
+            <div>
+              <label for="residual">Residual (if lease)</label>
+              <input id="residual" name="residual" placeholder="51%" />
+            </div>
+            <div>
+              <label for="docFee">Doc fee</label>
+              <input id="docFee" name="docFee" placeholder="$250" />
+            </div>
+            <div>
+              <label for="addons">Add-ons</label>
+              <input id="addons" name="addons" placeholder="Protection package, VIN etching" />
+            </div>
+            <div class="full">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" placeholder="Type any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything the dealer told you."></textarea>
+            </div>
+            <div class="actions">
+              <div class="helper">Start here for pricing, payments, fees, trade-ins, and deal structure.</div>
+              <button class="primary" type="submit" id="analyzeBtn">Analyze</button>
+            </div>
+          </form>
+          <div class="status" id="status"></div>
+        </div>
+
+        <div id="servicePanel" class="mode-panel">
+          <div class="form-title">Enter Vehicle &amp; Service Details</div>
+          <div class="panel-intro">
+            Use this when you want help thinking through maintenance, repair quotes, timing, or whether a service recommendation makes sense.
           </div>
-          <div class="full">
-            <label for="model">Model</label>
-            <input id="model" name="model" placeholder="X3 xDrive30i" />
+          <form id="serviceForm">
+            <div>
+              <label for="serviceYear">Year</label>
+              <input id="serviceYear" name="year" placeholder="2021" />
+            </div>
+            <div>
+              <label for="serviceMake">Make</label>
+              <input id="serviceMake" name="make" placeholder="Porsche" />
+            </div>
+            <div class="full">
+              <label for="serviceModel">Model</label>
+              <input id="serviceModel" name="model" placeholder="Macan" />
+            </div>
+            <div>
+              <label for="mileage">Mileage</label>
+              <input id="mileage" name="mileage" placeholder="38,000" />
+            </div>
+            <div>
+              <label for="quoteTotal">Quote total (optional)</label>
+              <input id="quoteTotal" name="quoteTotal" placeholder="$1,240" />
+            </div>
+            <div class="full">
+              <label for="serviceItems">Quoted services or repairs</label>
+              <textarea id="serviceItems" name="serviceItems" placeholder="Brake fluid flush, cabin filter replacement, fuel induction service"></textarea>
+            </div>
+            <div class="full">
+              <label for="serviceNotes">Notes</label>
+              <textarea id="serviceNotes" name="notes" placeholder="Type any additional detail here, including warning lights, advisor comments, drivability issues, or whether this is routine maintenance."></textarea>
+            </div>
+            <div class="actions">
+              <div class="helper">Start here for maintenance questions, repair quotes, and service recommendations.</div>
+              <button class="primary" type="submit" id="serviceBtn">Ask About Service</button>
+            </div>
+          </form>
+          <div class="status" id="serviceStatus"></div>
+        </div>
+
+        <div id="chatPanel" class="mode-panel">
+          <div class="form-title">Ask Archie Anything</div>
+          <div class="panel-intro">
+            Use this for general car questions about buying, ownership, maintenance, terminology, or what to do next.
           </div>
-          <div>
-            <label for="dealType">Deal type</label>
-            <select id="dealType" name="dealType">
-              <option value="">Select one</option>
-              <option>Lease</option>
-              <option>Finance</option>
-              <option>Cash</option>
-            </select>
+          <div class="chat-standalone">
+            <textarea id="generalQuestion" placeholder="Example: Should I buy or lease if I only drive 8,000 miles a year?"></textarea>
+            <div class="actions">
+              <div class="helper">A general-purpose car companion mode for questions that don’t fit the other two lanes.</div>
+              <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
+            </div>
           </div>
-          <div>
-            <label for="msrp">MSRP</label>
-            <input id="msrp" name="msrp" placeholder="$54,200" />
-          </div>
-          <div>
-            <label for="sellingPrice">Selling price</label>
-            <input id="sellingPrice" name="sellingPrice" placeholder="$53,500" />
-          </div>
-          <div>
-            <label for="apr">APR / money factor</label>
-            <input id="apr" name="apr" placeholder="7.4% or .00240" />
-          </div>
-          <div>
-            <label for="residual">Residual (if lease)</label>
-            <input id="residual" name="residual" placeholder="51%" />
-          </div>
-          <div>
-            <label for="docFee">Doc fee</label>
-            <input id="docFee" name="docFee" placeholder="$250" />
-          </div>
-          <div>
-            <label for="addons">Add-ons</label>
-            <input id="addons" name="addons" placeholder="Protection package, VIN etching" />
-          </div>
-          <div class="full">
-            <label for="notes">Notes</label>
-            <textarea id="notes" name="notes" placeholder="Type any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything the dealer told you."></textarea>
-          </div>
-          <div class="actions">
-            <div class="helper">Version 1 can run on structured inputs first. You can add uploads later once the core analysis feels right.</div>
-            <button class="primary" type="submit" id="analyzeBtn">Analyze</button>
-          </div>
-        </form>
-        <div class="status" id="status"></div>
+          <div class="status" id="generalStatus"></div>
+        </div>
       </div>
     </section>
   </div>
