@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AskArchie</title>
   <style>
-    :root {
-      --bg: #f7f5f1;
-      --card: #ffffff;
-      --text: #1f1f1f;
-      --muted: #6b6b6b;
-      --line: #ded9d1;
-      --accent: #111111;
-      --accentText: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
-      --radius: 18px;
-      --max: 1120px;
+   :root {
+  --bg: #f7f5f1;
+  --card: #ffffff;
+  --text: #1f1f1f;
+  --muted: #6b6b6b;
+  --line: #ded9d1;
+
+  --accent: #2563EB;
+  --accent-dark: #1D4ED8;
+  --accent-soft: #EAF2FF;
+  --accentText: #ffffff;
+
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --radius: 18px;
+  --max: 1120px;
+}--max: 1120px;
     }
 
     * { box-sizing: border-box; }
@@ -181,8 +186,8 @@
     }
 
     .mode-card.active {
-      background: #ebe5dc;
-      border-color: #cfc6ba;
+      background: var(--accent-soft);
+      border-color: var(--accent);
     }
 
     .mode-card h3 {
@@ -328,9 +333,9 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <h1>Car question?<br />Just Ask Archie.</h1>
+        <h1>Car question?<br />Just ask Archie.</h1>
         <p>
-          Think of Archie as your Car Companion. Wait. Car Coach. No. Champion. Too much alliteration? 
+          Think of Archie as your Car Coach. Wait. Car Champion. No. <b></b>Companion<b></b>. Too much alliteration? 
         </p>
 
                 <div class="mode-grid">
@@ -390,7 +395,7 @@
               <input id="apr" name="apr" placeholder="7.4% or .00240" />
             </div>
             <div>
-              <label for="residual">Residual (if lease)</label>
+              <label for="residual">Residual (if leasing)</label>
               <input id="residual" name="residual" placeholder="51%" />
             </div>
             <div>
@@ -398,15 +403,15 @@
               <input id="docFee" name="docFee" placeholder="$250" />
             </div>
             <div>
-              <label for="addons">Optional Add-ons (total up things like dealer protection packages, VIN etching, nitrous, etc.)</label>
-              <input id="addons" name="addons" placeholder="Protection package, VIN etching" />
+              <label for="addons">Optional Add-ons (total $ for dealer protection packages, VIN etching, nitrous, etc.)</label>
+              <input id="addons" name="addons" placeholder="$1500" />
             </div>
             <div class="full">
               <label for="notes">Notes</label>
-              <textarea id="notes" name="notes" placeholder="Type any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything the dealer told you."></textarea>
+              <textarea id="notes" name="notes" placeholder="Enter any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything else the dealer told you."></textarea>
             </div>
             <div class="actions">
-              <div class="helper">Start here for pricing, payments, fees, trade-ins, and deal structure.</div>
+              <div class="helper">Archie can make mistakes. Check important info.</div>
               <button class="primary" type="submit" id="analyzeBtn">Analyze</button>
             </div>
           </form>
@@ -448,7 +453,7 @@
               <textarea id="serviceNotes" name="notes" placeholder="Type any additional detail here, including warning lights, advisor comments, drivability issues, or whether this is routine maintenance."></textarea>
             </div>
             <div class="actions">
-              <div class="helper">Start here for maintenance questions, repair quotes, and service recommendations.</div>
+              <div class="helper">Archie can make mistakes. Check important info.</div>
               <button class="primary" type="submit" id="serviceBtn">Ask About Service</button>
             </div>
           </form>
@@ -463,7 +468,7 @@
           <div class="chat-standalone">
             <textarea id="generalQuestion" placeholder="Example: Should I buy or lease if I only drive 8,000 miles a year?"></textarea>
             <div class="actions">
-              <div class="helper">A general-purpose car companion mode for questions that don’t fit the other two lanes.</div>
+              <div class="helper">Archie can make mistakes. Check important inof.</div>
               <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
             </div>
           </div>
