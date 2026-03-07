@@ -316,7 +316,32 @@ form > div {
       color: var(--muted);
       font-size: 0.9rem;
     }
+/* Footer */
 
+.footer {
+  margin-top: 60px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer-links {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; }
       .mode-grid { grid-template-columns: 1fr; }
@@ -707,5 +732,19 @@ modeButtons.forEach((btn) => {
       }
     });
   </script>
+  <footer class="footer">
+  <div>© 2026 AskArchie</div>
+
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
+    Archie provides general information about car buying, ownership, and service.
+    Information may not always be accurate. Always verify details before making decisions.
+  </div>
+</footer>
 </body>
 </html>
