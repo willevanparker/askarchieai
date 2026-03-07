@@ -553,7 +553,7 @@ modeButtons.forEach((btn) => {
     dealForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(dealForm);
-      dealContext = Object.fromEntries(formData.entries());
+      dealContext = { ...Object.fromEntries(formData.entries()), mode: 'deal' };
       conversation = [];
 
       statusEl.textContent = 'Analyzing your deal...';
@@ -566,7 +566,7 @@ modeButtons.forEach((btn) => {
         const response = await fetch('/.netlify/functions/analyze-deal', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ deal: dealContext, messages: [] })
+          body: JSON.stringify({ mode: 'deal', deal: dealContext, messages: [] })
         });
 
         if (!response.ok) throw new Error('Function not connected yet');
@@ -586,7 +586,7 @@ modeButtons.forEach((btn) => {
         serviceForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(serviceForm);
-      dealContext = Object.fromEntries(formData.entries());
+      dealContext = { ...Object.fromEntries(formData.entries()), mode: 'service' };
       conversation = [];
 
       serviceStatus.textContent = 'Thinking through your service question...';
@@ -625,7 +625,7 @@ modeButtons.forEach((btn) => {
       const question = generalQuestion.value.trim();
       if (!question) return;
 
-      dealContext = {};
+      dealContext = { mode: 'chat' };
       conversation = [];
 
       generalStatus.textContent = 'Archie is thinking...';
@@ -637,7 +637,8 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            deal: {},
+          mode: 'chat',
+          deal: {},
             messages: [{ role: 'user', content: question }],
             followup: true
           })
@@ -667,7 +668,8 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            deal: dealContext,
+          mode: dealContext?.mode || 'deal',
+          deal: dealContext,
             messages: [...conversation, { role: 'user', content: question }],
             followup: true
           })
