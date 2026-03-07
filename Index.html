@@ -529,6 +529,37 @@
     let dealContext = null;
     let conversation = [];
 
+    let dealContext = null;
+let conversation = [];
+
+/* MODE SWITCHING */
+
+const modeButtons = document.querySelectorAll('.mode-card');
+const dealPanel = document.getElementById('dealPanel');
+const servicePanel = document.getElementById('servicePanel');
+const chatPanel = document.getElementById('chatPanel');
+const serviceForm = document.getElementById('serviceForm');
+const serviceStatus = document.getElementById('serviceStatus');
+const generalQuestion = document.getElementById('generalQuestion');
+const generalAskBtn = document.getElementById('generalAskBtn');
+const generalStatus = document.getElementById('generalStatus');
+
+function setMode(mode) {
+  modeButtons.forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+
+  dealPanel.classList.toggle('active', mode === 'deal');
+  servicePanel.classList.toggle('active', mode === 'service');
+  chatPanel.classList.toggle('active', mode === 'chat');
+}
+
+modeButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setMode(btn.dataset.mode);
+  });
+});
+
     function openModal() {
       archieModal.classList.add('open');
       archieModal.setAttribute('aria-hidden', 'false');
@@ -574,6 +605,79 @@
         archieResponse.textContent = fallback;
         conversation.push({ role: 'assistant', content: fallback });
         statusEl.textContent = 'Preview mode: backend not connected yet.';
+      }
+    });
+
+        serviceForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(serviceForm);
+      dealContext = Object.fromEntries(formData.entries());
+      conversation = [];
+
+      serviceStatus.textContent = 'Thinking through your service question...';
+      archieResponse.textContent = 'Working on it...';
+      openModal();
+
+      try {
+        const response = await fetch('/.netlify/functions/analyze-deal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deal: dealContext,
+            messages: [
+              {
+                role: 'user',
+                content: 'Please review this vehicle service question and help me understand what looks routine, what may be optional, and what I should ask next.'
+              }
+            ],
+            followup: true
+          })
+        });
+
+        if (!response.ok) throw new Error('Service mode not connected yet');
+        const data = await response.json();
+
+        archieResponse.textContent = data.reply || 'No response returned.';
+        conversation.push({ role: 'assistant', content: data.reply || '' });
+        serviceStatus.textContent = 'Service guidance ready.';
+      } catch (error) {
+        archieResponse.textContent = 'Service mode is wired into the interface, but the backend logic still needs to be refined.';
+        serviceStatus.textContent = 'Preview mode: service logic still being refined.';
+      }
+    });
+
+    generalAskBtn.addEventListener('click', async () => {
+      const question = generalQuestion.value.trim();
+      if (!question) return;
+
+      dealContext = {};
+      conversation = [];
+
+      generalStatus.textContent = 'Archie is thinking...';
+      archieResponse.textContent = 'Working on it...';
+      openModal();
+
+      try {
+        const response = await fetch('/.netlify/functions/analyze-deal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deal: {},
+            messages: [{ role: 'user', content: question }],
+            followup: true
+          })
+        });
+
+        if (!response.ok) throw new Error('General chat not connected yet');
+        const data = await response.json();
+
+        archieResponse.textContent = data.reply || 'No response returned.';
+        conversation.push({ role: 'user', content: question });
+        conversation.push({ role: 'assistant', content: data.reply || '' });
+        generalStatus.textContent = 'Response ready.';
+      } catch (error) {
+        archieResponse.textContent = 'General chat mode is set up in the interface, but the backend still needs a true Ask Anything prompt.';
+        generalStatus.textContent = 'Preview mode: general chat logic still being refined.';
       }
     });
 
