@@ -418,26 +418,74 @@ form > div {
             <div>
   <label for="state">State (for tax & dealer fee rules)</label>
 
-  <select id="state" name="state">
-    <option value="">Select state</option>
+ <div class="full">
+  <label for="model">Model</label>
+  <input id="model" name="model" placeholder="X3 xDrive30i" />
+</div>
 
-    <option value="AL">Alabama</option>
-    <option value="AK">Alaska</option>
-    <option value="AZ">Arizona</option>
-    <option value="AR">Arkansas</option>
-    <option value="CA">California</option>
-    <option value="CO">Colorado</option>
-    <option value="FL">Florida</option>
-    <option value="GA">Georgia</option>
-    <option value="IL">Illinois</option>
-    <option value="NY">New York</option>
-    <option value="NC">North Carolina</option>
-    <option value="PA">Pennsylvania</option>
-    <option value="TX">Texas</option>
-    <option value="VA">Virginia</option>
-    <option value="WA">Washington</option>
+<div>
+  <label for="state">State (for tax & dealer fee rules)</label>
+  <select id="state" name="state">
+    { code: "AL", name: "Alabama" },
+      { code: "AK", name: "Alaska" },
+      { code: "AZ", name: "Arizona" },
+      { code: "AR", name: "Arkansas" },
+      { code: "CA", name: "California" },
+      { code: "CO", name: "Colorado" },
+      { code: "CT", name: "Connecticut" },
+      { code: "DE", name: "Delaware" },
+      { code: "FL", name: "Florida" },
+      { code: "GA", name: "Georgia" },
+      { code: "HI", name: "Hawaii" },
+      { code: "ID", name: "Idaho" },
+      { code: "IL", name: "Illinois" },
+      { code: "IN", name: "Indiana" },
+      { code: "IA", name: "Iowa" },
+      { code: "KS", name: "Kansas" },
+      { code: "KY", name: "Kentucky" },
+      { code: "LA", name: "Louisiana" },
+      { code: "ME", name: "Maine" },
+      { code: "MD", name: "Maryland" },
+      { code: "MA", name: "Massachusetts" },
+      { code: "MI", name: "Michigan" },
+      { code: "MN", name: "Minnesota" },
+      { code: "MS", name: "Mississippi" },
+      { code: "MO", name: "Missouri" },
+      { code: "MT", name: "Montana" },
+      { code: "NE", name: "Nebraska" },
+      { code: "NV", name: "Nevada" },
+      { code: "NH", name: "New Hampshire" },
+      { code: "NJ", name: "New Jersey" },
+      { code: "NM", name: "New Mexico" },
+      { code: "NY", name: "New York" },
+      { code: "NC", name: "North Carolina" },
+      { code: "ND", name: "North Dakota" },
+      { code: "OH", name: "Ohio" },
+      { code: "OK", name: "Oklahoma" },
+      { code: "OR", name: "Oregon" },
+      { code: "PA", name: "Pennsylvania" },
+      { code: "RI", name: "Rhode Island" },
+      { code: "SC", name: "South Carolina" },
+      { code: "SD", name: "South Dakota" },
+      { code: "TN", name: "Tennessee" },
+      { code: "TX", name: "Texas" },
+      { code: "UT", name: "Utah" },
+      { code: "VT", name: "Vermont" },
+      { code: "VA", name: "Virginia" },
+      { code: "WA", name: "Washington" },
+      { code: "WV", name: "West Virginia" },
+      { code: "WI", name: "Wisconsin" },
+      { code: "WY", name: "Wyoming" }
   </select>
 </div>
+
+<div>
+  <label for="dealType">Deal type</label>
+  <select id="dealType" name="dealType">
+    <option value="">Select one</option>
+    <option>Lease</option>
+    <option>Finance</option>
+    <option>Cash</option>
   </select>
 </div>
             <div>
