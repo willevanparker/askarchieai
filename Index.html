@@ -90,7 +90,7 @@
 
     .form-card {
   padding: 22px;
-  scroll-margin-top: 64px;
+  scroll-margin-top: 24px;
 }
 
     .form-title {
@@ -397,7 +397,7 @@ form > div {
         </div>
       </div>
 
-            <div class="card form-card">
+            <div class="card form-card" id="formCard">
         <div id="dealPanel" class="mode-panel active">
           <div class="form-title">Enter Details</div>
           <div class="panel-intro">
@@ -561,6 +561,7 @@ const modeButtons = document.querySelectorAll('.mode-card');
 const dealPanel = document.getElementById('dealPanel');
 const servicePanel = document.getElementById('servicePanel');
 const chatPanel = document.getElementById('chatPanel');
+const formCard = document.getElementById('formCard');
 const serviceForm = document.getElementById('serviceForm');
 const serviceStatus = document.getElementById('serviceStatus');
 const generalQuestion = document.getElementById('generalQuestion');
@@ -576,17 +577,12 @@ function setMode(mode) {
   servicePanel.classList.toggle('active', mode === 'service');
   chatPanel.classList.toggle('active', mode === 'chat');
 
-  const activePanel =
-    mode === 'deal' ? dealPanel :
-    mode === 'service' ? servicePanel :
-    chatPanel;
-
-  if (window.innerWidth <= 920) {
-    activePanel.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
+if (window.innerWidth <= 920) {
+  formCard.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
 }
 
 modeButtons.forEach((btn) => {
