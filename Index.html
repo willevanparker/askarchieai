@@ -20,7 +20,6 @@
   --shadow: 0 10px 30px rgba(0,0,0,0.08);
   --radius: 18px;
   --max: 1120px;
-}--max: 1120px;
     }
 
     * { box-sizing: border-box; }
@@ -92,10 +91,14 @@
     }
 
     form {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+form > div {
+  min-width: 0;
+}
 
     .full { grid-column: 1 / -1; }
 
@@ -168,22 +171,28 @@
     }
 
     .mode-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 32px;
+  align-items: stretch;
+}
 
     .mode-card {
-      text-align: left;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-      width: 100%;
-      color: var(--text);
-    }
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  width: 100%;
+  color: var(--text);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 
     .mode-card.active {
       background: var(--accent-soft);
@@ -402,8 +411,8 @@
               <label for="docFee">Doc fee</label>
               <input id="docFee" name="docFee" placeholder="$250" />
             </div>
-            <div>
-              <label for="addons">Optional Add-ons (total $ for dealer protection packages, VIN etching, nitrous, etc.)</label>
+            <div class="full">
+              <label for="addons">Optional Add-ons (total $ for dealer protection packages, VIN etching, nitrogen, etc.)</label>
               <input id="addons" name="addons" placeholder="$1500" />
             </div>
             <div class="full">
@@ -603,8 +612,9 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            deal: dealContext,
-            messages: [
+  mode: 'service',
+  deal: dealContext,
+  messages: [
               {
                 role: 'user',
                 content: 'Please review this vehicle service question and help me understand what looks routine, what may be optional, and what I should ask next.'
