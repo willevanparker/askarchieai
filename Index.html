@@ -326,17 +326,17 @@
       <div class="hero-copy">
         <h1>Car question?<br />Ask Archie.</h1>
         <p>
-          Ask Archie about a car deal, repair quote, lease, doc fee, add-ons, financing terms, maintenance question, or anything else car-related.
+          Think of Archie as your personal <strong>Car Companion</strong>. Ask him anything car-related &mdash buying, servicing, financing, and more. 
         </p>
       </div>
 
       <div class="card chat-card">
         <div class="form-title">Ask Archie Anything</div>
         <div class="panel-intro">
-          Tell Archie what’s going on in plain English. No worksheet required.
+          Tell Archie what’s going on.
         </div>
 
-        <textarea id="generalQuestion" placeholder="Example: A dealer offered me a 2021 Porsche Macan for $49,797 with a $999 doc fee and $1,500 in add-ons. Is that reasonable?"></textarea>
+        <textarea id="generalQuestion" placeholder="Example: Are doc fees required? And if so, how much is reasonable to pay? I live in Florida."></textarea>
 
         <div class="actions">
           <div class="helper">Archie can make mistakes. Check important info.</div>
@@ -346,9 +346,9 @@
         <div class="status" id="generalStatus"></div>
 
         <div class="examples">
-          <button class="example" type="button">Is $2,000 for a 2019 BMW in mint condition obviously too low?</button>
-          <button class="example" type="button">A dealer says the doc fee is normal in Florida. Is that true?</button>
-          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel induction service. What is actually necessary?</button>
+          <button class="example" type="button">Is it better to lease or buy a vehicle?</button>
+          <button class="example" type="button">Where can I find the residual value of a lease?</button>
+          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel additive. What is actually necessary?</button>
         </div>
       </div>
     </section>
@@ -365,7 +365,7 @@
         <div class="response" id="archieResponse">Archie’s answer will appear here.</div>
 
         <div class="chat-box">
-          <label for="followupInput">Ask Archie a follow-up</label>
+          <label for="followupInput">Keep chatting with Archie</label>
           <div class="chat-row">
             <input id="followupInput" placeholder="Example: What should I ask the dealer next?" />
             <button class="secondary" id="followupBtn">Send</button>
@@ -421,7 +421,7 @@
       if (!question) return;
 
       generalStatus.textContent = 'Archie is thinking...';
-      archieResponse.textContent = 'Working on it...';
+      archieResponse.textContent = 'Thinking...';
       openModal();
 
       try {
