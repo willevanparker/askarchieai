@@ -391,12 +391,12 @@
         </p>
 
         <div class="mode-grid">
-          <button class="mode-card active" type="button" data-mode="deal">
+          <button class="mode-card" type="button" data-mode="deal">
             <h3>Buying</h3>
             <p>Break down pricing, fees, add-ons, trade terms, and lease structure into something clear and useful.</p>
           </button>
 
-          <button class="mode-card" type="button" data-mode="">
+          <button class="mode-card" type="button" data-mode="service">
             <h3>Service</h3>
             <p>Ask about maintenance timing, repair quotes, common services, and what may or may not be worth doing.</p>
           </button>
@@ -409,7 +409,7 @@
       </div>
 
       <div class="card form-card" id="formCard">
-        <div id="dealPanel" class="mode-panel active">
+        <div id="dealPanel" class="mode-panel">
           <div class="form-title">Enter Details</div>
           <div class="panel-intro">
             Use this when you're planning to buy a car. Archie will help break down how everything works so you have confidence you're getting a good deal.
@@ -678,10 +678,20 @@
     }
 
     modeButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        setMode(btn.dataset.mode);
-      });
-    });
+  btn.addEventListener('click', () => {
+    setMode(btn.dataset.mode);
+  });
+});
+
+/* MOBILE: remove default active mode */
+
+if (window.innerWidth <= 920) {
+  modeButtons.forEach((btn) => btn.classList.remove('active'));
+
+  dealPanel.classList.remove('active');
+  servicePanel.classList.remove('active');
+  chatPanel.classList.remove('active');
+}
 
     function openModal() {
       archieModal.classList.add('open');
