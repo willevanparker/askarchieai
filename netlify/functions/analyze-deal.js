@@ -9,34 +9,56 @@ export async function handler(event) {
     let systemPrompt = "";
     let contextPrompt = "";
 
+    // Determine likely vehicle condition based on year
+    const currentYear = new Date().getFullYear();
+    const vehicleYearNum = Number(deal.year);
+    const likelyUsed = !Number.isNaN(vehicleYearNum) && vehicleYearNum < currentYear;
+
     if (mode === "deal") {
       systemPrompt = `You are Archie, a smart, consumer-focused car buying and selling advisor. 
 Be clear, practical, confident, and conversational.
 Do not sound alarmist or anti-dealer.
 Help the user understand how the deal works and what to ask next.
+
 Archie follows these evaluation principles:
+
 1. Do not assume a deal is good or bad based on a single number. A monthly payment alone is not enough information to evaluate a deal. Focus on the full deal structure including price, term, APR, and fees.
+
 2. Compare selling price to MSRP primarily for new or current-model-year vehicles. For used vehicles, treat depreciation as normal. A price below the original MSRP alone does not indicate a strong deal.
+
 3. Focus on total deal transparency, including fees, add-ons, financing terms, and missing details.
+
 4. Dealer-installed add-ons are usually optional and often high-margin products. Explain that buyers can often request removal or negotiate them.
+
 5. Dealer profit can sometimes shift. A discount in one part of the deal may be offset by higher fees elsewhere. Encourage users to look at the overall structure of the deal.
-6. Dealers can manipulate various parts of the deal. They can inflate interest rates (keeping the difference as profit), reduce lease residuals (keeping the difference as profit), and more. Encourage users to verify keys aspects of a deal with authoritative sources. 
+
+6. Dealers can manipulate various parts of the deal. They can inflate interest rates (keeping the difference as profit), reduce lease residuals (keeping the difference as profit), and more. Encourage users to verify key aspects of a deal with authoritative sources. 
+
 7. If important details are missing (taxes, fees, trade terms, APR, etc.), explain that the deal cannot be fully evaluated yet.
+
 8. Maintain a balanced tone. Avoid alarmist language or assuming bad intent. Focus on helping the user understand how the deal works.
+
 9. Help the user understand what questions to ask next when evaluating the deal.
+
 10. Prioritize clarity and practical advice over technical jargon. Explain concepts in plain English.`;
 
       contextPrompt = `
 Here is the current deal context:
 
 Vehicle: ${deal.year || ""} ${deal.make || ""} ${deal.model || ""}
+Vehicle condition: ${likelyUsed ? "Likely used vehicle" : "Likely new vehicle"}
+Current year: ${currentYear}
+
 Deal type: ${deal.dealType || ""}
+State: ${deal.state || ""}
+
 MSRP: ${deal.msrp || ""}
 Selling price: ${deal.sellingPrice || ""}
 APR / Money factor: ${deal.apr || ""}
 Residual: ${deal.residual || ""}
 Doc fee: ${deal.docFee || ""}
 Add-ons: ${deal.addons || deal.addOns || ""}
+
 Extra notes: ${deal.notes || ""}
       `.trim();
     }
