@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ask Archie — AI Car Buying & Service Advisor</title>
-  <meta name="description" content="Ask Archie is an AI car buying and service advisor that helps you understand car deals, repair quotes, add-ons, leases, and ownership questions in plain English." />
+  <title>Ask Archie — Car Questions, Answered Clearly</title>
+  <meta name="description" content="Ask Archie is an AI car companion that helps you understand car buying, service, repair quotes, add-ons, leases, and ownership questions in plain English." />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Ask Archie — AI Car Buying & Service Advisor" />
-  <meta property="og:description" content="Understand car deals, repair quotes, add-ons, and ownership questions in plain English." />
+  <meta property="og:title" content="Ask Archie — Car Questions, Answered Clearly" />
+  <meta property="og:description" content="Understand car deals, repair quotes, leases, add-ons, and ownership questions in plain English." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://askarchie.ai" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -89,71 +89,56 @@
       box-shadow: var(--shadow);
     }
 
-    .form-card {
+    .chat-card {
       padding: 22px;
-      scroll-margin-top: 24px;
     }
 
     .form-title {
       font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    form {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 14px;
-      row-gap: 20px;
+    .panel-intro {
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    form > div {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      line-height: 1.25;
-    }
-
-    input, select, textarea {
+    textarea,
+    input {
       width: 100%;
-      padding: 14px 14px;
+      padding: 16px;
       border-radius: 14px;
       border: 1px solid var(--line);
       background: #fff;
       color: var(--text);
       font: inherit;
-      min-height: 56px;
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 180px;
       resize: vertical;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input {
+      min-height: 56px;
+    }
+
+    textarea:focus,
+    input:focus {
       outline: none;
       border-color: #999;
       box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
     }
 
     .actions {
-      grid-column: 1 / -1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-top: 6px;
+      margin-top: 14px;
     }
 
     .helper {
@@ -187,70 +172,32 @@
       border: 1px solid var(--line);
     }
 
-    .mode-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 32px;
-      align-items: stretch;
+    .status {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
-    .mode-card {
-      text-align: left;
-      background: var(--card);
+    .examples {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .example {
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-      width: 100%;
+      background: #faf8f4;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.92rem;
       color: var(--text);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+      text-align: left;
     }
 
-    .mode-card.active {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-
-    .mode-card h3 {
-      margin: 0 0 8px;
-      font-size: 0.95rem;
-    }
-
-    .mode-card p {
-      margin: 0;
-      font-size: 0.92rem;
-      line-height: 1.55;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .mode-panel {
-      display: none;
-    }
-
-    .mode-panel.active {
-      display: block;
-    }
-
-    .chat-standalone {
-      display: grid;
-      gap: 14px;
-    }
-
-    .chat-standalone textarea {
-      min-height: 140px;
-    }
-
-    .panel-intro {
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.55;
-      margin-bottom: 16px;
+    .example:hover {
+      border-color: #cfc7bc;
+      background: #f6f2eb;
     }
 
     .modal {
@@ -328,12 +275,6 @@
       border-radius: 10px;
     }
 
-    .status {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
     .footer {
       margin-top: 60px;
       padding: 28px 0;
@@ -362,12 +303,10 @@
 
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; }
-      .mode-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
       .wrap { padding: 18px; }
-      form { grid-template-columns: 1fr; }
       .actions {
         align-items: stretch;
         flex-direction: column;
@@ -387,231 +326,29 @@
       <div class="hero-copy">
         <h1>Car question?<br />Ask Archie.</h1>
         <p>
-          Think of Archie as your Car Companion. Simply choose an option below to <strong>get started</strong>.
+          Ask Archie about a car deal, repair quote, lease, doc fee, add-ons, financing terms, maintenance question, or anything else car-related.
         </p>
-
-        <div class="mode-grid">
-          <button class="mode-card" type="button" data-mode="deal">
-            <h3>Buying</h3>
-            <p>Enter a few basic details and Archie will help you <strong>understand</strong> the car buying process.</p>
-          </button>
-
-          <button class="mode-card" type="button" data-mode="service">
-            <h3>Service</h3>
-            <p>Ask about maintenance schedules, repair quotes, common service pitfalls, and more.</p>
-          </button>
-
-          <button class="mode-card" type="button" data-mode="chat">
-            <h3>Ask Anything</h3>
-            <p>Just have a general car question? Archie can help with that too.</p>
-          </button>
-        </div>
       </div>
 
-      <div class="card form-card" id="formCard">
-        <div id="starterMessage" class="panel-intro">
-  Choose a category to get started.
-</div>
-        <div id="dealPanel" class="mode-panel">
-          <div class="form-title">Enter Details</div>
-          <div class="panel-intro">
-            Use this when you're planning to buy a car. Archie will help break down how everything works so you have confidence you're getting a good deal.
-          </div>
-
-          <form id="dealForm">
-            <div>
-              <label for="year">Year</label>
-              <input id="year" name="year" placeholder="2024" />
-            </div>
-
-            <div>
-              <label for="make">Make</label>
-              <input id="make" name="make" placeholder="BMW" />
-            </div>
-
-            <div class="full">
-              <label for="model">Model</label>
-              <input id="model" name="model" placeholder="X3 xDrive30i" />
-            </div>
-
-            <div>
-              <label for="state">State</label>
-              <select id="state" name="state">
-                <option value="">Select state</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="dealType">Deal type</label>
-              <select id="dealType" name="dealType">
-                <option value="">Select one</option>
-                <option value="lease">Lease</option>
-                <option value="finance">Finance</option>
-                <option value="cash">Cash</option>
-              </select>
-            </div>
-
-            <div class="full">
-              <label for="msrp">MSRP</label>
-              <input id="msrp" name="msrp" placeholder="$54,200" />
-            </div>
-
-            <div class="full">
-              <label for="sellingPrice">Selling price</label>
-              <input id="sellingPrice" name="sellingPrice" placeholder="$53,500" />
-            </div>
-
-            <div class="full">
-              <label for="apr">APR / money factor</label>
-              <input id="apr" name="apr" placeholder="7.4% or .00240" />
-            </div>
-
-            <div class="full">
-              <label for="residual">Residual (if leasing)</label>
-              <input id="residual" name="residual" placeholder="51%" />
-            </div>
-
-            <div class="full">
-              <label for="docFee">Doc fee</label>
-              <input id="docFee" name="docFee" placeholder="$250" />
-            </div>
-
-            <div class="full">
-              <label for="addons">Optional Add-ons (total $ for dealer protection packages, VIN etching, nitrogen, etc.)</label>
-              <input id="addons" name="addons" placeholder="$1500" />
-            </div>
-
-            <div class="full">
-              <label for="notes">Notes</label>
-              <textarea id="notes" name="notes" placeholder="Enter any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything else the dealer told you."></textarea>
-            </div>
-
-            <div class="actions">
-              <div class="helper">Archie can make mistakes. Check important info.</div>
-              <button class="primary" type="submit" id="analyzeBtn">Ask Archie</button>
-            </div>
-          </form>
-
-          <div class="status" id="status"></div>
+      <div class="card chat-card">
+        <div class="form-title">Ask Archie Anything</div>
+        <div class="panel-intro">
+          Tell Archie what’s going on in plain English. No worksheet required.
         </div>
 
-        <div id="servicePanel" class="mode-panel">
-          <div class="form-title">Enter Details</div>
-          <div class="panel-intro">
-            Use this when you want help thinking through maintenance, repair quotes, timing, or whether a service recommendation makes sense.
-          </div>
+        <textarea id="generalQuestion" placeholder="Example: A dealer offered me a 2021 Porsche Macan for $49,797 with a $999 doc fee and $1,500 in add-ons. Is that reasonable?"></textarea>
 
-          <form id="serviceForm">
-            <div>
-              <label for="serviceYear">Year</label>
-              <input id="serviceYear" name="year" placeholder="2021" />
-            </div>
-
-            <div>
-              <label for="serviceMake">Make</label>
-              <input id="serviceMake" name="make" placeholder="Porsche" />
-            </div>
-
-            <div class="full">
-              <label for="serviceModel">Model</label>
-              <input id="serviceModel" name="model" placeholder="Macan" />
-            </div>
-
-            <div>
-              <label for="mileage">Mileage</label>
-              <input id="mileage" name="mileage" placeholder="38,000" />
-            </div>
-
-            <div>
-              <label for="quoteTotal">Quote total (optional)</label>
-              <input id="quoteTotal" name="quoteTotal" placeholder="$1,240" />
-            </div>
-
-            <div class="full">
-              <label for="serviceItems">Quoted services or repairs</label>
-              <textarea id="serviceItems" name="serviceItems" placeholder="Brake fluid flush, cabin filter replacement, fuel induction service"></textarea>
-            </div>
-
-            <div class="full">
-              <label for="serviceNotes">Notes</label>
-              <textarea id="serviceNotes" name="notes" placeholder="Type any additional detail here, including warning lights, advisor comments, drivability issues, or whether this is routine maintenance."></textarea>
-            </div>
-
-            <div class="actions">
-              <div class="helper">Archie can make mistakes. Check important info.</div>
-              <button class="primary" type="submit" id="serviceBtn">Ask Archie</button>
-            </div>
-          </form>
-
-          <div class="status" id="serviceStatus"></div>
+        <div class="actions">
+          <div class="helper">Archie can make mistakes. Check important info.</div>
+          <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
         </div>
 
-        <div id="chatPanel" class="mode-panel">
-          <div class="form-title">Ask Archie Anything</div>
-          <div class="panel-intro">
-            Use this for general car questions about buying, ownership, maintenance, and more.
-          </div>
+        <div class="status" id="generalStatus"></div>
 
-          <div class="chat-standalone">
-            <textarea id="generalQuestion" placeholder="Example: Should I buy or lease if I only drive 8,000 miles a year?"></textarea>
-
-            <div class="actions">
-              <div class="helper">Archie can make mistakes. Check important info.</div>
-              <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
-            </div>
-          </div>
-
-          <div class="status" id="generalStatus"></div>
+        <div class="examples">
+          <button class="example" type="button">Is $2,000 for a 2019 BMW in mint condition obviously too low?</button>
+          <button class="example" type="button">A dealer says the doc fee is normal in Florida. Is that true?</button>
+          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel induction service. What is actually necessary?</button>
         </div>
       </div>
     </section>
@@ -625,12 +362,12 @@
       </div>
 
       <div class="modal-body">
-        <div class="response" id="archieResponse">Archie’s analysis will appear here.</div>
+        <div class="response" id="archieResponse">Archie’s answer will appear here.</div>
 
         <div class="chat-box">
           <label for="followupInput">Ask Archie a follow-up</label>
           <div class="chat-row">
-            <input id="followupInput" placeholder="Ready for your next questions" />
+            <input id="followupInput" placeholder="Example: What should I ask the dealer next?" />
             <button class="secondary" id="followupBtn">Send</button>
           </div>
           <div class="status" id="followupStatus"></div>
@@ -640,63 +377,21 @@
   </div>
 
   <script>
-    const dealForm = document.getElementById('dealForm');
-    const statusEl = document.getElementById('status');
-    const archieModal = document.getElementById('archieModal');
-    const archieResponse = document.getElementById('archieResponse');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const followupBtn = document.getElementById('followupBtn');
-    const followupInput = document.getElementById('followupInput');
-    const followupStatus = document.getElementById('followupStatus');
-
-    let dealContext = null;
-    let conversation = [];
-
-    const modeButtons = document.querySelectorAll('.mode-card');
-    const dealPanel = document.getElementById('dealPanel');
-    const servicePanel = document.getElementById('servicePanel');
-    const chatPanel = document.getElementById('chatPanel');
-    const formCard = document.getElementById('formCard');
-    const serviceForm = document.getElementById('serviceForm');
-    const serviceStatus = document.getElementById('serviceStatus');
     const generalQuestion = document.getElementById('generalQuestion');
     const generalAskBtn = document.getElementById('generalAskBtn');
     const generalStatus = document.getElementById('generalStatus');
 
-    function setMode(mode) {
-      modeButtons.forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.mode === mode);
-      });
+    const archieModal = document.getElementById('archieModal');
+    const archieResponse = document.getElementById('archieResponse');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-      dealPanel.classList.toggle('active', mode === 'deal');
-      servicePanel.classList.toggle('active', mode === 'service');
-      chatPanel.classList.toggle('active', mode === 'chat');
+    const followupBtn = document.getElementById('followupBtn');
+    const followupInput = document.getElementById('followupInput');
+    const followupStatus = document.getElementById('followupStatus');
 
-      document.getElementById("starterMessage").style.display = "none";
+    const exampleButtons = document.querySelectorAll('.example');
 
-      if (window.innerWidth <= 920) {
-        formCard.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }
-
-    modeButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setMode(btn.dataset.mode);
-  });
-});
-
-/* MOBILE: remove default active mode */
-
-if (window.innerWidth <= 920) {
-  modeButtons.forEach((btn) => btn.classList.remove('active'));
-
-  dealPanel.classList.remove('active');
-  servicePanel.classList.remove('active');
-  chatPanel.classList.remove('active');
-}
+    let conversation = [];
 
     function openModal() {
       archieModal.classList.add('open');
@@ -714,82 +409,16 @@ if (window.innerWidth <= 920) {
       if (e.target === archieModal) closeModal();
     });
 
-    dealForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(dealForm);
-      dealContext = { ...Object.fromEntries(formData.entries()), mode: 'deal' };
-      conversation = [];
-
-      statusEl.textContent = 'Analyzing your deal...';
-      archieResponse.textContent = 'Working on it...';
-      openModal();
-
-      try {
-        const response = await fetch('/.netlify/functions/analyze-deal', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mode: 'deal', deal: dealContext, messages: [] })
-        });
-
-        if (!response.ok) throw new Error('Function not connected yet');
-        const data = await response.json();
-
-        archieResponse.textContent = data.reply || 'No response returned.';
-        conversation.push({ role: 'assistant', content: data.reply || '' });
-        statusEl.textContent = 'Analysis ready.';
-      } catch (error) {
-        const fallback = `Overall Take\nThis looks like a promising AskArchie MVP layout. Your AI function is not connected yet, so this is placeholder copy for testing the user flow.\n\nWhat Looks Normal\n- The page structure is ready\n- The form is collecting the right first-pass fields\n- The modal flow works well for an initial Archie response\n\nWhat Looks Questionable\n- The backend function still needs to be connected\n- No real model response is being returned yet\n\nIf This Deal Were Clean\nOnce the Netlify function is wired up, this modal should return a structured deal analysis based on the user's inputs.\n\nWhat To Ask Next\n- Is the analyze-deal function deployed?\n- Is the API key stored in Netlify environment variables?\n- Is the form payload being passed correctly?`;
-        archieResponse.textContent = fallback;
-        conversation.push({ role: 'assistant', content: fallback });
-        statusEl.textContent = 'Preview mode: backend not connected yet.';
-      }
+    exampleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        generalQuestion.value = button.textContent.trim();
+        generalQuestion.focus();
+      });
     });
 
-    serviceForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(serviceForm);
-      dealContext = { ...Object.fromEntries(formData.entries()), mode: 'service' };
-      conversation = [];
-
-      serviceStatus.textContent = 'Thinking through your service question...';
-      archieResponse.textContent = 'Working on it...';
-      openModal();
-
-      try {
-        const response = await fetch('/.netlify/functions/analyze-deal', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            mode: 'service',
-            deal: dealContext,
-            messages: [
-              {
-                role: 'user',
-                content: 'Please review this vehicle service question and help me understand what looks routine, what may be optional, and what I should ask next.'
-              }
-            ],
-            followup: true
-          })
-        });
-
-        if (!response.ok) throw new Error('Service mode not connected yet');
-        const data = await response.json();
-
-        archieResponse.textContent = data.reply || 'No response returned.';
-        conversation.push({ role: 'assistant', content: data.reply || '' });
-        serviceStatus.textContent = 'Service guidance ready.';
-      } catch (error) {
-        archieResponse.textContent = 'Service mode is wired into the interface, but the backend logic still needs to be refined.';
-        serviceStatus.textContent = 'Preview mode: service logic still being refined.';
-      }
-    });
-
-    generalAskBtn.addEventListener('click', async () => {
-      const question = generalQuestion.value.trim();
+    async function askArchie(initialQuestion) {
+      const question = initialQuestion.trim();
       if (!question) return;
-
-      dealContext = { mode: 'chat' };
-      conversation = [];
 
       generalStatus.textContent = 'Archie is thinking...';
       archieResponse.textContent = 'Working on it...';
@@ -800,29 +429,44 @@ if (window.innerWidth <= 920) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            mode: 'chat',
-            deal: {},
-            messages: [{ role: 'user', content: question }],
-            followup: true
+            messages: [{ role: 'user', content: question }]
           })
         });
 
-        if (!response.ok) throw new Error('General chat not connected yet');
-        const data = await response.json();
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
 
-        archieResponse.textContent = data.reply || 'No response returned.';
-        conversation.push({ role: 'user', content: question });
-        conversation.push({ role: 'assistant', content: data.reply || '' });
+        const data = await response.json();
+        const reply = data.reply || 'No response returned.';
+
+        conversation = [
+          { role: 'user', content: question },
+          { role: 'assistant', content: reply }
+        ];
+
+        archieResponse.textContent = reply;
         generalStatus.textContent = 'Response ready.';
       } catch (error) {
-        archieResponse.textContent = 'General chat mode is set up in the interface, but the backend still needs a true Ask Anything prompt.';
-        generalStatus.textContent = 'Preview mode: general chat logic still being refined.';
+        archieResponse.textContent = 'Archie is wired into the interface, but the backend response failed. Check that your Netlify function is deployed and your OpenAI key is set.';
+        generalStatus.textContent = 'There was a connection issue.';
+      }
+    }
+
+    generalAskBtn.addEventListener('click', async () => {
+      await askArchie(generalQuestion.value);
+    });
+
+    generalQuestion.addEventListener('keydown', async (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        e.preventDefault();
+        await askArchie(generalQuestion.value);
       }
     });
 
     followupBtn.addEventListener('click', async () => {
       const question = followupInput.value.trim();
-      if (!question || !dealContext) return;
+      if (!question || conversation.length === 0) return;
 
       followupStatus.textContent = 'Sending...';
 
@@ -831,27 +475,32 @@ if (window.innerWidth <= 920) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            mode: dealContext?.mode || 'deal',
-            deal: dealContext,
-            messages: [...conversation, { role: 'user', content: question }],
-            followup: true
+            messages: [...conversation, { role: 'user', content: question }]
           })
         });
 
-        if (!response.ok) throw new Error('Follow-up not connected yet');
-        const data = await response.json();
+        if (!response.ok) {
+          throw new Error('Follow-up failed');
+        }
 
-        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\n${data.reply || 'No reply returned.'}`;
+        const data = await response.json();
+        const reply = data.reply || 'No reply returned.';
+
+        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\n${reply}`;
         conversation.push({ role: 'user', content: question });
-        conversation.push({ role: 'assistant', content: data.reply || '' });
+        conversation.push({ role: 'assistant', content: reply });
+
         followupInput.value = '';
         followupStatus.textContent = 'Sent.';
       } catch (error) {
-        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\nThis follow-up chat is ready for wiring once the Netlify function is connected.`;
-        conversation.push({ role: 'user', content: question });
-        conversation.push({ role: 'assistant', content: 'This follow-up chat is ready for wiring once the Netlify function is connected.' });
-        followupInput.value = '';
-        followupStatus.textContent = 'Preview mode: follow-up not connected yet.';
+        followupStatus.textContent = 'There was a connection issue.';
+      }
+    });
+
+    followupInput.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        followupBtn.click();
       }
     });
   </script>
@@ -867,7 +516,7 @@ if (window.innerWidth <= 920) {
     </div>
 
     <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
-      Archie provides general information about car buying, ownership, and service.
+      Archie provides general information about car buying, ownership, service, and maintenance.
       Information may not always be accurate. Always verify details before making decisions.
     </div>
   </footer>
