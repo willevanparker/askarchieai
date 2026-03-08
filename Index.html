@@ -409,6 +409,9 @@
       </div>
 
       <div class="card form-card" id="formCard">
+        <div id="starterMessage" class="panel-intro">
+  Choose a category to get started.
+</div>
         <div id="dealPanel" class="mode-panel">
           <div class="form-title">Enter Details</div>
           <div class="panel-intro">
@@ -668,6 +671,8 @@
       dealPanel.classList.toggle('active', mode === 'deal');
       servicePanel.classList.toggle('active', mode === 'service');
       chatPanel.classList.toggle('active', mode === 'chat');
+
+      document.getElementById("starterMessage").style.display = "none";
 
       if (window.innerWidth <= 920) {
         formCard.scrollIntoView({
