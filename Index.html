@@ -4,33 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask Archie — AI Car Buying & Service Advisor</title>
-<meta name="description" content="Ask Archie is an AI car buying and service advisor that helps you understand car deals, repair quotes, add-ons, leases, and ownership questions in plain English." /><meta name="robots" content="index, follow" />
-<meta property="og:title" content="Ask Archie — AI Car Buying & Service Advisor" />
-<meta property="og:description" content="Understand car deals, repair quotes, add-ons, and ownership questions in plain English." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://askarchie.ai" />
-<meta name="twitter:card" content="summary_large_image" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-968145859196348"
-     crossorigin="anonymous"></script>
+  <meta name="description" content="Ask Archie is an AI car buying and service advisor that helps you understand car deals, repair quotes, add-ons, leases, and ownership questions in plain English." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Ask Archie — AI Car Buying & Service Advisor" />
+  <meta property="og:description" content="Understand car deals, repair quotes, add-ons, and ownership questions in plain English." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://askarchie.ai" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-968145859196348" crossorigin="anonymous"></script>
+
   <style>
-   :root {
-  --bg: #f7f5f1;
-  --card: #ffffff;
-  --text: #1f1f1f;
-  --muted: #6b6b6b;
-  --line: #ded9d1;
-
-  --accent: #2563EB;
-  --accent-dark: #1D4ED8;
-  --accent-soft: #EAF2FF;
-  --accentText: #ffffff;
-
-  --shadow: 0 10px 30px rgba(0,0,0,0.08);
-  --radius: 18px;
-  --max: 1120px;
+    :root {
+      --bg: #f7f5f1;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #6b6b6b;
+      --line: #ded9d1;
+      --accent: #2563EB;
+      --accent-dark: #1D4ED8;
+      --accent-soft: #EAF2FF;
+      --accentText: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+      --max: 1120px;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -89,9 +90,9 @@
     }
 
     .form-card {
-  padding: 22px;
-  scroll-margin-top: 24px;
-}
+      padding: 22px;
+      scroll-margin-top: 24px;
+    }
 
     .form-title {
       font-size: 1.05rem;
@@ -100,22 +101,28 @@
     }
 
     form {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 14px;
+      row-gap: 20px;
+    }
 
-form > div {
-  min-width: 0;
-}
+    form > div {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
 
-    .full { grid-column: 1 / -1; }
+    .full {
+      grid-column: 1 / -1;
+    }
 
     label {
       display: block;
       font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.25;
     }
 
     input, select, textarea {
@@ -126,6 +133,7 @@ form > div {
       background: #fff;
       color: var(--text);
       font: inherit;
+      min-height: 56px;
     }
 
     textarea {
@@ -180,28 +188,28 @@ form > div {
     }
 
     .mode-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 32px;
-  align-items: stretch;
-}
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+      align-items: stretch;
+    }
 
     .mode-card {
-  text-align: left;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 18px;
-  width: 100%;
-  color: var(--text);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      width: 100%;
+      color: var(--text);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
 
     .mode-card.active {
       background: var(--accent-soft);
@@ -325,32 +333,33 @@ form > div {
       color: var(--muted);
       font-size: 0.9rem;
     }
-/* Footer */
 
-.footer {
-  margin-top: 60px;
-  padding: 28px 0;
-  border-top: 1px solid var(--line);
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
+    .footer {
+      margin-top: 60px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
 
-.footer-links {
-  margin-top: 8px;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-}
+    .footer-links {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
 
-.footer-links a {
-  color: var(--muted);
-  text-decoration: none;
-}
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
 
-.footer-links a:hover {
-  text-decoration: underline;
-}
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; }
       .mode-grid { grid-template-columns: 1fr; }
@@ -378,18 +387,20 @@ form > div {
       <div class="hero-copy">
         <h1>Car question?<br />Just ask Archie.</h1>
         <p>
-          Think of Archie as your Car Companion. Simply choose an option below and <strong>get started</strong>. 
+          Think of Archie as your Car Companion. Simply choose an option below and <strong>get started</strong>.
         </p>
 
-                <div class="mode-grid">
+        <div class="mode-grid">
           <button class="mode-card active" type="button" data-mode="deal">
             <h3>Buying</h3>
             <p>Break down pricing, fees, add-ons, trade terms, and lease structure into something clear and useful.</p>
           </button>
+
           <button class="mode-card" type="button" data-mode="service">
             <h3>Service</h3>
             <p>Ask about maintenance timing, repair quotes, common services, and what may or may not be worth doing.</p>
           </button>
+
           <button class="mode-card" type="button" data-mode="chat">
             <h3>Ask Anything</h3>
             <p>Have a general car question? Archie can help with buying, ownership, maintenance, terminology, and more.</p>
@@ -397,126 +408,137 @@ form > div {
         </div>
       </div>
 
-            <div class="card form-card" id="formCard">
+      <div class="card form-card" id="formCard">
         <div id="dealPanel" class="mode-panel active">
           <div class="form-title">Enter Details</div>
           <div class="panel-intro">
             Use this when you're planning to buy a car. Archie will help break down how everything works so you have confidence you're getting a good deal.
           </div>
-        <form id="dealForm">
-  <div>
-    <label for="year">Year</label>
-    <input id="year" name="year" placeholder="2024" />
-  </div>
 
-  <div>
-    <label for="make">Make</label>
-    <input id="make" name="make" placeholder="BMW" />
-  </div>
-
-  <div class="full">
-    <label for="model">Model</label>
-    <input id="model" name="model" placeholder="X3 xDrive30i" />
-  </div>
-
-  <div>
-    <label for="state">State</label>
-    <select id="state" name="state">
-      <option value="">Select state</option>
-      <option value="AL">Alabama</option>
-      <option value="AK">Alaska</option>
-      <option value="AZ">Arizona</option>
-      <option value="AR">Arkansas</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="IA">Iowa</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="ME">Maine</option>
-      <option value="MD">Maryland</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MS">Mississippi</option>
-      <option value="MO">Missouri</option>
-      <option value="MT">Montana</option>
-      <option value="NE">Nebraska</option>
-      <option value="NV">Nevada</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NY">New York</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VT">Vermont</option>
-      <option value="VA">Virginia</option>
-      <option value="WA">Washington</option>
-      <option value="WV">West Virginia</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WY">Wyoming</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="dealType">Deal type</label>
-    <select id="dealType" name="dealType">
-      <option value="">Select one</option>
-      <option value="lease">Lease</option>
-      <option value="finance">Finance</option>
-      <option value="cash">Cash</option>
-    </select>
+          <form id="dealForm">
             <div>
+              <label for="year">Year</label>
+              <input id="year" name="year" placeholder="2024" />
+            </div>
+
+            <div>
+              <label for="make">Make</label>
+              <input id="make" name="make" placeholder="BMW" />
+            </div>
+
+            <div class="full">
+              <label for="model">Model</label>
+              <input id="model" name="model" placeholder="X3 xDrive30i" />
+            </div>
+
+            <div>
+              <label for="state">State</label>
+              <select id="state" name="state">
+                <option value="">Select state</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="dealType">Deal type</label>
+              <select id="dealType" name="dealType">
+                <option value="">Select one</option>
+                <option value="lease">Lease</option>
+                <option value="finance">Finance</option>
+                <option value="cash">Cash</option>
+              </select>
+            </div>
+
+            <div class="full">
               <label for="msrp">MSRP</label>
               <input id="msrp" name="msrp" placeholder="$54,200" />
             </div>
-            <div>
+
+            <div class="full">
               <label for="sellingPrice">Selling price</label>
               <input id="sellingPrice" name="sellingPrice" placeholder="$53,500" />
             </div>
-            <div>
+
+            <div class="full">
               <label for="apr">APR / money factor</label>
               <input id="apr" name="apr" placeholder="7.4% or .00240" />
             </div>
-            <div>
+
+            <div class="full">
               <label for="residual">Residual (if leasing)</label>
               <input id="residual" name="residual" placeholder="51%" />
             </div>
-            <div>
+
+            <div class="full">
               <label for="docFee">Doc fee</label>
               <input id="docFee" name="docFee" placeholder="$250" />
             </div>
+
             <div class="full">
               <label for="addons">Optional Add-ons (total $ for dealer protection packages, VIN etching, nitrogen, etc.)</label>
               <input id="addons" name="addons" placeholder="$1500" />
             </div>
+
             <div class="full">
               <label for="notes">Notes</label>
               <textarea id="notes" name="notes" placeholder="Enter any other deal details here, including taxes, trade amount, monthly payment, due at signing, or anything else the dealer told you."></textarea>
             </div>
+
             <div class="actions">
               <div class="helper">Archie can make mistakes. Check important info.</div>
               <button class="primary" type="submit" id="analyzeBtn">Ask Archie</button>
             </div>
           </form>
+
           <div class="status" id="status"></div>
         </div>
 
@@ -525,40 +547,49 @@ form > div {
           <div class="panel-intro">
             Use this when you want help thinking through maintenance, repair quotes, timing, or whether a service recommendation makes sense.
           </div>
+
           <form id="serviceForm">
             <div>
               <label for="serviceYear">Year</label>
               <input id="serviceYear" name="year" placeholder="2021" />
             </div>
+
             <div>
               <label for="serviceMake">Make</label>
               <input id="serviceMake" name="make" placeholder="Porsche" />
             </div>
+
             <div class="full">
               <label for="serviceModel">Model</label>
               <input id="serviceModel" name="model" placeholder="Macan" />
             </div>
+
             <div>
               <label for="mileage">Mileage</label>
               <input id="mileage" name="mileage" placeholder="38,000" />
             </div>
+
             <div>
               <label for="quoteTotal">Quote total (optional)</label>
               <input id="quoteTotal" name="quoteTotal" placeholder="$1,240" />
             </div>
+
             <div class="full">
               <label for="serviceItems">Quoted services or repairs</label>
               <textarea id="serviceItems" name="serviceItems" placeholder="Brake fluid flush, cabin filter replacement, fuel induction service"></textarea>
             </div>
+
             <div class="full">
               <label for="serviceNotes">Notes</label>
               <textarea id="serviceNotes" name="notes" placeholder="Type any additional detail here, including warning lights, advisor comments, drivability issues, or whether this is routine maintenance."></textarea>
             </div>
+
             <div class="actions">
               <div class="helper">Archie can make mistakes. Check important info.</div>
               <button class="primary" type="submit" id="serviceBtn">Ask Archie</button>
             </div>
           </form>
+
           <div class="status" id="serviceStatus"></div>
         </div>
 
@@ -567,13 +598,16 @@ form > div {
           <div class="panel-intro">
             Use this for general car questions about buying, ownership, maintenance, and more.
           </div>
+
           <div class="chat-standalone">
             <textarea id="generalQuestion" placeholder="Example: Should I buy or lease if I only drive 8,000 miles a year?"></textarea>
+
             <div class="actions">
               <div class="helper">Archie can make mistakes. Check important info.</div>
               <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
             </div>
           </div>
+
           <div class="status" id="generalStatus"></div>
         </div>
       </div>
@@ -586,6 +620,7 @@ form > div {
         <div class="modal-title">Archie’s Take</div>
         <button class="close-btn" id="closeModalBtn" aria-label="Close">✕</button>
       </div>
+
       <div class="modal-body">
         <div class="response" id="archieResponse">Archie’s analysis will appear here.</div>
 
@@ -614,41 +649,39 @@ form > div {
     let dealContext = null;
     let conversation = [];
 
-/* MODE SWITCHING */
+    const modeButtons = document.querySelectorAll('.mode-card');
+    const dealPanel = document.getElementById('dealPanel');
+    const servicePanel = document.getElementById('servicePanel');
+    const chatPanel = document.getElementById('chatPanel');
+    const formCard = document.getElementById('formCard');
+    const serviceForm = document.getElementById('serviceForm');
+    const serviceStatus = document.getElementById('serviceStatus');
+    const generalQuestion = document.getElementById('generalQuestion');
+    const generalAskBtn = document.getElementById('generalAskBtn');
+    const generalStatus = document.getElementById('generalStatus');
 
-const modeButtons = document.querySelectorAll('.mode-card');
-const dealPanel = document.getElementById('dealPanel');
-const servicePanel = document.getElementById('servicePanel');
-const chatPanel = document.getElementById('chatPanel');
-const formCard = document.getElementById('formCard');
-const serviceForm = document.getElementById('serviceForm');
-const serviceStatus = document.getElementById('serviceStatus');
-const generalQuestion = document.getElementById('generalQuestion');
-const generalAskBtn = document.getElementById('generalAskBtn');
-const generalStatus = document.getElementById('generalStatus');
+    function setMode(mode) {
+      modeButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
 
-function setMode(mode) {
-  modeButtons.forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.mode === mode);
-  });
+      dealPanel.classList.toggle('active', mode === 'deal');
+      servicePanel.classList.toggle('active', mode === 'service');
+      chatPanel.classList.toggle('active', mode === 'chat');
 
-  dealPanel.classList.toggle('active', mode === 'deal');
-  servicePanel.classList.toggle('active', mode === 'service');
-  chatPanel.classList.toggle('active', mode === 'chat');
+      if (window.innerWidth <= 920) {
+        formCard.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
 
-if (window.innerWidth <= 920) {
-  formCard.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-}
-}
-
-modeButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setMode(btn.dataset.mode);
-  });
-});
+    modeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setMode(btn.dataset.mode);
+      });
+    });
 
     function openModal() {
       archieModal.classList.add('open');
@@ -661,6 +694,7 @@ modeButtons.forEach((btn) => {
     }
 
     closeModalBtn.addEventListener('click', closeModal);
+
     archieModal.addEventListener('click', (e) => {
       if (e.target === archieModal) closeModal();
     });
@@ -676,8 +710,6 @@ modeButtons.forEach((btn) => {
       openModal();
 
       try {
-        // Replace /.netlify/functions/analyze-deal with your real endpoint.
-        // For now, this includes a fallback mock response so the page still works visually.
         const response = await fetch('/.netlify/functions/analyze-deal', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -698,7 +730,7 @@ modeButtons.forEach((btn) => {
       }
     });
 
-        serviceForm.addEventListener('submit', async (e) => {
+    serviceForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(serviceForm);
       dealContext = { ...Object.fromEntries(formData.entries()), mode: 'service' };
@@ -713,9 +745,9 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-  mode: 'service',
-  deal: dealContext,
-  messages: [
+            mode: 'service',
+            deal: dealContext,
+            messages: [
               {
                 role: 'user',
                 content: 'Please review this vehicle service question and help me understand what looks routine, what may be optional, and what I should ask next.'
@@ -753,8 +785,8 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-          mode: 'chat',
-          deal: {},
+            mode: 'chat',
+            deal: {},
             messages: [{ role: 'user', content: question }],
             followup: true
           })
@@ -784,8 +816,8 @@ modeButtons.forEach((btn) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-          mode: dealContext?.mode || 'deal',
-          deal: dealContext,
+            mode: dealContext?.mode || 'deal',
+            deal: dealContext,
             messages: [...conversation, { role: 'user', content: question }],
             followup: true
           })
@@ -808,20 +840,21 @@ modeButtons.forEach((btn) => {
       }
     });
   </script>
+
   <footer class="footer">
-  <div>© 2026 AskArchie</div>
+    <div>© 2026 AskArchie</div>
 
-  <div class="footer-links">
-<a href="/about.html">About</a>
-<a href="/privacy.html">Privacy</a>
-<a href="/terms.html">Terms</a>
-<a href="/contact.html">Contact</a>
-  </div>
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </div>
 
-  <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
-    Archie provides general information about car buying, ownership, and service.
-    Information may not always be accurate. Always verify details before making decisions.
-  </div>
-</footer>
+    <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
+      Archie provides general information about car buying, ownership, and service.
+      Information may not always be accurate. Always verify details before making decisions.
+    </div>
+  </footer>
 </body>
 </html>
