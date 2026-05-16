@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KPCD6GPLFM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KPCD6GPLFM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-KPCD6GPLFM');
-</script>
+    gtag('config', 'G-KPCD6GPLFM');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask Archie — Car Questions, Answered Clearly</title>
@@ -21,9 +21,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://askarchie.ai" />
   <meta name="twitter:card" content="summary_large_image" />
-  
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9681458599196348"
-     crossorigin="anonymous"></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9681458599196348"
+    crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -57,6 +57,7 @@
     }
 
     header {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -67,6 +68,57 @@
       font-weight: 700;
       font-size: 1.1rem;
       letter-spacing: -0.02em;
+    }
+
+    .hamburger {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      font-size: 24px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .hamburger:hover {
+      background: #f5f1ea;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 64px;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 10px;
+      min-width: 190px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .mobile-menu.open {
+      display: grid;
+      gap: 4px;
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .mobile-menu a:hover {
+      background: #f5f1ea;
     }
 
     .hero {
@@ -91,6 +143,10 @@
       color: var(--muted);
       max-width: 540px;
       margin: 0;
+    }
+
+    .about-archie p {
+      margin-bottom: 16px;
     }
 
     .card {
@@ -318,45 +374,62 @@
 
     @media (max-width: 640px) {
       .wrap { padding: 18px; }
+
       .actions {
         align-items: stretch;
         flex-direction: column;
       }
+
       .hero-copy h1 { max-width: 100%; }
+
       .chat-row { flex-direction: column; }
+
+      .mobile-menu {
+        right: 0;
+        left: auto;
+        width: min(240px, calc(100vw - 36px));
+      }
     }
-    .about-archie p {
-  margin-bottom: 16px;
-}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
       <div class="brand">AskArchie</div>
+
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
     </header>
 
     <section class="hero">
       <div class="hero-copy">
         <h1>Car question?<br />Ask Archie.</h1>
-        <p>
-         <section class="about-archie">
-          
-<p>
-<strong>Car ownership can be complicated</strong> Buying, selling, maintenance, and repairs — there’s a lot to keep track of. That’s why we created Archie. Using industry-leading AI paired with deep automotive knowledge, Archie helps explain how the automotive world works in clear, easy-to-understand language.
-</p>
 
-<p>
-<strong>Think of Archie as your personal car companion.</strong> And while he isn’t a replacement for professional advice (he can’t turn a wrench just yet), he’s available 24/7 to help you better understand the decisions that come with owning a car.
-</p>
-</section>
+        <section class="about-archie">
+          <p>
+            <strong>Car ownership can be complicated.</strong> Buying, selling, maintenance, and repairs — there’s a lot to keep track of. That’s why we created Archie. Using industry-leading AI paired with deep automotive knowledge, Archie helps explain how the automotive world works in clear, easy-to-understand language.
+          </p>
+
+          <p>
+            <strong>Think of Archie as your personal car companion.</strong> And while he isn’t a replacement for professional advice (he can’t turn a wrench just yet), he’s available 24/7 to help you better understand the decisions that come with owning a car.
+          </p>
+        </section>
       </div>
 
       <div class="card chat-card">
         <div class="form-title">Get Started</div>
+
         <div class="panel-intro">
           Type your question in the box below.
-      
         </div>
 
         <textarea id="generalQuestion" placeholder="Example: What car has the best gas mileage?"></textarea>
@@ -381,7 +454,7 @@
     <div class="modal-panel">
       <div class="modal-header">
         <div class="modal-title">Ask Archie</div>
-        <button class="close-btn" id="closeModalBtn" aria-label="Close">✕</button>
+        <button class="close-btn" id="closeModalBtn" type="button" aria-label="Close">✕</button>
       </div>
 
       <div class="modal-body">
@@ -389,15 +462,33 @@
 
         <div class="chat-box">
           <label for="followupInput">Keep chatting with Archie</label>
-                      <input id="followupInput"/>
+          <input id="followupInput" />
+
           <div class="chat-row">
-            <button class="secondary" id="followupBtn">Send</button>
+            <button class="secondary" id="followupBtn" type="button">Send</button>
           </div>
+
           <div class="status" id="followupStatus"></div>
         </div>
       </div>
     </div>
   </div>
+
+  <footer class="footer">
+    <div>© 2026 AskArchie</div>
+
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+
+    <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
+      Archie provides general information about car buying, ownership, service, and maintenance.
+      Information may not always be accurate. Always verify details before making decisions.
+    </div>
+  </footer>
 
   <script>
     const generalQuestion = document.getElementById('generalQuestion');
@@ -414,6 +505,9 @@
 
     const exampleButtons = document.querySelectorAll('.example');
 
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
     let conversation = [];
 
     function openModal() {
@@ -425,6 +519,32 @@
       archieModal.classList.remove('open');
       archieModal.setAttribute('aria-hidden', 'true');
     }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      const clickedInsideMenu = mobileMenu.contains(e.target);
+      const clickedHamburger = hamburgerBtn.contains(e.target);
+
+      if (!clickedInsideMenu && !clickedHamburger) {
+        closeMobileMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+        closeModal();
+      }
+    });
 
     closeModalBtn.addEventListener('click', closeModal);
 
@@ -527,21 +647,5 @@
       }
     });
   </script>
-
-  <footer class="footer">
-    <div>© 2026 AskArchie</div>
-
-    <div class="footer-links">
-      <a href="/about.html">About</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-
-    <div style="margin-top:10px; max-width:600px; margin-left:auto; margin-right:auto;">
-      Archie provides general information about car buying, ownership, service, and maintenance.
-      Information may not always be accurate. Always verify details before making decisions.
-    </div>
-  </footer>
 </body>
 </html>
