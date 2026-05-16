@@ -35,10 +35,10 @@
       --muted: #6b6b6b;
       --line: #ded9d1;
       --accent: #2563EB;
-      --accent-dark: #1D4ED8;
-      --accent-soft: #EAF2FF;
       --accentText: #ffffff;
-      --archie-navy: #14395a;
+      --archie-navy: #132f4a;
+      --archie-navy-dark: #071827;
+      --bubble-gray: #f2f2f4;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
       --max: 1120px;
@@ -145,7 +145,7 @@
     }
 
     .hero-copy {
-      max-width: 760px;
+      max-width: 780px;
     }
 
     .hero-copy h1 {
@@ -159,7 +159,7 @@
       font-size: clamp(1.05rem, 2vw, 1.35rem);
       line-height: 1.55;
       color: var(--muted);
-      max-width: 680px;
+      max-width: 690px;
       margin: 0 0 18px;
     }
 
@@ -179,40 +179,6 @@
       color: var(--muted);
       font-weight: 700;
       font-size: 0.95rem;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    textarea,
-    input {
-      width: 100%;
-      padding: 16px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-    }
-
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    input {
-      min-height: 56px;
-    }
-
-    textarea:focus,
-    input:focus {
-      outline: none;
-      border-color: #999;
-      box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
     }
 
     button {
@@ -236,15 +202,14 @@
       transform: none;
     }
 
+    input,
+    textarea {
+      font: inherit;
+    }
+
     .primary {
       background: var(--accent);
       color: var(--accentText);
-    }
-
-    .secondary {
-      background: #f1ede7;
-      color: var(--text);
-      border: 1px solid var(--line);
     }
 
     .helper {
@@ -253,9 +218,11 @@
       line-height: 1.5;
     }
 
-    .status {
-      color: var(--muted);
-      font-size: 0.92rem;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
     .chat-bubble {
@@ -278,6 +245,208 @@
 
     .chat-bubble:hover {
       transform: translateY(-3px);
+    }
+
+    .chat-shell {
+      position: fixed;
+      right: 28px;
+      bottom: 112px;
+      width: min(420px, calc(100vw - 36px));
+      height: min(680px, calc(100vh - 140px));
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.26);
+      border: 1px solid rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .chat-shell.open {
+      display: flex;
+    }
+
+    .chat-header {
+      background: linear-gradient(180deg, var(--archie-navy-dark), #000000);
+      color: #ffffff;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .chat-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .chat-title-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .chat-subtitle {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.72);
+      margin-top: 2px;
+    }
+
+    .chat-close {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: rgba(255,255,255,0.76);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .chat-close:hover {
+      background: rgba(255,255,255,0.1);
+      transform: none;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 22px;
+      overflow-y: auto;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message {
+      max-width: 86%;
+      padding: 13px 16px;
+      border-radius: 22px;
+      line-height: 1.45;
+      font-size: 0.98rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .message.archie {
+      align-self: flex-start;
+      background: var(--bubble-gray);
+      color: #27272a;
+      border-bottom-left-radius: 8px;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #ffffff;
+      border-bottom-right-radius: 8px;
+    }
+
+    .typing {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #8a8a8a;
+      display: inline-block;
+      animation: typing 1s infinite ease-in-out;
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes typing {
+      0%, 80%, 100% {
+        opacity: 0.35;
+        transform: translateY(0);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+
+    .chat-disclaimer {
+      margin: 0 18px 10px;
+      padding: 11px 14px;
+      border-radius: 16px;
+      background: #f7f7f8;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .chat-composer {
+      padding: 0 18px 18px;
+      background: #ffffff;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 58px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 8px 8px 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .chat-input-wrap input {
+      border: none;
+      outline: none;
+      flex: 1;
+      min-width: 0;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .chat-input-wrap input::placeholder {
+      color: #9ca3af;
+    }
+
+    .send-btn {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: #000000;
+      color: #ffffff;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .send-btn:hover {
+      transform: none;
+      opacity: 0.9;
     }
 
     .archie-checklist {
@@ -459,118 +628,6 @@
       border: 1px solid #ef9a85;
     }
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(20,20,20,0.42);
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .modal-panel {
-      width: min(720px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-      border: 1px solid var(--line);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 20px 22px;
-      border-bottom: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      background: #fff;
-      z-index: 2;
-    }
-
-    .modal-title {
-      font-size: 1rem;
-      font-weight: 800;
-    }
-
-    .modal-body {
-      padding: 22px;
-    }
-
-    .modal-intro {
-      color: var(--muted);
-      line-height: 1.55;
-      margin: 0 0 16px;
-    }
-
-    .chat-input-area {
-      display: grid;
-      gap: 12px;
-    }
-
-    .chat-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .response {
-      display: none;
-      background: #faf8f4;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      line-height: 1.65;
-      white-space: pre-wrap;
-      margin-top: 18px;
-    }
-
-    .response.open {
-      display: block;
-    }
-
-    .examples {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .example {
-      border: 1px solid var(--line);
-      background: #faf8f4;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 0.92rem;
-      color: var(--text);
-      cursor: pointer;
-      text-align: left;
-      font-weight: 700;
-    }
-
-    .example:hover {
-      border-color: #cfc7bc;
-      background: #f6f2eb;
-      transform: none;
-    }
-
-    .close-btn {
-      background: transparent;
-      color: var(--muted);
-      padding: 8px;
-      border-radius: 10px;
-    }
-
     .footer {
       margin-top: 60px;
       padding: 28px 0;
@@ -637,6 +694,24 @@
         font-size: 28px;
       }
 
+      .chat-shell {
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100dvh;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+      }
+
+      .chat-header {
+        padding-top: max(18px, env(safe-area-inset-top));
+      }
+
+      .message {
+        max-width: 90%;
+      }
+
       .deal-card {
         padding: 22px;
       }
@@ -653,14 +728,8 @@
         flex: 1;
       }
 
-      .deal-submit-row .primary,
-      .chat-actions .primary {
+      .deal-submit-row .primary {
         width: 100%;
-      }
-
-      .chat-actions {
-        align-items: stretch;
-        flex-direction: column-reverse;
       }
     }
   </style>
@@ -735,39 +804,38 @@
     💬
   </button>
 
-  <div class="modal" id="archieModal" aria-hidden="true">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div class="modal-title">Ask Archie</div>
-        <button class="close-btn" id="closeModalBtn" type="button" aria-label="Close">✕</button>
+  <section class="chat-shell" id="chatShell" aria-hidden="true" aria-label="Ask Archie chat">
+    <div class="chat-header">
+      <div class="chat-avatar">A</div>
+
+      <div class="chat-title-wrap">
+        <div class="chat-title">Ask Archie</div>
+        <div class="chat-subtitle">Car questions, answered clearly.</div>
       </div>
 
-      <div class="modal-body">
-        <p class="modal-intro">
-          Ask Archie about car buying, service, repairs, leases, add-ons, maintenance, or general ownership questions.
-        </p>
+      <button class="chat-close" id="closeChatBtn" type="button" aria-label="Close chat">×</button>
+    </div>
 
-        <div class="chat-input-area">
-          <textarea id="archieQuestion" placeholder="Example: Is it better to lease or buy a vehicle?"></textarea>
-
-          <div class="chat-actions">
-            <div class="helper">Archie can make mistakes. Check important info.</div>
-            <button class="primary" type="button" id="archieAskBtn">Ask Archie</button>
-          </div>
-
-          <div class="status" id="archieStatus"></div>
-        </div>
-
-        <div class="response" id="archieResponse"></div>
-
-        <div class="examples">
-          <button class="example" type="button">Is it better to lease or buy a vehicle?</button>
-          <button class="example" type="button">Where can I find the residual value of a lease?</button>
-          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel additive. What is actually necessary?</button>
-        </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message archie">
+        👋 Hey, I’m Archie. Ask me anything about buying, servicing, repairing, leasing, or owning a car.
+      </div>
+      <div class="message archie">
+        Tell me what’s going on, and I’ll help you make sense of it.
       </div>
     </div>
-  </div>
+
+    <div class="chat-disclaimer">
+      Archie provides general information and can make mistakes. Check important details before making decisions.
+    </div>
+
+    <div class="chat-composer">
+      <div class="chat-input-wrap">
+        <input id="archieQuestion" type="text" placeholder="Ask me anything about cars..." autocomplete="off" />
+        <button class="send-btn" id="archieAskBtn" type="button" aria-label="Send message">➜</button>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div>© 2026 AskArchie</div>
@@ -793,13 +861,11 @@
     const footerDealBtn = document.getElementById('footerDealBtn');
 
     const chatBubbleBtn = document.getElementById('chatBubbleBtn');
-    const archieModal = document.getElementById('archieModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
+    const chatShell = document.getElementById('chatShell');
+    const closeChatBtn = document.getElementById('closeChatBtn');
+    const chatMessages = document.getElementById('chatMessages');
     const archieQuestion = document.getElementById('archieQuestion');
     const archieAskBtn = document.getElementById('archieAskBtn');
-    const archieStatus = document.getElementById('archieStatus');
-    const archieResponse = document.getElementById('archieResponse');
-    const exampleButtons = document.querySelectorAll('.example');
 
     const dealSection = document.getElementById('deal-check');
     const dealQuestions = document.getElementById('dealQuestions');
@@ -897,15 +963,15 @@
       ]
     };
 
-    function openModal() {
-      archieModal.classList.add('open');
-      archieModal.setAttribute('aria-hidden', 'false');
+    function openChat() {
+      chatShell.classList.add('open');
+      chatShell.setAttribute('aria-hidden', 'false');
       setTimeout(() => archieQuestion.focus(), 100);
     }
 
-    function closeModal() {
-      archieModal.classList.remove('open');
-      archieModal.setAttribute('aria-hidden', 'true');
+    function closeChat() {
+      chatShell.classList.remove('open');
+      chatShell.setAttribute('aria-hidden', 'true');
     }
 
     function closeMobileMenu() {
@@ -919,6 +985,28 @@
       setTimeout(() => {
         dealSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
+    }
+
+    function addMessage(sender, text) {
+      const message = document.createElement('div');
+      message.className = `message ${sender}`;
+      message.textContent = text;
+      chatMessages.appendChild(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return message;
+    }
+
+    function addTypingMessage() {
+      const message = document.createElement('div');
+      message.className = 'message archie';
+      message.innerHTML = `
+        <span class="typing" aria-label="Archie is typing">
+          <span></span><span></span><span></span>
+        </span>
+      `;
+      chatMessages.appendChild(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return message;
     }
 
     hamburgerBtn.addEventListener('click', () => {
@@ -936,47 +1024,38 @@
     document.addEventListener('click', (e) => {
       const clickedInsideMenu = mobileMenu.contains(e.target);
       const clickedHamburger = hamburgerBtn.contains(e.target);
+      const clickedInsideChat = chatShell.contains(e.target);
+      const clickedChatBubble = chatBubbleBtn.contains(e.target);
 
       if (!clickedInsideMenu && !clickedHamburger) {
         closeMobileMenu();
+      }
+
+      if (!clickedInsideChat && !clickedChatBubble && chatShell.classList.contains('open')) {
+        closeChat();
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeMobileMenu();
-        closeModal();
+        closeChat();
       }
     });
 
-    chatBubbleBtn.addEventListener('click', openModal);
-    closeModalBtn.addEventListener('click', closeModal);
-
-    archieModal.addEventListener('click', (e) => {
-      if (e.target === archieModal) closeModal();
-    });
-
-    exampleButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        archieQuestion.value = button.textContent.trim();
-        archieQuestion.focus();
-      });
-    });
+    chatBubbleBtn.addEventListener('click', openChat);
+    closeChatBtn.addEventListener('click', closeChat);
 
     async function askArchie() {
       const question = archieQuestion.value.trim();
 
       if (!question) return;
 
+      archieQuestion.value = '';
       archieAskBtn.disabled = true;
-      archieStatus.textContent = 'Archie is thinking...';
-      archieResponse.classList.add('open');
 
-      if (conversation.length === 0) {
-        archieResponse.textContent = 'Thinking...';
-      } else {
-        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\nThinking...`;
-      }
+      addMessage('user', question);
+      const typingMessage = addTypingMessage();
 
       try {
         const messages = conversation.length === 0
@@ -996,29 +1075,24 @@
         const data = await response.json();
         const reply = data.reply || 'No response returned.';
 
-        if (conversation.length === 0) {
-          archieResponse.textContent = reply;
-        } else {
-          archieResponse.textContent = archieResponse.textContent.replace('Thinking...', reply);
-        }
+        typingMessage.textContent = reply;
 
         conversation.push({ role: 'user', content: question });
         conversation.push({ role: 'assistant', content: reply });
 
-        archieQuestion.value = '';
-        archieStatus.textContent = 'Response ready.';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
       } catch (error) {
-        archieResponse.textContent = 'Archie is wired into the interface, but the backend response failed. Check that your Netlify function is deployed and your OpenAI key is set.';
-        archieStatus.textContent = 'There was a connection issue.';
+        typingMessage.textContent = 'Archie is wired into the interface, but the backend response failed. Check that your Netlify function is deployed and your OpenAI key is set.';
       } finally {
         archieAskBtn.disabled = false;
+        archieQuestion.focus();
       }
     }
 
     archieAskBtn.addEventListener('click', askArchie);
 
     archieQuestion.addEventListener('keydown', async (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      if (e.key === 'Enter') {
         e.preventDefault();
         await askArchie();
       }
