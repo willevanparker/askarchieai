@@ -13,13 +13,16 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Ask Archie — Car Questions, Answered Clearly</title>
   <meta name="description" content="Ask Archie is an AI car companion that helps you understand car buying, service, repair quotes, add-ons, leases, and ownership questions in plain English." />
   <meta name="robots" content="index, follow" />
+
   <meta property="og:title" content="Ask Archie — Car Questions, Answered Clearly" />
   <meta property="og:description" content="Understand car deals, repair quotes, leases, add-ons, and ownership questions in plain English." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://askarchie.ai" />
+
   <meta name="twitter:card" content="summary_large_image" />
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9681458599196348"
@@ -41,7 +44,13 @@
       --max: 1120px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -114,7 +123,7 @@
       color: var(--text);
       padding: 12px 14px;
       border-radius: 12px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .mobile-menu a:hover {
@@ -162,7 +171,7 @@
 
     .form-title {
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 12px;
     }
 
@@ -225,8 +234,15 @@
       transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
-    button:hover { transform: translateY(-1px); }
-    button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     .primary {
       background: var(--accent);
@@ -267,6 +283,174 @@
       background: #f6f2eb;
     }
 
+    .archie-checklist {
+      scroll-margin-top: 28px;
+      padding: 12px 0 36px;
+    }
+
+    .deal-card {
+      padding: 28px;
+    }
+
+    .deal-header {
+      margin-bottom: 22px;
+    }
+
+    .deal-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .deal-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0 0 12px;
+    }
+
+    .deal-subtitle {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .deal-toggle {
+      display: inline-flex;
+      gap: 6px;
+      background: #f1ede7;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px;
+      margin: 6px 0 22px;
+    }
+
+    .deal-toggle button {
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      border: none;
+    }
+
+    .deal-toggle button.active {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .deal-question {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+      background: #faf8f4;
+    }
+
+    .deal-question-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .deal-question h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .deal-question p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .deal-options {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .deal-answer {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 16px;
+      min-width: 70px;
+    }
+
+    .deal-answer.selected.yes {
+      background: #e9f7ed;
+      border-color: #83c995;
+      color: #176b2c;
+    }
+
+    .deal-answer.selected.no {
+      background: #fff0ec;
+      border-color: #ef9a85;
+      color: #9b2c14;
+    }
+
+    .deal-submit-row {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .deal-result {
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 22px;
+      line-height: 1.5;
+    }
+
+    .deal-result h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .deal-result p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .deal-result ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .deal-result li {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 650;
+    }
+
+    .deal-result.good {
+      background: #edf8ef;
+      border: 1px solid #b9dfc2;
+    }
+
+    .deal-result.warning {
+      background: #fff8df;
+      border: 1px solid #ecd36d;
+    }
+
+    .deal-result.red {
+      background: #fff0ec;
+      border: 1px solid #ef9a85;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -278,7 +462,9 @@
       z-index: 1000;
     }
 
-    .modal.open { display: flex; }
+    .modal.open {
+      display: flex;
+    }
 
     .modal-panel {
       width: min(860px, 100%);
@@ -369,25 +555,53 @@
     }
 
     @media (max-width: 920px) {
-      .hero { grid-template-columns: 1fr; }
+      .hero {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
-      .wrap { padding: 18px; }
+      .wrap {
+        padding: 18px;
+      }
 
       .actions {
         align-items: stretch;
         flex-direction: column;
       }
 
-      .hero-copy h1 { max-width: 100%; }
+      .hero-copy h1 {
+        max-width: 100%;
+      }
 
-      .chat-row { flex-direction: column; }
+      .chat-row {
+        flex-direction: column;
+      }
 
       .mobile-menu {
         right: 0;
         left: auto;
         width: min(240px, calc(100vw - 36px));
+      }
+
+      .deal-card {
+        padding: 22px;
+      }
+
+      .deal-question-top {
+        flex-direction: column;
+      }
+
+      .deal-options {
+        width: 100%;
+      }
+
+      .deal-answer {
+        flex: 1;
+      }
+
+      .deal-submit-row .primary {
+        width: 100%;
       }
     }
   </style>
@@ -403,12 +617,12 @@
       </button>
 
       <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
-  <a href="#deal-check">Deal Check</a>
-  <a href="/about.html">About</a>
-  <a href="/privacy.html">Privacy</a>
-  <a href="/terms.html">Terms</a>
-  <a href="/contact.html">Contact</a>
-</nav>
+        <a href="#deal-check">Deal Check</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
     </header>
 
     <section class="hero">
@@ -451,6 +665,34 @@
     </section>
   </div>
 
+  <section class="archie-checklist" id="deal-check">
+    <div class="wrap">
+      <div class="card deal-card">
+        <div class="deal-header">
+          <div class="deal-eyebrow">Deal Check</div>
+          <h2 class="deal-title">Is your car deal structurally sound?</h2>
+          <p class="deal-subtitle">
+            Answer a few simple questions. If anything is marked “No,” Archie will flag it as an area to review before you sign.
+          </p>
+        </div>
+
+        <div class="deal-toggle" aria-label="Choose deal type">
+          <button class="active" id="newDealBtn" type="button">New</button>
+          <button id="usedDealBtn" type="button">Used</button>
+        </div>
+
+        <div id="dealQuestions"></div>
+
+        <div class="deal-submit-row">
+          <button class="primary" id="checkDealBtn" type="button">Check My Deal</button>
+          <div class="helper">This is a simple confidence check, not legal or financial advice.</div>
+        </div>
+
+        <div id="dealResults"></div>
+      </div>
+    </div>
+  </section>
+
   <div class="modal" id="archieModal" aria-hidden="true">
     <div class="modal-panel">
       <div class="modal-header">
@@ -479,6 +721,7 @@
     <div>© 2026 AskArchie</div>
 
     <div class="footer-links">
+      <a href="#deal-check">Deal Check</a>
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -509,7 +752,100 @@
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
 
+    const dealQuestions = document.getElementById('dealQuestions');
+    const dealResults = document.getElementById('dealResults');
+    const newDealBtn = document.getElementById('newDealBtn');
+    const usedDealBtn = document.getElementById('usedDealBtn');
+    const checkDealBtn = document.getElementById('checkDealBtn');
+
     let conversation = [];
+    let currentDealType = 'new';
+    let dealAnswers = {};
+
+    const checklistData = {
+      new: [
+        {
+          id: 'msrp',
+          title: 'MSRP or less?',
+          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below.',
+          flag: 'Vehicle price may be above MSRP. Ask whether market conditions justify the markup.'
+        },
+        {
+          id: 'trade',
+          title: 'Trade-in value checked?',
+          text: 'Does your trade-in amount match KBB, CarMax, Carvana, or another real written offer?',
+          flag: 'Trade-in value was not benchmarked. Compare it against KBB, CarMax, Carvana, or another written offer.'
+        },
+        {
+          id: 'apr',
+          title: 'APR compared?',
+          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender?',
+          flag: 'APR was not independently compared. The dealer may be able to mark up the rate.'
+        },
+        {
+          id: 'addons',
+          title: 'Add-ons optional?',
+          text: 'Were products like warranty, GAP, nitrogen, ceramic coating, VIN etching, or protection packages optional?',
+          flag: 'Add-ons may not be optional. Review whether any products were required or added without clear consent.'
+        },
+        {
+          id: 'fees',
+          title: 'Dealer fees explained?',
+          text: 'Were doc fees, dealer fees, and government fees clearly separated and explained?',
+          flag: 'Fees were not clearly explained. Ask for a full itemized out-the-door breakdown.'
+        },
+        {
+          id: 'otd',
+          title: 'Out-the-door price known?',
+          text: 'Do you know the full price including taxes, fees, add-ons, and registration?',
+          flag: 'Out-the-door price is unclear. Review the total amount before focusing on monthly payment.'
+        }
+      ],
+      used: [
+        {
+          id: 'comps',
+          title: 'Comparable listings checked?',
+          text: 'Did you compare this vehicle against similar cars with similar miles, trim, condition, and location?',
+          flag: 'Comparable listings were not checked. Review similar vehicles before accepting the price.'
+        },
+        {
+          id: 'history',
+          title: 'Vehicle history reviewed?',
+          text: 'Did you review CarFax, AutoCheck, title history, accident history, and ownership history?',
+          flag: 'Vehicle history was not reviewed. Check for accidents, title issues, mileage concerns, and ownership history.'
+        },
+        {
+          id: 'ppi',
+          title: 'Inspection completed?',
+          text: 'Did you get a pre-purchase inspection or knowingly decline one after reviewing the risk?',
+          flag: 'No inspection was completed. A used vehicle may have hidden repair or maintenance issues.'
+        },
+        {
+          id: 'trade',
+          title: 'Trade-in value checked?',
+          text: 'Does your trade-in amount match KBB, CarMax, Carvana, or another real written offer?',
+          flag: 'Trade-in value was not benchmarked. Compare it against KBB, CarMax, Carvana, or another written offer.'
+        },
+        {
+          id: 'apr',
+          title: 'APR compared?',
+          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender?',
+          flag: 'APR was not independently compared. The dealer may be able to mark up the rate.'
+        },
+        {
+          id: 'addons',
+          title: 'Add-ons optional?',
+          text: 'Were products like warranty, GAP, nitrogen, ceramic coating, VIN etching, or protection packages optional?',
+          flag: 'Add-ons may not be optional. Review whether any products were required or added without clear consent.'
+        },
+        {
+          id: 'otd',
+          title: 'Out-the-door price known?',
+          text: 'Do you know the full price including taxes, fees, add-ons, and registration?',
+          flag: 'Out-the-door price is unclear. Review the total amount before focusing on monthly payment.'
+        }
+      ]
+    };
 
     function openModal() {
       archieModal.classList.add('open');
@@ -529,6 +865,12 @@
     hamburgerBtn.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
     });
 
     document.addEventListener('click', (e) => {
@@ -562,6 +904,7 @@
 
     async function askArchie(initialQuestion) {
       const question = initialQuestion.trim();
+
       if (!question) return;
 
       generalStatus.textContent = 'Archie is thinking...';
@@ -610,6 +953,7 @@
 
     followupBtn.addEventListener('click', async () => {
       const question = followupInput.value.trim();
+
       if (!question || conversation.length === 0) return;
 
       followupStatus.textContent = 'Sending...';
@@ -647,6 +991,99 @@
         followupBtn.click();
       }
     });
+
+    function renderDealQuestions(type) {
+      currentDealType = type;
+      dealAnswers = {};
+      dealResults.innerHTML = '';
+
+      dealQuestions.innerHTML = checklistData[type].map((question) => `
+        <div class="deal-question">
+          <div class="deal-question-top">
+            <div>
+              <h3>${question.title}</h3>
+              <p>${question.text}</p>
+            </div>
+
+            <div class="deal-options">
+              <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
+              <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.deal-answer').forEach((button) => {
+        button.addEventListener('click', () => {
+          const id = button.dataset.id;
+          const answer = button.dataset.answer;
+
+          dealAnswers[id] = answer;
+
+          const siblings = button.parentElement.querySelectorAll('.deal-answer');
+          siblings.forEach((sibling) => sibling.classList.remove('selected'));
+
+          button.classList.add('selected');
+        });
+      });
+    }
+
+    newDealBtn.addEventListener('click', () => {
+      newDealBtn.classList.add('active');
+      usedDealBtn.classList.remove('active');
+      renderDealQuestions('new');
+    });
+
+    usedDealBtn.addEventListener('click', () => {
+      usedDealBtn.classList.add('active');
+      newDealBtn.classList.remove('active');
+      renderDealQuestions('used');
+    });
+
+    checkDealBtn.addEventListener('click', () => {
+      const currentQuestions = checklistData[currentDealType];
+      const unanswered = currentQuestions.filter((question) => !dealAnswers[question.id]);
+
+      if (unanswered.length > 0) {
+        dealResults.innerHTML = `
+          <div class="deal-result warning">
+            <h3>Finish the checklist</h3>
+            <p>Please answer every question so Archie can review your deal structure.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const flags = currentQuestions.filter((question) => dealAnswers[question.id] === 'no');
+
+      if (flags.length === 0) {
+        dealResults.innerHTML = `
+          <div class="deal-result good">
+            <h3>Strong deal structure</h3>
+            <p>No major confidence gaps were detected. Based on your answers, the deal appears structurally reasonable.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const resultClass = flags.length >= 3 ? 'red' : 'warning';
+      const headline = flags.length >= 3 ? 'Multiple risk areas detected' : 'Review recommended';
+      const summary = flags.length >= 3
+        ? 'Several parts of the deal may need a closer review. Consider slowing down and asking for a clearer breakdown before signing.'
+        : 'This does not automatically mean it is a bad deal, but Archie found a few items worth double-checking before you sign.';
+
+      dealResults.innerHTML = `
+        <div class="deal-result ${resultClass}">
+          <h3>${headline}</h3>
+          <p>${summary}</p>
+          <ul>
+            ${flags.map((flag) => `<li>⚠️ ${flag.flag}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    });
+
+    renderDealQuestions('new');
   </script>
 </body>
 </html>
