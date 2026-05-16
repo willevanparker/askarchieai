@@ -767,7 +767,7 @@
         {
           id: 'msrp',
           title: 'MSRP or less?',
-          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below.',
+          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below (sometimes listed as a Discount).',
           flag: 'Vehicle price may be above MSRP. Ask whether market conditions justify the markup.'
         },
         {
@@ -785,7 +785,7 @@
         {
           id: 'addons',
           title: 'Add-ons optional?',
-          text: 'Were products like warranty, GAP, nitrogen, ceramic coating, VIN etching, or protection packages optional?',
+          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional.',
           flag: 'Add-ons may not be optional. Review whether any products were required or added without clear consent.'
         },
         {
@@ -817,7 +817,7 @@
         {
           id: 'ppi',
           title: 'Inspection completed?',
-          text: 'Did you get a pre-purchase inspection or knowingly decline one after reviewing the risk?',
+          text: 'Did you get a pre-purchase inspection or knowingly decline one?',
           flag: 'No inspection was completed. A used vehicle may have hidden repair or maintenance issues.'
         },
         {
@@ -1006,9 +1006,10 @@
             </div>
 
             <div class="deal-options">
-              <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
-              <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
-            </div>
+  <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
+  <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
+  ${question.id === 'trade' ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">N/A</button>` : ''}
+</div>
           </div>
         </div>
       `).join('');
