@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-KPCD6GPLFM');
   </script>
 
@@ -18,7 +17,7 @@
   <meta name="description" content="Ask Archie is an AI car companion that helps you understand car buying, service, repair quotes, add-ons, leases, and ownership questions in plain English." />
   <meta name="robots" content="index, follow" />
 
-  <meta property="og:title" content="Ask Archie — Car Questions, ed Clearly" />
+  <meta property="og:title" content="Ask Archie — Car Questions, Answered Clearly" />
   <meta property="og:description" content="Understand car deals, repair quotes, leases, add-ons, and ownership questions in plain English." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://askarchie.ai" />
@@ -39,6 +38,7 @@
       --accent-dark: #1D4ED8;
       --accent-soft: #EAF2FF;
       --accentText: #ffffff;
+      --archie-navy: #14395a;
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
       --max: 1120px;
@@ -54,6 +54,7 @@
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background: linear-gradient(180deg, #faf8f4 0%, #f3efe8 100%);
@@ -74,7 +75,7 @@
     }
 
     .brand {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.1rem;
       letter-spacing: -0.02em;
     }
@@ -118,44 +119,66 @@
       gap: 4px;
     }
 
-    .mobile-menu a {
+    .mobile-menu a,
+    .mobile-menu button {
       text-decoration: none;
       color: var(--text);
       padding: 12px 14px;
       border-radius: 12px;
       font-weight: 700;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
     }
 
-    .mobile-menu a:hover {
+    .mobile-menu a:hover,
+    .mobile-menu button:hover {
       background: #f5f1ea;
+      transform: none;
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 28px;
-      align-items: start;
-      padding: 24px 0 48px;
+      display: block;
+      padding: 54px 0 72px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
     }
 
     .hero-copy h1 {
-      font-size: clamp(2.4rem, 5vw, 4.8rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-      margin: 0 0 18px;
-      max-width: 680px;
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+      margin: 0 0 24px;
     }
 
     .hero-copy p {
-      font-size: 1.06rem;
-      line-height: 1.6;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.55;
       color: var(--muted);
-      max-width: 540px;
-      margin: 0;
+      max-width: 680px;
+      margin: 0 0 18px;
     }
 
-    .about-archie p {
-      margin-bottom: 16px;
+    .hero-copy strong {
+      color: var(--text);
+    }
+
+    .hero-note {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
     }
 
     .card {
@@ -163,23 +186,6 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-    }
-
-    .chat-card {
-      padding: 22px;
-    }
-
-    .form-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .panel-intro {
-      font-size: 0.98rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 18px;
     }
 
     textarea,
@@ -194,7 +200,7 @@
     }
 
     textarea {
-      min-height: 180px;
+      min-height: 130px;
       resize: vertical;
     }
 
@@ -207,20 +213,6 @@
       outline: none;
       border-color: #999;
       box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
-    }
-
-    .actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .helper {
-      font-size: 0.84rem;
-      color: var(--muted);
-      line-height: 1.5;
     }
 
     button {
@@ -255,37 +247,47 @@
       border: 1px solid var(--line);
     }
 
+    .helper {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     .status {
-      margin-top: 12px;
       color: var(--muted);
       font-size: 0.92rem;
     }
 
-    .examples {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
+    .chat-bubble {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--archie-navy);
+      color: #ffffff;
+      font-size: 30px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
-    .example {
-      border: 1px solid var(--line);
-      background: #faf8f4;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 0.92rem;
-      color: var(--text);
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .example:hover {
-      border-color: #cfc7bc;
-      background: #f6f2eb;
+    .chat-bubble:hover {
+      transform: translateY(-3px);
     }
 
     .archie-checklist {
+      display: none;
       scroll-margin-top: 28px;
       padding: 12px 0 36px;
+    }
+
+    .archie-checklist.open {
+      display: block;
     }
 
     .deal-card {
@@ -396,10 +398,10 @@
     }
 
     .deal-answer.selected.na {
-  background: ##FFFFC5;
-  border-color: ##FFEF00;
-  color: var(--text);
-}
+      background: #ffffc5;
+      border-color: #ffef00;
+      color: var(--text);
+    }
 
     .deal-submit-row {
       margin-top: 22px;
@@ -473,7 +475,7 @@
     }
 
     .modal-panel {
-      width: min(860px, 100%);
+      width: min(720px, 100%);
       max-height: 90vh;
       overflow: auto;
       background: #fff;
@@ -492,39 +494,74 @@
       position: sticky;
       top: 0;
       background: #fff;
+      z-index: 2;
     }
 
     .modal-title {
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .modal-body {
       padding: 22px;
     }
 
+    .modal-intro {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0 0 16px;
+    }
+
+    .chat-input-area {
+      display: grid;
+      gap: 12px;
+    }
+
+    .chat-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .response {
+      display: none;
       background: #faf8f4;
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 18px;
       line-height: 1.65;
       white-space: pre-wrap;
+      margin-top: 18px;
     }
 
-    .chat-box {
+    .response.open {
+      display: block;
+    }
+
+    .examples {
       margin-top: 18px;
       display: grid;
-      gap: 12px;
-    }
-
-    .chat-row {
-      display: flex;
       gap: 10px;
     }
 
-    .chat-row input {
-      flex: 1;
+    .example {
+      border: 1px solid var(--line);
+      background: #faf8f4;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .example:hover {
+      border-color: #cfc7bc;
+      background: #f6f2eb;
+      transform: none;
     }
 
     .close-btn {
@@ -551,19 +588,21 @@
       flex-wrap: wrap;
     }
 
-    .footer-links a {
+    .footer-links a,
+    .footer-links button {
       color: var(--muted);
       text-decoration: none;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
     }
 
-    .footer-links a:hover {
+    .footer-links a:hover,
+    .footer-links button:hover {
       text-decoration: underline;
-    }
-
-    @media (max-width: 920px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
+      transform: none;
     }
 
     @media (max-width: 640px) {
@@ -571,23 +610,31 @@
         padding: 18px;
       }
 
-      .actions {
-        align-items: stretch;
-        flex-direction: column;
+      .hero {
+        padding: 34px 0 54px;
       }
 
       .hero-copy h1 {
         max-width: 100%;
       }
 
-      .chat-row {
-        flex-direction: column;
+      .hero-note {
+        border-radius: 18px;
+        align-items: flex-start;
       }
 
       .mobile-menu {
         right: 0;
         left: auto;
         width: min(240px, calc(100vw - 36px));
+      }
+
+      .chat-bubble {
+        right: 18px;
+        bottom: 18px;
+        width: 64px;
+        height: 64px;
+        font-size: 28px;
       }
 
       .deal-card {
@@ -606,8 +653,14 @@
         flex: 1;
       }
 
-      .deal-submit-row .primary {
+      .deal-submit-row .primary,
+      .chat-actions .primary {
         width: 100%;
+      }
+
+      .chat-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
       }
     }
   </style>
@@ -623,7 +676,7 @@
       </button>
 
       <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
-        <a href="#deal-check">Deal Check</a>
+        <button id="dealMenuBtn" type="button">Deal Check</button>
         <a href="/about.html">About</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
@@ -635,33 +688,16 @@
       <div class="hero-copy">
         <h1>Car question?<br />Ask Archie.</h1>
 
-        <section class="about-archie">
-          <p>
-            <strong>Think of Archie as your personal car companion.</strong> And while he isn’t a replacement for professional advice (he can’t turn a wrench just yet), he’s available 24/7 to help you better understand the decisions that come with owning a car. Go ahead, try it out. Chat with him using the chat button below, or use one of his handy tools in the menu above. 
-          </p>
-        </section>
-      </div>
+        <p>
+          <strong>Think of Archie as your personal car companion.</strong> Buying, selling, maintenance, repairs, add-ons, leases, and ownership questions can get complicated fast.
+        </p>
 
-      <div class="card chat-card">
-        <div class="form-title">Get Started</div>
+        <p>
+          Archie helps explain how the automotive world works in clear, easy-to-understand language. He is not a replacement for professional advice, but he is available 24/7 to help you make more confident car decisions.
+        </p>
 
-        <div class="panel-intro">
-          Type your question in the box below.
-        </div>
-
-        <textarea id="generalQuestion" placeholder="Example: What car has the best gas mileage?"></textarea>
-
-        <div class="actions">
-          <div class="helper">Archie can make mistakes. Check important info.</div>
-          <button class="primary" type="button" id="generalAskBtn">Ask Archie</button>
-        </div>
-
-        <div class="status" id="generalStatus"></div>
-
-        <div class="examples">
-          <button class="example" type="button">Is it better to lease or buy a vehicle?</button>
-          <button class="example" type="button">Where can I find the residual value of a lease?</button>
-          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel additive. What is actually necessary?</button>
+        <div class="hero-note">
+          💬 Use the chat bubble in the bottom-right corner to ask Archie a question.
         </div>
       </div>
     </section>
@@ -695,6 +731,10 @@
     </div>
   </section>
 
+  <button class="chat-bubble" id="chatBubbleBtn" type="button" aria-label="Ask Archie">
+    💬
+  </button>
+
   <div class="modal" id="archieModal" aria-hidden="true">
     <div class="modal-panel">
       <div class="modal-header">
@@ -703,17 +743,27 @@
       </div>
 
       <div class="modal-body">
-        <div class="response" id="archieResponse">Archie’s answer will appear here.</div>
+        <p class="modal-intro">
+          Ask Archie about car buying, service, repairs, leases, add-ons, maintenance, or general ownership questions.
+        </p>
 
-        <div class="chat-box">
-          <label for="followupInput">Keep chatting with Archie</label>
-          <input id="followupInput" />
+        <div class="chat-input-area">
+          <textarea id="archieQuestion" placeholder="Example: Is it better to lease or buy a vehicle?"></textarea>
 
-          <div class="chat-row">
-            <button class="secondary" id="followupBtn" type="button">Send</button>
+          <div class="chat-actions">
+            <div class="helper">Archie can make mistakes. Check important info.</div>
+            <button class="primary" type="button" id="archieAskBtn">Ask Archie</button>
           </div>
 
-          <div class="status" id="followupStatus"></div>
+          <div class="status" id="archieStatus"></div>
+        </div>
+
+        <div class="response" id="archieResponse"></div>
+
+        <div class="examples">
+          <button class="example" type="button">Is it better to lease or buy a vehicle?</button>
+          <button class="example" type="button">Where can I find the residual value of a lease?</button>
+          <button class="example" type="button">My shop recommended brake fluid, spark plugs, and a fuel additive. What is actually necessary?</button>
         </div>
       </div>
     </div>
@@ -723,7 +773,7 @@
     <div>© 2026 AskArchie</div>
 
     <div class="footer-links">
-      <a href="#deal-check">Deal Check</a>
+      <button id="footerDealBtn" type="button">Deal Check</button>
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -737,23 +787,21 @@
   </footer>
 
   <script>
-    const generalQuestion = document.getElementById('generalQuestion');
-    const generalAskBtn = document.getElementById('generalAskBtn');
-    const generalStatus = document.getElementById('generalStatus');
-
-    const archieModal = document.getElementById('archieModal');
-    const archieResponse = document.getElementById('archieResponse');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-
-    const followupBtn = document.getElementById('followupBtn');
-    const followupInput = document.getElementById('followupInput');
-    const followupStatus = document.getElementById('followupStatus');
-
-    const exampleButtons = document.querySelectorAll('.example');
-
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
+    const dealMenuBtn = document.getElementById('dealMenuBtn');
+    const footerDealBtn = document.getElementById('footerDealBtn');
 
+    const chatBubbleBtn = document.getElementById('chatBubbleBtn');
+    const archieModal = document.getElementById('archieModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const archieQuestion = document.getElementById('archieQuestion');
+    const archieAskBtn = document.getElementById('archieAskBtn');
+    const archieStatus = document.getElementById('archieStatus');
+    const archieResponse = document.getElementById('archieResponse');
+    const exampleButtons = document.querySelectorAll('.example');
+
+    const dealSection = document.getElementById('deal-check');
     const dealQuestions = document.getElementById('dealQuestions');
     const dealResults = document.getElementById('dealResults');
     const newDealBtn = document.getElementById('newDealBtn');
@@ -769,7 +817,7 @@
         {
           id: 'msrp',
           title: 'MSRP or less?',
-          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below (sometimes listed as a Discount).',
+          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below (sometimes listed as a discount).',
           flag: 'Vehicle price may be above MSRP. Ask whether market conditions justify the markup.'
         },
         {
@@ -852,6 +900,7 @@
     function openModal() {
       archieModal.classList.add('open');
       archieModal.setAttribute('aria-hidden', 'false');
+      setTimeout(() => archieQuestion.focus(), 100);
     }
 
     function closeModal() {
@@ -864,15 +913,24 @@
       hamburgerBtn.setAttribute('aria-expanded', 'false');
     }
 
+    function showDealCheck() {
+      dealSection.classList.add('open');
+      closeMobileMenu();
+      setTimeout(() => {
+        dealSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+
     hamburgerBtn.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    dealMenuBtn.addEventListener('click', showDealCheck);
+    footerDealBtn.addEventListener('click', showDealCheck);
+
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMobileMenu();
-      });
+      link.addEventListener('click', closeMobileMenu);
     });
 
     document.addEventListener('click', (e) => {
@@ -891,6 +949,7 @@
       }
     });
 
+    chatBubbleBtn.addEventListener('click', openModal);
     closeModalBtn.addEventListener('click', closeModal);
 
     archieModal.addEventListener('click', (e) => {
@@ -899,27 +958,35 @@
 
     exampleButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        generalQuestion.value = button.textContent.trim();
-        generalQuestion.focus();
+        archieQuestion.value = button.textContent.trim();
+        archieQuestion.focus();
       });
     });
 
-    async function askArchie(initialQuestion) {
-      const question = initialQuestion.trim();
+    async function askArchie() {
+      const question = archieQuestion.value.trim();
 
       if (!question) return;
 
-      generalStatus.textContent = 'Archie is thinking...';
-      archieResponse.textContent = 'Thinking...';
-      openModal();
+      archieAskBtn.disabled = true;
+      archieStatus.textContent = 'Archie is thinking...';
+      archieResponse.classList.add('open');
+
+      if (conversation.length === 0) {
+        archieResponse.textContent = 'Thinking...';
+      } else {
+        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\nThinking...`;
+      }
 
       try {
+        const messages = conversation.length === 0
+          ? [{ role: 'user', content: question }]
+          : [...conversation, { role: 'user', content: question }];
+
         const response = await fetch('/.netlify/functions/analyze-deal', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [{ role: 'user', content: question }]
-          })
+          body: JSON.stringify({ messages })
         });
 
         if (!response.ok) {
@@ -929,68 +996,31 @@
         const data = await response.json();
         const reply = data.reply || 'No response returned.';
 
-        conversation = [
-          { role: 'user', content: question },
-          { role: 'assistant', content: reply }
-        ];
-
-        archieResponse.textContent = reply;
-        generalStatus.textContent = 'Response ready.';
-      } catch (error) {
-        archieResponse.textContent = 'Archie is wired into the interface, but the backend response failed. Check that your Netlify function is deployed and your OpenAI key is set.';
-        generalStatus.textContent = 'There was a connection issue.';
-      }
-    }
-
-    generalAskBtn.addEventListener('click', async () => {
-      await askArchie(generalQuestion.value);
-    });
-
-    generalQuestion.addEventListener('keydown', async (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-        e.preventDefault();
-        await askArchie(generalQuestion.value);
-      }
-    });
-
-    followupBtn.addEventListener('click', async () => {
-      const question = followupInput.value.trim();
-
-      if (!question || conversation.length === 0) return;
-
-      followupStatus.textContent = 'Sending...';
-
-      try {
-        const response = await fetch('/.netlify/functions/analyze-deal', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [...conversation, { role: 'user', content: question }]
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Follow-up failed');
+        if (conversation.length === 0) {
+          archieResponse.textContent = reply;
+        } else {
+          archieResponse.textContent = archieResponse.textContent.replace('Thinking...', reply);
         }
 
-        const data = await response.json();
-        const reply = data.reply || 'No reply returned.';
-
-        archieResponse.textContent += `\n\nYou\n${question}\n\nArchie\n${reply}`;
         conversation.push({ role: 'user', content: question });
         conversation.push({ role: 'assistant', content: reply });
 
-        followupInput.value = '';
-        followupStatus.textContent = 'Sent.';
+        archieQuestion.value = '';
+        archieStatus.textContent = 'Response ready.';
       } catch (error) {
-        followupStatus.textContent = 'There was a connection issue.';
+        archieResponse.textContent = 'Archie is wired into the interface, but the backend response failed. Check that your Netlify function is deployed and your OpenAI key is set.';
+        archieStatus.textContent = 'There was a connection issue.';
+      } finally {
+        archieAskBtn.disabled = false;
       }
-    });
+    }
 
-    followupInput.addEventListener('keydown', async (e) => {
-      if (e.key === 'Enter') {
+    archieAskBtn.addEventListener('click', askArchie);
+
+    archieQuestion.addEventListener('keydown', async (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
         e.preventDefault();
-        followupBtn.click();
+        await askArchie();
       }
     });
 
@@ -1008,10 +1038,10 @@
             </div>
 
             <div class="deal-options">
-  <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
-  <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
-  ${question.id === 'trade' ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">N/A</button>` : ''}
-</div>
+              <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
+              <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
+              ${question.id === 'trade' ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">N/A</button>` : ''}
+            </div>
           </div>
         </div>
       `).join('');
