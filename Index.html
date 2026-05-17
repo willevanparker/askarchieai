@@ -777,9 +777,9 @@
       <div class="card deal-card">
         <div class="deal-header">
           <div class="deal-eyebrow">Deal Check</div>
-          <h2 class="deal-title">Buying a car?</h2>
+          <h2 class="deal-title">Buying a car from a dealership?</h2>
           <p class="deal-subtitle">
-            Answer a few simple questions below to see what Archie says about the car deal.
+            Use Archie's quick questionarie to analyze the basics of your car deal.
           </p>
         </div>
 
@@ -791,7 +791,7 @@
         <div id="dealQuestions"></div>
 
         <div class="deal-submit-row">
-          <button class="primary" id="checkDealBtn" type="button">Check My Deal</button>
+          <button class="primary" id="checkDealBtn" type="button">Submit</button>
           <div class="helper">This is a simple confidence check, not legal or financial advice.</div>
         </div>
 
@@ -893,19 +893,19 @@
         {
           id: 'apr',
           title: 'APR compared?',
-          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender?',
+          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
           flag: 'APR was not independently compared. The dealer may be able to mark up the rate.'
         },
         {
           id: 'addons',
           title: 'Add-ons optional?',
-          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional.',
-          flag: 'Add-ons may not be optional. Review whether any products were required or added without clear consent.'
+          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Are they on your deal?',
+          flag: 'If desired, ask the dealer to remove the optional prodcuts. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
         },
         {
           id: 'fees',
-          title: 'Dealer fees explained?',
-          text: 'Were doc fees, dealer fees, and government fees clearly separated and explained?',
+          title: 'Do you understand all the dealer fees?',
+          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
           flag: 'Fees were not clearly explained. Ask for a full itemized out-the-door breakdown.'
         },
         {
