@@ -202,12 +202,29 @@
 .hero-note:hover {
   transform: translateY(-1px);
 }
-    .hero-actions-title {
-  margin: 18px 0 4px;
-  text-align: center;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+
+    .hero-action-card {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.55);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero-actions-title {
+  margin: 0 0 16px;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text) !important;
+  color: var(--text);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
 }
 
     button {
@@ -794,19 +811,29 @@
             That's why we created <strong>Archie</strong>. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just <em>yet</em>), he's available 24/7 to help you make more confident car decisions.
           </p>
 
-          <p class="hero-actions-title">
-  <strong>Start here ↓</strong>
-</p>
+          <div class="hero-action-card">
 
-          <div class="hero-note">
-            💬 Chat using the chat bubble below ↘️
-          </div>
-          <button class="hero-note" id="heroDealBtn" type="button">
-  🔎 Use Deal Check to potentially save 💰
-</button>
-           <a href="/Archie-Plus.html" class="hero-note">
-  🧰 Sign up for Archie + 👨‍🔧
-</a>
+  <p class="hero-actions-title">
+    <strong>Start here ↓</strong>
+  </p>
+
+  <div class="hero-actions">
+
+    <button class="hero-note" id="heroChatBtn" type="button">
+      💬 Chat using the chat bubble below ↘️
+    </button>
+
+    <button class="hero-note" id="heroDealBtn" type="button">
+      🔎 Use Deal Check to potentially save you 💰
+    </button>
+
+    <a href="/Archie-Plus.html" class="hero-note">
+      🧰 Sign up for Archie + 👨‍🔧
+    </a>
+
+  </div>
+
+</div>
         </div>
       </section>
     </div>
