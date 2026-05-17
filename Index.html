@@ -229,7 +229,7 @@
     .chat-bubble {
       position: fixed;
       right: 28px;
-      bottom: 28px;
+      bottom: 90px;
       width: 72px;
       height: 72px;
       border-radius: 50%;
@@ -881,21 +881,27 @@
         {
           id: 'msrp',
           title: 'MSRP or less?',
-          text: 'When buying or leasing a new vehicle, you should generally target MSRP or below (sometimes listed as a discount).',
-          flag: 'Vehicle price may be above MSRP. Ask whether market conditions justify the markup.'
+          text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall cost and can negatively impact long-term value.',
+          flag: 'Ask why. And remember, Market Value Selling Price isn't MSRP.'
         },
         {
-          id: 'trade',
+      id: 'trade',
           title: 'Trade-in value checked?',
-          text: 'Does your trade-in amount match KBB, CarMax, Carvana, or another real written offer?',
-          flag: 'Trade-in value was not benchmarked. Compare it against KBB, CarMax, Carvana, or another written offer.'
+          text: 'Does your trade-in amount match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
+          flag: 'Compare it against KBB, CarMax, Carvana, or another written offer.'
         },
         {
           id: 'apr',
           title: 'APR compared?',
           text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
-          flag: 'APR was not independently compared. The dealer may be able to mark up the rate.'
+          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher reate and keep the difference.'
         },
+        {
+  id: 'residual',
+  title: 'Residual verified?',
+  text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment and creating additional dealer profit.',
+  flag: 'The residual value may have been reduced.'
+}
         {
           id: 'addons',
           title: 'Add-ons optional?',
@@ -906,57 +912,52 @@
           id: 'fees',
           title: 'Do you understand all the dealer fees?',
           text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
-          flag: 'Fees were not clearly explained. Ask for a full itemized out-the-door breakdown.'
-        },
-        {
-          id: 'otd',
-          title: 'Out-the-door price known?',
-          text: 'Do you know the full price including taxes, fees, add-ons, and registration?',
-          flag: 'Out-the-door price is unclear. Review the total amount before focusing on monthly payment.'
+          flag: 'If fees were not clearly explained. Ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
         }
       ],
       used: [
         {
           id: 'comps',
           title: 'Comparable listings checked?',
-          text: 'Did you compare this vehicle against similar cars with similar miles, trim, condition, and location?',
+          text: 'Did you compare this vehicle against similar cars on <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB.com</a> with similar miles, trim, condition, and location?',
           flag: 'Comparable listings were not checked. Review similar vehicles before accepting the price.'
         },
         {
           id: 'history',
           title: 'Vehicle history reviewed?',
-          text: 'Did you review CarFax, AutoCheck, title history, accident history, and ownership history?',
-          flag: 'Vehicle history was not reviewed. Check for accidents, title issues, mileage concerns, and ownership history.'
+          text: 'Did you review <a href="https://www.carfax.com" target="_blank" rel="noopener noreferrer">CarFax</a>, AutoCheck, title history, accident history, and ownership history?',
+          flag: 'Check for accidents, title issues, mileage concerns, and ownership history. CarFax is a great place to do this.'
         },
         {
           id: 'ppi',
           title: 'Inspection completed?',
           text: 'Did you get a pre-purchase inspection or knowingly decline one?',
-          flag: 'No inspection was completed. A used vehicle may have hidden repair or maintenance issues.'
+          flag: 'If no inspection was completed, a used vehicle may have hidden repair or maintenance issues.'
         },
         {
           id: 'trade',
           title: 'Trade-in value checked?',
-          text: 'Does your trade-in amount match KBB, CarMax, Carvana, or another real written offer?',
-          flag: 'Trade-in value was not benchmarked. Compare it against KBB, CarMax, Carvana, or another written offer.'
+          text: 'Does your trade-in amount match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
+          flag: 'Compare it against KBB, CarMax, Carvana, or another written offer.'
         },
         {
           id: 'apr',
           title: 'APR compared?',
-          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender?',
-          flag: 'APR was not independently compared. The dealer may be able to mark up the rate.'
+          text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
+          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher reate and keep the difference.'
         },
         {
           id: 'addons',
+          id: 'addons',
           title: 'Add-ons optional?',
-          text: 'Were products like warranty, GAP, nitrogen, ceramic coating, VIN etching, or protection packages optional?',
-          flag: 'Add-ons may not be optional. Review whether any products were required or added without clear consent.'
+          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Are they on your deal?',
+          flag: 'If desired, ask the dealer to remove the optional prodcuts. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
         },
         {
-          id: 'otd',
-          title: 'Out-the-door price known?',
-          text: 'Do you know the full price including taxes, fees, add-ons, and registration?',
-          flag: 'Out-the-door price is unclear. Review the total amount before focusing on monthly payment.'
+          id: 'fees',
+          title: 'Do you understand all the dealer fees?',
+          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
+          flag: 'If fees were not clearly explained. Ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
         }
       ]
     };
@@ -1110,10 +1111,17 @@
             </div>
 
             <div class="deal-options">
-              <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
-              <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
-              ${question.id === 'trade' ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">No Trade</button>` : ''}
-            </div>
+  <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
+  <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
+
+  ${question.id === 'trade'
+    ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">No Trade</button>`
+    : ''}
+
+  ${question.id === 'residual'
+    ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">Not Leasing</button>`
+    : ''}
+</div>
           </div>
         </div>
       `).join('');
