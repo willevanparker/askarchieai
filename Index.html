@@ -158,8 +158,11 @@
     }
 
     .hero-copy {
-      max-width: 780px;
-    }
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
     .hero-copy h1 {
       font-size: clamp(3.2rem, 8vw, 6.8rem);
@@ -179,19 +182,24 @@
     .hero-copy strong {
       color: var(--text);
     }
+.hero-note {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
 
-    .hero-note {
-      margin-top: 28px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.6);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.95rem;
+.hero-note:hover {
+  transform: translateY(-1px);
+}
     }
 
     button {
@@ -775,11 +783,21 @@
           </p>
 
           <p>
-            That's why we created Archie. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just yet), he's available 24/7 to help you make more confident car decisions.
+            That's why we created <strong>Archie</strong>. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just <em>yet</em>), he's available 24/7 to help you make more confident car decisions.
+          </p>
+
+          <p>
+            <strong>Get Started</strong>
           </p>
 
           <div class="hero-note">
-            💬 Chat with Archie below or dive deeper in the menu above ↗️.
+            💬 Chat with Archie using the chat bubble below ↘️
+          </div>
+          <a href="#deal-check" class="hero-note">
+  🔎 Use Archie's Deal Check to potentially save you 💰
+</a>
+           <div class="hero-note">
+            🧰 Sign up for Archie Plus 👨‍🔧
           </div>
         </div>
       </section>
