@@ -578,11 +578,11 @@
     }
 
     .deal-question-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-    }
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+}
 
     .deal-question h3 {
       margin: 0 0 8px;
@@ -596,10 +596,12 @@
     }
 
     .deal-options {
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0;
-    }
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  justify-self: end;
+  align-self: center;
+}
 
     .deal-answer {
       border: 1px solid var(--line);
