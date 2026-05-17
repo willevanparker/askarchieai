@@ -480,7 +480,7 @@
       width: 44px;
       height: 44px;
       padding: 0;
-      background: #000000;
+      background: var(--archie-navy);
       color: #ffffff;
       border-radius: 50%;
       flex-shrink: 0;
@@ -948,13 +948,13 @@
         {
           id: 'msrp',
           title: 'MSRP or less?',
-          text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall payment and can negatively impact long-term value.',
+          text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall payment and can negatively impact long-term value. Are you paying MSRP?',
           flag: 'MSRP: Ask why. And remember, Market Value Selling Price is not MSRP.'
         },
         {
           id: 'trade',
           title: 'Trade-in value checked?',
-          text: 'Does your trade-in amount match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
+          text: 'Does your trade-in quote match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
           flag: 'Trade: Compare it against KBB, CarMax, Carvana, or another written offer.'
         },
         {
@@ -966,7 +966,7 @@
         {
           id: 'residual',
           title: 'Residual verified?',
-          text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment. Higher residual = lower monthly payment.',
+          text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment. <strong>Higher residual = lower monthly payment.</strong>
           flag: 'Residual: The residual value may have been reduced.'
         },
         {
