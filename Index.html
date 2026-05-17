@@ -1195,11 +1195,11 @@ heroDealBtn.addEventListener('click', showDealCheck);
               <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
 
               ${question.id === 'trade'
-                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">No Trade</button>`
+                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">N/A</button>`
                 : ''}
 
               ${question.id === 'residual'
-                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">Not Leasing</button>`
+                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">N/A</button>`
                 : ''}
             </div>
           </div>
