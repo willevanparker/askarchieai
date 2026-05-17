@@ -153,9 +153,18 @@
     }
 
     .hero {
-      display: block;
-      padding: 54px 0 72px;
-    }
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: start;
+  padding: 54px 0 72px;
+}
+
+    @media (max-width: 900px) {
+  .hero {
+    display: block;
+  }
+}
 
     .hero-copy {
   max-width: 980px;
@@ -211,6 +220,7 @@
   background: #F5F9FF;
   width: fit-content;
   max-width: 100%;
+  align-self: center;
 }
 
 .hero-actions-title {
