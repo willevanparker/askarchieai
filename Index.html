@@ -51,14 +51,21 @@
 
     html {
       scroll-behavior: smooth;
+      min-height: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background: linear-gradient(180deg, #faf8f4 0%, #f3efe8 100%);
+    }
+
+    main {
+      flex: 1;
     }
 
     .wrap {
@@ -269,13 +276,13 @@
     }
 
     .chat-header {
-  background: var(--archie-navy);
-  color: #ffffff;
-  padding: 22px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+      background: var(--archie-navy);
+      color: #ffffff;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
     .chat-avatar {
       width: 46px;
@@ -630,8 +637,8 @@
     }
 
     .footer {
-      margin-top: 60px;
-      padding: 28px 0;
+      margin-top: auto;
+      padding: 28px 24px;
       border-top: 1px solid var(--line);
       text-align: center;
       font-size: 0.85rem;
@@ -689,7 +696,7 @@
 
       .chat-bubble {
         right: 18px;
-        bottom: 18px;
+        bottom: 90px;
         width: 64px;
         height: 64px;
         font-size: 28px;
@@ -737,68 +744,70 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">AskArchie</div>
+  <main>
+    <div class="wrap">
+      <header>
+        <div class="brand">AskArchie</div>
 
-      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
-        ☰
-      </button>
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
+          ☰
+        </button>
 
-      <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
-        <button id="dealMenuBtn" type="button">Deal Check</button>
-        <a href="/about.html">About</a>
-        <a href="/Archie-Plus.html">Archie+</a>
-        <a href="/contact.html">Contact</a>
-      </nav>
-    </header>
+        <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
+          <button id="dealMenuBtn" type="button">Deal Check</button>
+          <a href="/about.html">About</a>
+          <a href="/Archie-Plus.html">Archie+</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </header>
 
-    <section class="hero">
-      <div class="hero-copy">
-        <h1>Car question?<br />Ask Archie.</h1>
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Car question?<br />Ask Archie.</h1>
 
-        <p>
-          <strong>The car industry is complicated.</strong> 
-        </p>
+          <p>
+            <strong>The car industry is complicated.</strong>
+          </p>
 
-        <p>
-          That's why we created Archie. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just yet), he's available 24/7 to help you make more confident car decisions.
-        </p>
+          <p>
+            That's why we created Archie. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just yet), he's available 24/7 to help you make more confident car decisions.
+          </p>
 
-        <div class="hero-note">
-          💬 Chat with Archie below or dive deeper in the menu above ↗️.
+          <div class="hero-note">
+            💬 Chat with Archie below or dive deeper in the menu above ↗️.
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="archie-checklist" id="deal-check">
+      <div class="wrap">
+        <div class="card deal-card">
+          <div class="deal-header">
+            <div class="deal-eyebrow">Deal Check</div>
+            <h2 class="deal-title">Buying a car from a dealership?</h2>
+            <p class="deal-subtitle">
+              Use Archie's quick questionnaire to analyze the basics of your car deal.
+            </p>
+          </div>
+
+          <div class="deal-toggle" aria-label="Choose deal type">
+            <button class="active" id="newDealBtn" type="button">New</button>
+            <button id="usedDealBtn" type="button">Used</button>
+          </div>
+
+          <div id="dealQuestions"></div>
+
+          <div class="deal-submit-row">
+            <button class="primary" id="checkDealBtn" type="button">Submit</button>
+            <div class="helper">This is a simple confidence check, not legal or financial advice.</div>
+          </div>
+
+          <div id="dealResults"></div>
         </div>
       </div>
     </section>
-  </div>
-
-  <section class="archie-checklist" id="deal-check">
-    <div class="wrap">
-      <div class="card deal-card">
-        <div class="deal-header">
-          <div class="deal-eyebrow">Deal Check</div>
-          <h2 class="deal-title">Buying a car from a dealership?</h2>
-          <p class="deal-subtitle">
-            Use Archie's quick questionarie to analyze the basics of your car deal.
-          </p>
-        </div>
-
-        <div class="deal-toggle" aria-label="Choose deal type">
-          <button class="active" id="newDealBtn" type="button">New</button>
-          <button id="usedDealBtn" type="button">Used</button>
-        </div>
-
-        <div id="dealQuestions"></div>
-
-        <div class="deal-submit-row">
-          <button class="primary" id="checkDealBtn" type="button">Submit</button>
-          <div class="helper">This is a simple confidence check, not legal or financial advice.</div>
-        </div>
-
-        <div id="dealResults"></div>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <button class="chat-bubble" id="chatBubbleBtn" type="button" aria-label="Ask Archie">
     💬
@@ -819,7 +828,6 @@
     <div class="chat-messages" id="chatMessages">
       <div class="message archie">
         👋 Hey, I’m Archie. Ask me anything about buying, servicing, repairing, leasing, or owning a car.
-      </div>
       </div>
     </div>
 
@@ -882,10 +890,10 @@
           id: 'msrp',
           title: 'MSRP or less?',
           text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall cost and can negatively impact long-term value.',
-          flag: 'Ask why. And remember, Market Value Selling Price isn't MSRP.'
+          flag: 'Ask why. And remember, Market Value Selling Price is not MSRP.'
         },
         {
-      id: 'trade',
+          id: 'trade',
           title: 'Trade-in value checked?',
           text: 'Does your trade-in amount match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
           flag: 'Compare it against KBB, CarMax, Carvana, or another written offer.'
@@ -894,25 +902,25 @@
           id: 'apr',
           title: 'APR compared?',
           text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
-          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher reate and keep the difference.'
+          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher rate, then keep the difference.'
         },
         {
-  id: 'residual',
-  title: 'Residual verified?',
-  text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment and creating additional dealer profit.',
-  flag: 'The residual value may have been reduced.'
-}
+          id: 'residual',
+          title: 'Residual verified?',
+          text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment and creating additional dealer profit.',
+          flag: 'The residual value may have been reduced.'
+        },
         {
           id: 'addons',
           title: 'Add-ons optional?',
           text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Are they on your deal?',
-          flag: 'If desired, ask the dealer to remove the optional prodcuts. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
+          flag: 'If desired, ask the dealer to remove the optional products. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
         },
         {
           id: 'fees',
           title: 'Do you understand all the dealer fees?',
-          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
-          flag: 'If fees were not clearly explained. Ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
+          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank" rel="noopener noreferrer">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
+          flag: 'If fees were not clearly explained, ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
         }
       ],
       used: [
@@ -944,20 +952,19 @@
           id: 'apr',
           title: 'APR compared?',
           text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
-          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher reate and keep the difference.'
+          flag: 'Dealerships often buy financing from the bank at one rate and sell it to customers at a higher rate, then keep the difference.'
         },
         {
           id: 'addons',
-          id: 'addons',
           title: 'Add-ons optional?',
           text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Are they on your deal?',
-          flag: 'If desired, ask the dealer to remove the optional prodcuts. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
+          flag: 'If desired, ask the dealer to remove the optional products. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
         },
         {
           id: 'fees',
           title: 'Do you understand all the dealer fees?',
-          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
-          flag: 'If fees were not clearly explained. Ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
+          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank" rel="noopener noreferrer">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
+          flag: 'If fees were not clearly explained, ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
         }
       ]
     };
@@ -981,6 +988,7 @@
     function showDealCheck() {
       dealSection.classList.add('open');
       closeMobileMenu();
+
       setTimeout(() => {
         dealSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
@@ -1111,17 +1119,17 @@
             </div>
 
             <div class="deal-options">
-  <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
-  <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
+              <button class="deal-answer yes" type="button" data-id="${question.id}" data-answer="yes">Yes</button>
+              <button class="deal-answer no" type="button" data-id="${question.id}" data-answer="no">No</button>
 
-  ${question.id === 'trade'
-    ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">No Trade</button>`
-    : ''}
+              ${question.id === 'trade'
+                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">No Trade</button>`
+                : ''}
 
-  ${question.id === 'residual'
-    ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">Not Leasing</button>`
-    : ''}
-</div>
+              ${question.id === 'residual'
+                ? `<button class="deal-answer na" type="button" data-id="${question.id}" data-answer="na">Not Leasing</button>`
+                : ''}
+            </div>
           </div>
         </div>
       `).join('');
