@@ -802,9 +802,9 @@
           <div class="hero-note">
             💬 Chat using the chat bubble below ↘️
           </div>
-          <a href="#deal-check" class="hero-note">
+          <button class="hero-note" id="heroDealBtn" type="button">
   🔎 Use Deal Check to potentially save you 💰
-</a>
+</button>
            <a href="/Archie-Plus.html" class="hero-note">
   🧰 Sign up for Archie Plus 👨‍🔧
 </a>
@@ -911,6 +911,7 @@
     const newDealBtn = document.getElementById('newDealBtn');
     const usedDealBtn = document.getElementById('usedDealBtn');
     const checkDealBtn = document.getElementById('checkDealBtn');
+    const heroDealBtn = document.getElementById('heroDealBtn');
 
     let conversation = [];
     let currentDealType = 'new';
@@ -1054,7 +1055,8 @@
     });
 
     dealMenuBtn.addEventListener('click', showDealCheck);
-    footerDealBtn.addEventListener('click', showDealCheck);
+footerDealBtn.addEventListener('click', showDealCheck);
+heroDealBtn.addEventListener('click', showDealCheck);
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeMobileMenu);
