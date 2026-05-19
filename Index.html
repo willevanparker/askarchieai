@@ -825,7 +825,7 @@
     </p>
 
     <p>
-      That's why we created <strong>Archie</strong>. Archie helps explain the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just <em>yet</em>), he's available 24/7 to help you make more confident car decisions.
+      That's why we created <strong>Archie</strong>. Archie explains the automotive world in clear, easy-to-understand language. And while he's not a replacement for professional advice (he can't turn a 🔧 just <em>yet</em>), he's available 24/7 Archie to help you navigate the automotive world with a little more clarity and confidence.
     </p>
   </div>
 
@@ -840,7 +840,7 @@
       </button>
 
       <button class="hero-note" id="heroDealBtn" type="button">
-        🔎 Buying a car? 💰
+        🔎 Buying from a dealership? 💰
       </button>
 
             <a href="/Archie-Plus.html" class="hero-note">
@@ -858,7 +858,7 @@
             <div class="deal-eyebrow">Deal Check</div>
             <h2 class="deal-title">Buying a car from a dealership?</h2>
             <p class="deal-subtitle">
-              Use Archie's quick questionnaire to analyze the basics of your car deal.
+              Use Archie's quick questionnaire to better understand your car deal.
             </p>
           </div>
 
@@ -896,10 +896,10 @@
       <button class="chat-close" id="closeChatBtn" type="button" aria-label="Close chat">×</button>
     </div>
 
-    <div class="chat-messages" id="chatMessages">
-      <div class="message archie">
-        👋 Hey, I’m Archie. Ask me anything about buying, servicing, repairing, leasing, or owning a car.
-      </div>
+    <div class="chat-message">
+  <span class="emoji">👋</span>
+  <span>Hey, I’m Archie! How can I help?</span>
+</div>
     </div>
 
     <div class="chat-disclaimer">
@@ -962,32 +962,32 @@
         {
           id: 'msrp',
           title: 'MSRP or less?',
-          text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall payment and can negatively impact long-term value. Are you paying MSRP?',
+          text: 'Paying above MSRP typically means you’re paying a market adjustment or markup, which increases your overall out-the-door price and can negatively impact long-term value. Are you paying MSRP?',
           flag: 'MSRP: Ask why. And remember, Market Value Selling Price is not MSRP.'
         },
         {
           id: 'trade',
           title: 'Trade-in value checked?',
-          text: 'Does your trade-in quote match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
+          text: 'Does your trade-in quote match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer? <strong>Higher trade $ = lower monthly out-the-door price.</strong> ',
           flag: 'Trade: Compare it against KBB, CarMax, Carvana, or another written offer.'
         },
         {
           id: 'apr',
           title: 'APR compared?',
           text: 'Did you compare the dealer’s rate against your bank, credit union, or another lender? This is one area dealerships make the bulk of their profit.',
-          flag: 'APR: Dealerships often buy financing from the bank at one rate and sell it to customers at a higher rate, then keep the difference.'
+          flag: 'APR: Dealerships often secure (buy) financing from the bank at one rate and sell it to you at a higher rate, then keep the difference.'
         },
         {
           id: 'residual',
-          title: 'Residual verified?',
-          text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing your monthly payment. <strong>Higher residual = lower monthly payment.</strong>',
+          title: 'Lease residual verified?',
+          text: 'Did you verify the residual value against the manufacturer’s official lease program? Dealers are able to lower the residual, increasing the out-the-door price. <strong>Higher residual = lower out-the-door price.</strong>',
 flag: 'Residual: The residual value may have been reduced.'
         },
         {
           id: 'addons',
           title: 'Add-ons optional?',
-          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Is your deal free of add-ons?',
-          flag: 'Add-ons: If desired, ask the dealer to remove the optional products. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
+          text: 'Products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages should be shown as optional. They are typically high dealer profit but provide little actual value to you or your car.',
+          flag: 'Add-ons: If desired, ask the dealer to remove the optional products.'
         },
         {
           id: 'fees',
@@ -1018,7 +1018,7 @@ flag: 'Residual: The residual value may have been reduced.'
         {
           id: 'trade',
           title: 'Trade-in value checked?',
-          text: 'Does your trade-in amount match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer?',
+          text: 'Does your trade-in quote match <a href="https://www.kbb.com" target="_blank" rel="noopener noreferrer">KBB</a>, CarMax, Carvana, or another real written offer? <strong>Higher trade $ = lower monthly out-the-door price.</strong> ',
           flag: 'Trade: Compare it against KBB, CarMax, Carvana, or another written offer.'
         },
         {
@@ -1030,14 +1030,14 @@ flag: 'Residual: The residual value may have been reduced.'
         {
           id: 'addons',
           title: 'Add-ons optional?',
-          text: 'By law, products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages must be shown as optional. Are they on your deal?',
-          flag: 'Add-ons: If desired, ask the dealer to remove the optional products. These are typically high margin profit drivers for dealerships and add little actual value to your car.'
+          text: 'Products like warranties, GAP, nitrogen, ceramic coating, VIN etching, or protection packages should be shown as optional. They are typically high dealer profit but provide little actual value to you or your car.',
+          flag: 'Add-ons: If desired, ask the dealer to remove the optional products.'
         },
         {
           id: 'fees',
           title: 'Do you understand all the dealer fees?',
-          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank" rel="noopener noreferrer">doc fees</a>, dealer fees, and government fees clearly separated and explained?',
-          flag: 'Fees: If fees were not clearly explained, ask for a full itemized out-the-door breakdown. Fees are often pure dealership profit.'
+          text: 'Were <a href="https://caredge.com/guides/car-dealer-doc-fee-by-state" target="_blank" rel="noopener noreferrer">doc fees</a>, dealer fees, and government fees clearly separated and explained? Most fees are pure dealer profit.',
+          flag: 'Fees: If fees were not clearly explained, ask for a full itemized out-the-door breakdown.'
         }
       ]
     };
