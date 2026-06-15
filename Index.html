@@ -1102,10 +1102,7 @@
                     <strong id="estimatedApr">0%</strong>
                   </div>
 
-                  <div class="archie-take" id="archieTake">
-                    Enter your numbers to see Archie’s take.
-                  </div>
-                </div>
+                
               </div>
 </article>
 
@@ -1375,34 +1372,6 @@
       document.getElementById("residualValue").textContent = money(residualValue);
       document.getElementById("capCost").textContent = money(adjustedCapCost);
       document.getElementById("estimatedApr").textContent = effectiveApr.toFixed(2) + "%";
-
-      let take = "";
-
-      if (adjustedCapCost <= 0 || msrp <= 0) {
-        take = "Enter the basic lease numbers to see Archie’s take.";
-      } else {
-        if (downPayment > 2000) {
-          take += "Be careful putting a lot of money down on a lease. It lowers the monthly payment, but that money usually does not build equity. ";
-        }
-
-        if (effectiveApr > 8) {
-          take += "The money factor converts to roughly " + effectiveApr.toFixed(1) + "% APR, which is worth questioning. ";
-        }
-
-        if (residualPercent < 50) {
-          take += "The residual looks low, which usually means you are paying for more depreciation. ";
-        }
-
-        if (sellingPrice >= msrp) {
-          take += "The selling price is at or above MSRP, so make sure the vehicle is actually worth paying that much for. ";
-        }
-
-        if (!take) {
-          take = "This estimate looks reasonable on the surface. The next step is comparing the selling price, money factor, fees, and due-at-signing amount against the dealer worksheet.";
-        }
-      }
-
-      document.getElementById("archieTake").textContent = take;
     }
 
     [
