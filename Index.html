@@ -17,11 +17,11 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
 
-  <meta name="description" content="Ask Archie helps people buy, service, and own cars with more clarity. Plain-English car guides, practical advice, and helpful answers for everyday car owners." />
+  <meta name="description" content="Ask Archie helps people buy, service, and own cars with more clarity. Plain-English car guides, practical tools, and helpful answers for everyday car owners." />
   <meta name="robots" content="index, follow" />
 
-  <meta property="og:title" content="Ask Archie — Car Questions, Answered Clearly" />
-  <meta property="og:description" content="Helpful car buying, service, repair, and ownership guidance in plain English." />
+  <meta property="og:title" content="Car Question? Just ask Archie." />
+  <meta property="og:description" content="Car Question? Just ask Archie." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://justaskarchie.com" />
   <meta property="og:image" content="https://justaskarchie.com/archie-avatar.png" />
@@ -261,12 +261,6 @@
       color: var(--accentText);
     }
 
-    .helper {
-      font-size: 0.84rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
     .card {
       background: var(--card);
       border: 1px solid var(--line);
@@ -274,12 +268,14 @@
       box-shadow: var(--shadow);
     }
 
-    .guides-section {
+    .guides-section,
+    .tools-section {
       scroll-margin-top: 28px;
       padding: 12px 0 72px;
     }
 
-    .guides-card {
+    .guides-card,
+    .tools-card {
       padding: 28px;
     }
 
@@ -391,11 +387,145 @@
       border: 1px solid var(--line);
     }
 
-    .guide-note {
-      margin-top: 20px;
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .calculator-card,
+    .tool-list-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #ffffff;
+      padding: 26px;
+    }
+
+    .calculator-card h3,
+    .tool-list-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+      letter-spacing: -0.025em;
+    }
+
+    .calculator-card p,
+    .tool-list-card p {
       color: var(--muted);
       line-height: 1.6;
+      margin: 0 0 18px;
+    }
+
+    .lease-calculator-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 22px;
+    }
+
+    .lease-inputs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lease-inputs label {
+      font-size: 0.9rem;
+      font-weight: 750;
+      color: var(--text);
+    }
+
+    .lease-inputs input {
+      width: 100%;
+      margin-top: 7px;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--text);
+      background: #F8FBFF;
+      outline: none;
+    }
+
+    .lease-inputs input:focus {
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .calculate-button {
+      grid-column: span 2;
+      background: var(--accent);
+      color: #ffffff;
+      margin-top: 4px;
+    }
+
+    .lease-results {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #F8FBFF;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lease-results h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .big-number {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.055em;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding: 12px 0;
+      color: var(--muted);
       font-size: 0.95rem;
+    }
+
+    .result-row strong {
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .archie-take {
+      margin-top: auto;
+      padding: 16px;
+      border-radius: 18px;
+      background: #EEF4FF;
+      color: var(--archie-navy-dark);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .tool-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tool-item {
+      border: 1px solid var(--line);
+      background: #F8FBFF;
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .tool-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tool-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
     .chat-bubble {
@@ -420,12 +550,12 @@
       transform: translateY(-3px);
     }
 
-.chat-shell {
-  position: fixed;
-  right: 28px;
-  bottom: 112px;
-  width: min(420px, calc(100vw - 36px));
-  height: min(560px, calc(100vh - 140px));
+    .chat-shell {
+      position: fixed;
+      right: 28px;
+      bottom: 112px;
+      width: min(420px, calc(100vw - 36px));
+      height: min(560px, calc(100vh - 140px));
       background: #ffffff;
       border-radius: 28px;
       box-shadow: 0 24px 70px rgba(0,0,0,0.26);
@@ -664,6 +794,13 @@
       transform: none;
     }
 
+    @media (max-width: 1100px) {
+      .tools-grid,
+      .lease-calculator-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 900px) {
       .hero {
         display: block;
@@ -702,6 +839,14 @@
         width: min(240px, calc(100vw - 36px));
       }
 
+      .lease-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .calculate-button {
+        grid-column: span 1;
+      }
+
       .chat-bubble {
         right: 18px;
         bottom: 70px;
@@ -728,7 +873,8 @@
         max-width: 90%;
       }
 
-      .guides-card {
+      .guides-card,
+      .tools-card {
         padding: 22px;
       }
 
@@ -755,6 +901,7 @@
 
         <nav class="mobile-menu" id="mobileMenu" aria-label="Main menu">
           <button id="guidesMenuBtn" type="button">Guides</button>
+          <button id="toolsMenuBtn" type="button">Tools</button>
           <a href="/about.html">About</a>
           <a href="/glossary.html">Glossary</a>
         </nav>
@@ -787,9 +934,14 @@
               📘 Buy Archie guides
             </button>
 
-<button class="hero-note" type="button">
-  🎥 Video Library (Coming Soon)
-</button>
+            <button class="hero-note" id="heroToolsBtn" type="button">
+              🧮 Try Archie tools
+            </button>
+
+            <button class="hero-note" type="button">
+              🎥 Video Library (Coming Soon)
+            </button>
+          </div>
         </div>
       </section>
 
@@ -813,13 +965,13 @@
                 Built from decades of automotive industry experience. Learn how pricing, financing, trade-ins, leases, fees, and protection products really work—before you buy or lease your next vehicle.
               </p>
 
-<ul>
-  <li>✓ How vehicle pricing really works</li>
-  <li>✓ Financing and the numbers that matter</li>
-  <li>✓ Trade-ins and negative equity</li>
-  <li>✓ Fees, add-ons, and protection products</li>
-  <li>✓ An insider's checklist before you sign</li>
-</ul>
+              <ul>
+                <li>✓ How vehicle pricing really works</li>
+                <li>✓ Financing and the numbers that matter</li>
+                <li>✓ Trade-ins and negative equity</li>
+                <li>✓ Fees, add-ons, and protection products</li>
+                <li>✓ An insider's checklist before you sign</li>
+              </ul>
 
               <div class="guide-footer">
                 <span class="guide-price">$29</span>
@@ -844,10 +996,155 @@
 
               <div class="guide-footer">
                 <span class="guide-price">$29</span>
-                <a href="#" class="guide-button">Coming Soon</a>
+                <a href="#" class="guide-button secondary">Coming Soon</a>
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="tools-section" id="tools">
+        <div class="card tools-card">
+          <div class="section-header">
+            <p class="eyebrow">Archie Tools</p>
+
+            <h2 class="section-title">Simple tools for confusing car math.</h2>
+
+            <p class="section-subtitle">
+              Estimate payments, compare numbers, and understand what is driving the cost before you sign anything.
+            </p>
+          </div>
+
+          <div class="tools-grid">
+            <article class="calculator-card">
+              <h3>🧮 Lease Calculator</h3>
+
+              <p>
+                Estimate a monthly lease payment using MSRP, selling price, residual value, money factor, taxes, fees, rebates, and lease term.
+              </p>
+
+              <div class="lease-calculator-layout">
+                <div class="lease-inputs">
+                  <label>
+                    MSRP
+                    <input id="msrp" type="number" value="50000">
+                  </label>
+
+                  <label>
+                    Selling Price
+                    <input id="sellingPrice" type="number" value="47000">
+                  </label>
+
+                  <label>
+                    Residual %
+                    <input id="residualPercent" type="number" value="58">
+                  </label>
+
+                  <label>
+                    Money Factor
+                    <input id="moneyFactor" type="number" step="0.00001" value="0.00200">
+                  </label>
+
+                  <label>
+                    Lease Term
+                    <input id="term" type="number" value="36">
+                  </label>
+
+                  <label>
+                    Sales Tax %
+                    <input id="taxRate" type="number" step="0.01" value="7">
+                  </label>
+
+                  <label>
+                    Down Payment
+                    <input id="downPayment" type="number" value="0">
+                  </label>
+
+                  <label>
+                    Fees Rolled In
+                    <input id="fees" type="number" value="995">
+                  </label>
+
+                  <label>
+                    Rebates / Incentives
+                    <input id="rebates" type="number" value="0">
+                  </label>
+
+                  <button class="calculate-button" type="button" onclick="calculateLease()">
+                    Calculate Lease
+                  </button>
+                </div>
+
+                <div class="lease-results">
+                  <h4>Estimated Payment</h4>
+
+                  <div class="big-number" id="monthlyPayment">$0/mo</div>
+
+                  <div class="result-row">
+                    <span>Base Payment</span>
+                    <strong id="basePayment">$0</strong>
+                  </div>
+
+                  <div class="result-row">
+                    <span>Monthly Tax</span>
+                    <strong id="monthlyTax">$0</strong>
+                  </div>
+
+                  <div class="result-row">
+                    <span>Residual Value</span>
+                    <strong id="residualValue">$0</strong>
+                  </div>
+
+                  <div class="result-row">
+                    <span>Adjusted Cap Cost</span>
+                    <strong id="capCost">$0</strong>
+                  </div>
+
+                  <div class="result-row">
+                    <span>Estimated APR</span>
+                    <strong id="estimatedApr">0%</strong>
+                  </div>
+
+                  <div class="archie-take" id="archieTake">
+                    Enter your numbers to see Archie’s take.
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <aside class="tool-list-card">
+              <h3>More Archie tools</h3>
+
+              <p>
+                The lease calculator is live now. More tools are coming soon.
+              </p>
+
+              <div class="tool-list">
+                <div class="tool-item">
+                  <strong>🧮 Lease Calculator</strong>
+                  <span>Live now</span>
+                </div>
+
+                <div class="tool-item">
+                  <strong>🚗 Finance Calculator</strong>
+                  <span>Coming soon</span>
+                </div>
+
+                <div class="tool-item">
+                  <strong>💰 Trade-In Calculator</strong>
+                  <span>Coming soon</span>
+                </div>
+
+                <div class="tool-item">
+                  <strong>📋 Out-the-Door Calculator</strong>
+                  <span>Coming soon</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <button class="chat-bubble" id="chatBubbleBtn" type="button" aria-label="Ask Archie">
@@ -891,6 +1188,7 @@
 
     <div class="footer-links">
       <button id="footerGuidesBtn" type="button">Guides</button>
+      <button id="footerToolsBtn" type="button">Tools</button>
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -908,10 +1206,12 @@
     const mobileMenu = document.getElementById('mobileMenu');
 
     const guidesMenuBtn = document.getElementById('guidesMenuBtn');
+    const toolsMenuBtn = document.getElementById('toolsMenuBtn');
     const heroGuidesBtn = document.getElementById('heroGuidesBtn');
+    const heroToolsBtn = document.getElementById('heroToolsBtn');
     const heroChatBtn = document.getElementById('heroChatBtn');
     const footerGuidesBtn = document.getElementById('footerGuidesBtn');
-    const footerChatBtn = document.getElementById('footerChatBtn');
+    const footerToolsBtn = document.getElementById('footerToolsBtn');
 
     const chatBubbleBtn = document.getElementById('chatBubbleBtn');
     const chatShell = document.getElementById('chatShell');
@@ -921,6 +1221,7 @@
     const archieAskBtn = document.getElementById('archieAskBtn');
 
     const guidesSection = document.getElementById('guides');
+    const toolsSection = document.getElementById('tools');
 
     let conversation = [];
 
@@ -943,9 +1244,15 @@
 
     function showGuides() {
       closeMobileMenu();
-
       setTimeout(() => {
         guidesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+
+    function showTools() {
+      closeMobileMenu();
+      setTimeout(() => {
+        toolsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
     }
 
@@ -977,11 +1284,13 @@
     });
 
     guidesMenuBtn.addEventListener('click', showGuides);
+    toolsMenuBtn.addEventListener('click', showTools);
     heroGuidesBtn.addEventListener('click', showGuides);
+    heroToolsBtn.addEventListener('click', showTools);
     footerGuidesBtn.addEventListener('click', showGuides);
+    footerToolsBtn.addEventListener('click', showTools);
 
     heroChatBtn.addEventListener('click', openChat);
-    footerChatBtn?.addEventListener('click', openChat);
     chatBubbleBtn.addEventListener('click', openChat);
     closeChatBtn.addEventListener('click', closeChat);
 
@@ -1062,6 +1371,87 @@
         await askArchie();
       }
     });
+
+    function money(value) {
+      return value.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      });
+    }
+
+    function calculateLease() {
+      const msrp = Number(document.getElementById("msrp").value) || 0;
+      const sellingPrice = Number(document.getElementById("sellingPrice").value) || 0;
+      const residualPercent = Number(document.getElementById("residualPercent").value) || 0;
+      const moneyFactor = Number(document.getElementById("moneyFactor").value) || 0;
+      const term = Number(document.getElementById("term").value) || 36;
+      const taxRate = Number(document.getElementById("taxRate").value) / 100 || 0;
+      const downPayment = Number(document.getElementById("downPayment").value) || 0;
+      const fees = Number(document.getElementById("fees").value) || 0;
+      const rebates = Number(document.getElementById("rebates").value) || 0;
+
+      const residualValue = msrp * (residualPercent / 100);
+      const adjustedCapCost = sellingPrice + fees - rebates - downPayment;
+
+      const depreciationCharge = (adjustedCapCost - residualValue) / term;
+      const financeCharge = (adjustedCapCost + residualValue) * moneyFactor;
+      const basePayment = depreciationCharge + financeCharge;
+      const monthlyTax = basePayment * taxRate;
+      const monthlyPayment = basePayment + monthlyTax;
+      const effectiveApr = moneyFactor * 2400;
+
+      document.getElementById("monthlyPayment").textContent = money(monthlyPayment) + "/mo";
+      document.getElementById("basePayment").textContent = money(basePayment);
+      document.getElementById("monthlyTax").textContent = money(monthlyTax);
+      document.getElementById("residualValue").textContent = money(residualValue);
+      document.getElementById("capCost").textContent = money(adjustedCapCost);
+      document.getElementById("estimatedApr").textContent = effectiveApr.toFixed(2) + "%";
+
+      let take = "";
+
+      if (adjustedCapCost <= 0 || msrp <= 0) {
+        take = "Enter the basic lease numbers to see Archie’s take.";
+      } else {
+        if (downPayment > 2000) {
+          take += "Be careful putting a lot of money down on a lease. It lowers the monthly payment, but that money usually does not build equity. ";
+        }
+
+        if (effectiveApr > 8) {
+          take += "The money factor converts to roughly " + effectiveApr.toFixed(1) + "% APR, which is worth questioning. ";
+        }
+
+        if (residualPercent < 50) {
+          take += "The residual looks low, which usually means you are paying for more depreciation. ";
+        }
+
+        if (sellingPrice >= msrp) {
+          take += "The selling price is at or above MSRP, so make sure the vehicle is actually worth paying that much for. ";
+        }
+
+        if (!take) {
+          take = "This estimate looks reasonable on the surface. The next step is comparing the selling price, money factor, fees, and due-at-signing amount against the dealer worksheet.";
+        }
+      }
+
+      document.getElementById("archieTake").textContent = take;
+    }
+
+    [
+      "msrp",
+      "sellingPrice",
+      "residualPercent",
+      "moneyFactor",
+      "term",
+      "taxRate",
+      "downPayment",
+      "fees",
+      "rebates"
+    ].forEach((id) => {
+      document.getElementById(id).addEventListener("input", calculateLease);
+    });
+
+    calculateLease();
   </script>
 </body>
 </html>
