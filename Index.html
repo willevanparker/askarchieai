@@ -387,12 +387,12 @@
       border: 1px solid var(--line);
     }
 
-    .tools-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-      align-items: stretch;
-    }
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
 
     .calculator-card,
     .tool-list-card {
@@ -1008,10 +1008,10 @@
           <div class="section-header">
             <p class="eyebrow">Archie Tools</p>
 
-            <h2 class="section-title">Simple tools for confusing car math.</h2>
+            <h2 class="section-title">Car Lease Calculator</h2>
 
             <p class="section-subtitle">
-              Estimate payments, compare numbers, and understand what is driving the cost before you sign anything.
+              Estimate payments, compare numbers, and understand what is driving your lease payment.
             </p>
           </div>
 
@@ -1020,7 +1020,7 @@
               <h3>🧮 Lease Calculator</h3>
 
               <p>
-                Estimate a monthly lease payment using MSRP, selling price, residual value, money factor, taxes, fees, rebates, and lease term.
+                Input your lease information into the fields below to estimate a monthly payment.
               </p>
 
               <div class="lease-calculator-layout">
@@ -1070,9 +1070,6 @@
                     <input id="rebates" type="number" value="0">
                   </label>
 
-                  <button class="calculate-button" type="button" onclick="calculateLease()">
-                    Calculate Lease
-                  </button>
                 </div>
 
                 <div class="lease-results">
@@ -1110,37 +1107,8 @@
                   </div>
                 </div>
               </div>
-            </article>
+</article>
 
-            <aside class="tool-list-card">
-              <h3>More Archie tools</h3>
-
-              <p>
-                The lease calculator is live now. More tools are coming soon.
-              </p>
-
-              <div class="tool-list">
-                <div class="tool-item">
-                  <strong>🧮 Lease Calculator</strong>
-                  <span>Live now</span>
-                </div>
-
-                <div class="tool-item">
-                  <strong>🚗 Finance Calculator</strong>
-                  <span>Coming soon</span>
-                </div>
-
-                <div class="tool-item">
-                  <strong>💰 Trade-In Calculator</strong>
-                  <span>Coming soon</span>
-                </div>
-
-                <div class="tool-item">
-                  <strong>📋 Out-the-Door Calculator</strong>
-                  <span>Coming soon</span>
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </section>
